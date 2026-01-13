@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids & Future Creators Coding Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <style>
+        /* --- 1. GLOBAL VARIABLES & RESET --- */
+        :root {
+            --brand-blue: #0D47A1;      /* Deep Trustworthy Blue */
+            --brand-light-blue: #E3F2FD; /* Light Background Blue */
+            --brand-orange: #FF6F00;    /* Energetic Orange */
+            --brand-white: #ffffff;
+            --text-dark: #333333;
+            
+            --font-heading-fun: 'Fredoka', sans-serif; /* Super rounded */
+            --font-subheading: 'Nunito', sans-serif;   /* Friendly */
+            --font-body: 'Open Sans', sans-serif;      /* Readable */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--brand-white);
+            overflow-x: hidden;
+        }
+
+        /* --- 2. HEADER STYLES --- */
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%; 
+            background-color: var(--brand-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand-logo img {
+            height: 50px; 
+            width: auto;
+            display: block;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin: 0;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--brand-blue);
+            font-family: var(--font-subheading);
+            font-weight: 700;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .main-nav a:hover, .main-nav a.active {
+            color: var(--brand-orange);
+        }
+
+        .main-nav .btn-nav {
+            background-color: var(--brand-blue);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .main-nav .btn-nav:hover {
+            background-color: var(--brand-orange);
+            color: white;
+        }
+
+        .menu-btn {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--brand-blue);
+        }
+
+        /* --- 3. PAGE CONTENT STYLES --- */
+        h1, h2, h3 { font-family: var(--font-heading-fun); color: var(--brand-blue); }
+        h4, h5 { font-family: var(--font-subheading); }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* General Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: var(--font-subheading);
+            transition: transform 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-orange { background-color: var(--brand-orange); color: white; box-shadow: 0 4px 0 #cc5800; }
+        .btn-orange:hover { transform: translateY(-2px); }
+        .btn-secondary { color: var(--brand-blue); text-decoration: underline; margin-left: 15px; }
+
+        /* --- HERO SECTION STYLES --- */
+        .hero {
+            background-image: linear-gradient(rgba(13, 71, 161, 0.85), rgba(13, 71, 161, 0.7)), url('herokidscoding.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 120px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero h2 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            line-height: 1.6;
+            color: #E3F2FD;
+        }
+
+        .hero .btn-secondary {
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .hero .btn-secondary:hover {
+            background: white;
+            color: var(--brand-blue);
+        }
+
+        /* --- SECTION SPECIFIC CSS --- */
+        .programs-section { padding: 80px 20px; background-color: #FAFAFA; }
+        .programs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto; }
+
+        /* CARD STYLING */
+        .program-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid #EEF2F6;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .program-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); border-color: var(--brand-orange); }
+        .card-image-wrapper { height: 250px; width: 100%; position: relative; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; }
+        .sketch-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
+            display: flex; align-items: center; justify-content: center;
+        }
+        .doodle-icon { font-size: 5rem; color: rgba(255, 255, 255, 0.8); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); transform: rotate(-10deg); }
+        
+        .card-body { padding: 40px 30px; display: flex; flex-direction: column; flex-grow: 1; }
+        .program-headline { font-family: 'Fredoka', sans-serif; font-size: 1.8rem; color: var(--brand-blue); margin-bottom: 10px; line-height: 1.2; }
+        .program-vibe { font-size: 1rem; color: #666; font-style: italic; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .detail-row { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-weight: bold; color: var(--text-dark); font-size: 0.95rem; }
+        .price-highlight { color: var(--brand-orange); font-size: 1.4rem; font-weight: 800; margin: 15px 0; display: block; }
+        .benefit-list { list-style: none; padding: 0; margin: 20px 0; }
+        .benefit-list li { margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; font-size: 0.95rem; color: #444; }
+
+        /* INTERACTIVE BUTTONS FOR CARD B */
+        .track-btn {
+            display: block; width: 100%; text-align: left; padding: 15px 20px; margin-bottom: 10px;
+            background: #F8F9FA; border: 2px solid #E9ECEF; border-radius: 12px;
+            color: var(--brand-blue); text-decoration: none; font-weight: 700; font-size: 0.95rem;
+            transition: all 0.2s; display: flex; justify-content: space-between; align-items: center;
+        }
+        .track-btn:hover { border-color: var(--brand-blue); background: #E3F2FD; transform: translateX(5px); }
+        .track-price { background: var(--brand-orange); color: white; font-size: 0.8rem; padding: 4px 10px; border-radius: 20px; }
+
+        /* FunTech Style "Pill" Buttons */
+        .btn-pill {
+            display: inline-flex; align-items: center; justify-content: center; padding: 14px 32px;
+            border-radius: 50px; font-weight: 700; text-decoration: none; transition: all 0.3s ease;
+            font-family: 'Nunito', sans-serif;
+        }
+        .btn-primary { background-color: var(--brand-orange); color: white; box-shadow: 0 4px 15px rgba(255, 111, 0, 0.3); }
+        .btn-primary:hover { background-color: #E65100; transform: translateY(-2px); }
+
+        /* JOURNEY MAP */
+        .journey { padding: 80px 0; background-color: var(--brand-white); }
+        .map-container { position: relative; max-width: 800px; margin: 0 auto; }
+        .map-container::before {
+            content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 4px;
+            background-image: linear-gradient(to bottom, var(--brand-blue) 50%, transparent 50%);
+            background-size: 4px 20px; transform: translateX(-50%); z-index: 0;
+        }
+        .step { position: relative; margin-bottom: 50px; width: 50%; padding: 0 40px; z-index: 1; }
+        .step:nth-child(odd) { left: 0; text-align: right; }
+        .step:nth-child(even) { left: 50%; text-align: left; }
+        .step::after {
+            content: ''; position: absolute; width: 20px; height: 20px; background-color: var(--brand-orange);
+            border-radius: 50%; top: 5px;
+        }
+        .step:nth-child(odd)::after { right: -10px; }
+        .step:nth-child(even)::after { left: -10px; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; }
+
+        /* TRUST */
+        .trust { background-color: #082d66; color: white; padding: 80px 0; text-align: center; }
+        .trust h2 { color: white; }
+        .testimonial { font-style: italic; font-size: 1.5rem; margin-bottom: 40px; font-family: var(--font-subheading); }
+        .trust-grid { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; }
+        .trust-item { max-width: 300px; }
+
+        /* FAQ */
+        .faq { padding: 80px 0; background-color: var(--brand-light-blue); }
+        .accordion { max-width: 800px; margin: 0 auto; }
+        .accordion-item { background: white; border-radius: 10px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .accordion-header { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-family: var(--font-subheading); }
+        .accordion-content { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background-color: #f9f9f9; }
+        .accordion-content p { padding: 20px 0; }
+
+        /* FOOTER (moved to global styles; removed local footer rules) */
+
+        /* MODAL STYLES */
+        .modal-overlay {
+            display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
+            align-items: center; justify-content: center;
+        }
+        .modal-box {
+            background-color: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px;
+            position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3); animation: slideUp 0.3s ease-out;
+        }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; color: #aaa; cursor: pointer; }
+        .modal-header { text-align: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .modal-header h3 { color: #0D47A1; margin: 0; }
+        .modal-header p { color: #666; font-size: 0.9rem; margin-top: 5px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 0.9rem; font-weight: bold; margin-bottom: 5px; color: #333; }
+        .form-group input { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px; font-size: 1rem; box-sizing: border-box; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; margin: 20px 0; font-weight: bold; font-size: 1.1rem; }
+        .price-tag { color: #FF6F00; font-size: 1.4rem; }
+        .pay-btn {
+            width: 100%; padding: 15px; background-color: #0D47A1; color: white; border: none;
+            border-radius: 50px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background 0.3s;
+        }
+        .pay-btn:hover { background-color: #082d66; }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .menu-btn { display: block; }
+            .main-nav { display: none; }
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .programs-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero h2 { font-size: 1.2rem; }
+            .card-image-wrapper { height: 200px; }
+            .map-container::before { left: 20px; }
+            .step { width: 100%; left: 0 !important; text-align: left; padding-left: 60px; }
+            .step:nth-child(odd)::after, .step:nth-child(even)::after { left: 10px; }
+            .trust-grid { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="brand-logo">
+            <img src="assets/images/logoblue.png" alt="iLearn Spaces">
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="academy.html">Academy</a></li>
+                <li><a href="kids-coding.html" class="active">Kids Coding</a></li>
+                <li><a href="bizsuite.html">BizSuite</a></li>
+                <li><a href="exam-prep.html">Exam Prep</a></li>
+                <li><a href="youth-hub.html">Youth Hub</a></li>
+                <li><a href="academy.html" class="btn-nav">FIND A COURSE</a></li>
+            </ul>
+        </nav>
+        <button class="menu-btn">☰</button>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Calling All Young Inventors!</h1>
+            <h2>Turn "Screen Time" into "Dream Time." Join the club where gaming, coding, and creativity collide.</h2>
+            <a href="#how-it-works" class="btn btn-secondary">See How It Works ↓</a>
+        </div>
+    </section>
+
+    <section style="background-color: #F8F9FA; padding: 40px 20px; border-top: 1px solid #eee; border-bottom: 1px solid #eee; width: 100%;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; align-items: flex-start; gap: 15px; overflow-x: auto;">
+            
+            <div style="flex: 1; text-align: center; min-width: 120px;">
+                <i class="far fa-calendar-alt" style="font-size: 2.5rem; color: #0D47A1; margin-bottom: 15px; display: inline-block;"></i>
+                <div style="font-family: sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; color: #FF6F00; margin-bottom: 5px; white-space: nowrap;">EST. 2023</div>
+                <div style="font-family: sans-serif; font-size: 13px; color: #718096;">Community Impact</div>
+            </div>
+
+            <div style="flex: 1; text-align: center; min-width: 120px;">
+                <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: #0D47A1; margin-bottom: 15px; display: inline-block;"></i>
+                <div style="font-family: sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; color: #FF6F00; margin-bottom: 5px; white-space: nowrap;">CAC REGISTERED</div>
+                <div style="font-family: sans-serif; font-size: 13px; color: #718096;">Fully Compliant</div>
+            </div>
+
+            <div style="flex: 1; text-align: center; min-width: 120px;">
+                <i class="fas fa-microchip" style="font-size: 2.5rem; color: #0D47A1; margin-bottom: 15px; display: inline-block;"></i>
+                <div style="font-family: sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; color: #FF6F00; margin-bottom: 5px; white-space: nowrap;">FUTURE-READY</div>
+                <div style="font-family: sans-serif; font-size: 13px; color: #718096;">AI-First Curriculum</div>
+            </div>
+
+            <div style="flex: 1; text-align: center; min-width: 120px;">
+                <i class="fas fa-user-graduate" style="font-size: 2.5rem; color: #0D47A1; margin-bottom: 15px; display: inline-block;"></i>
+                <div style="font-family: sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; color: #FF6F00; margin-bottom: 5px; white-space: nowrap;">VETTED MENTORS</div>
+                <div style="font-family: sans-serif; font-size: 13px; color: #718096;">STEM Certified</div>
+            </div>
+
+            <div style="flex: 1; text-align: center; min-width: 120px;">
+                <i class="fas fa-lock" style="font-size: 2.5rem; color: #0D47A1; margin-bottom: 15px; display: inline-block;"></i>
+                <div style="font-family: sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; color: #FF6F00; margin-bottom: 5px; white-space: nowrap;">SECURE HUB</div>
+                <div style="font-family: sans-serif; font-size: 13px; color: #718096;">Safe Environment</div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="programs-section" id="courses">
+        <div class="section-header" style="text-align: center; max-width: 700px; margin: 0 auto 60px;">
+            <h2>Choose Your Adventure</h2>
+            <p>Whether it's a summer of fun or a year of mastery, we have a path for you.</p>
+        </div>
+
+        <div class="programs-grid">
+
+            <div class="program-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Excited kid jumping" class="card-img">
+                    <div class="sketch-overlay">
+                        <i class="fas fa-sun doodle-icon" style="position:absolute; top:20px; right:20px; font-size:4rem;"></i>
+                        <i class="fas fa-robot doodle-icon" style="position:absolute; bottom:20px; left:20px; font-size:3rem; transform:rotate(15deg);"></i>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <h3 class="program-headline">🌞 Summer Code Camp 2026: The Age of AI</h3>
+                    <p class="program-vibe">An immersive 4-week experience where kids dive into a new tech adventure every single day.</p>
+                    
+                    <div class="detail-row"><i class="far fa-calendar-alt" style="color:var(--brand-orange);"></i> August 2026 (Daily Sessions)</div>
+                    <div class="detail-row"><i class="fas fa-map-marker-alt" style="color:var(--brand-orange);"></i> iLearn Spaces Hub</div>
+                    
+                    <span class="price-highlight">
+                        <s style="color:#999; font-size:1rem; font-weight:normal;">₦25,000</s> ₦20,000 <span style="font-size:0.9rem; color:#666; font-weight:normal;">(Early Bird)</span>
+                    </span>
+
+                    <ul class="benefit-list">
+                        <li><i class="fas fa-check" style="color:#4CAF50; margin-top:4px;"></i> <strong>Theme:</strong> Artificial Intelligence & Robotics</li>
+                        <li><i class="fas fa-check" style="color:#4CAF50; margin-top:4px;"></i> <strong>Format:</strong> 4 Weeks of Daily Fun</li>
+                        <li><i class="fas fa-check" style="color:#4CAF50; margin-top:4px;"></i> <strong>Activities:</strong> Coding, Outdoor Games & Building</li>
+                    </ul>
+
+                    <a href="#" onclick="openModal(); return false;" class="btn-pill btn-primary" style="width:100%; text-align:center; display:inline-flex; justify-content:center;">
+                        Join Priority Waitlist (Save ₦5,000)
+                    </a>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.pexels.com/photos/5905497/pexels-photo-5905497.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Girl focused on coding" class="card-img">
+                    <div class="sketch-overlay">
+                        <i class="far fa-lightbulb doodle-icon" style="font-size:5rem;"></i>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <h3 class="program-headline">📚 After-School Tech Academy</h3>
+                    <p class="program-vibe">Consistent, deep-dive learning to master specific skills. Perfect for building a portfolio.</p>
+                    
+                    <div class="detail-row"><i class="far fa-clock" style="color:var(--brand-orange);"></i> Weekdays | 4:00 PM – 6:00 PM</div>
+                    <div class="detail-row"><i class="fas fa-sync" style="color:var(--brand-orange);"></i> 3x Weekly Sessions</div>
+
+                    <p style="font-weight:bold; margin-top:15px; margin-bottom:10px; color:var(--brand-blue);">Select a Track to Enroll:</p>
+                    
+                    <div class="track-selector">
+                        <a href="payment.html?course=AI%20for%20Kids&price=40000" class="track-btn">
+                            <span>🤖 AI for Kids (4 Weeks)</span>
+                            <span class="track-price">₦40k</span>
+                        </a>
+                        <a href="payment.html?course=Coding%20and%20Animation&price=50000" class="track-btn">
+                            <span>👾 Coding & Animation (6 Wks)</span>
+                            <span class="track-price">₦50k</span>
+                        </a>
+                        <a href="payment.html?course=Creative%20Computing&price=60000" class="track-btn">
+                            <span>🎨 Creative Computing (6 Wks)</span>
+                            <span class="track-price">₦60k</span>
+                        </a>
+                        <a href="payment.html?course=Game%20Design&price=120000" class="track-btn">
+                            <span>🎮 Game Design (10 Weeks)</span>
+                            <span class="track-price">₦120k</span>
+                        </a>
+                        <a href="payment.html?course=Basic%20Computing&price=80000" class="track-btn">
+                            <span>🛡️ Basic Computing (8 Weeks)</span>
+                            <span class="track-price">₦80k</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="journey" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Your Journey Starts Here</h2>
+            <div class="map-container">
+                <div class="step">
+                    <h4>1. Book Your Slot</h4>
+                    <p>Choose a time that fits your family’s schedule.</p>
+                </div>
+                <div class="step">
+                    <h4>2. Meet Your Mentor</h4>
+                    <p>Get matched with a friendly, expert guide.</p>
+                </div>
+                <div class="step">
+                    <h4>3. Build & Play</h4>
+                    <p>Log in, learn live, and build cool projects.</p>
+                </div>
+                <div class="step">
+                    <h4>4. Level Up</h4>
+                    <p>Earn badges and certificates as you master new skills.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust">
+        <div class="container">
+            <div class="testimonial">
+                "My son finally feels accepted." <br>
+                <span style="font-size:1rem; opacity:0.8;">– Verified Parent ⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <i class="fas fa-lock" style="font-size:2rem; margin-bottom:10px;"></i>
+                    <h4>Safety First</h4>
+                    <p>All our mentors are vetted and trained to create inclusive spaces for every type of learner.</p>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-brain" style="font-size:2rem; margin-bottom:10px;"></i>
+                    <h4>Neuro-Inclusive</h4>
+                    <p>We celebrate different ways of thinking. High energy or hyper-focused, there's a place here.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        My child has never coded before. Is that okay? <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Absolutely! Our "Kids Tech Bootcamp" is designed exactly for beginners. We start with visual blocks and fun games.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        What equipment do we need? <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>A laptop or desktop, a stable internet connection, and a curiosity to learn! Tablets can work for some introductory courses.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        What if we miss a class? <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>No stress. We provide catch-up materials so your child never falls behind, and sessions are often recorded.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <script>
+        const headers = document.querySelectorAll('.accordion-header');
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('i');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                }
+            });
+        });
+    </script>
+
+    <div id="waitlistModal" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            
+            <div class="modal-header">
+                <h3>🌞 Secure Summer Slot</h3>
+                <p>Lock in the Early Bird price for August 2026.</p>
+            </div>
+
+            <form id="paymentForm">
+                <div class="form-group">
+                    <label>Parent's Name</label>
+                    <input type="text" id="parentName" required placeholder="e.g. Sarah O.">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email-address" required placeholder="For receipt">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" required placeholder="080...">
+                </div>
+
+                <div class="form-group">
+                    <label>Child's Name & Age</label>
+                    <input type="text" id="childInfo" required placeholder="e.g. Daniel (10)">
+                </div>
+
+                <div class="price-row">
+                    <span>Total Due:</span>
+                    <span class="price-tag">₦20,000</span>
+                </div>
+
+                <button type="submit" class="pay-btn" onclick="payWithPaystack(event)">
+                    Pay ₦20,000 Now
+                </button>
+                
+                <p style="text-align:center; font-size:0.8rem; color:#888; margin-top:10px;">
+                    <i class="fas fa-lock"></i> Secured by Paystack
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script>
+        // 1. OPEN MODAL
+        function openModal() {
+            document.getElementById("waitlistModal").style.display = "flex";
+        }
+
+        // 2. CLOSE MODAL
+        function closeModal() {
+            document.getElementById("waitlistModal").style.display = "none";
+        }
+
+        // 3. CLOSE IF CLICKING OUTSIDE BOX
+        window.onclick = function(event) {
+            var modal = document.getElementById("waitlistModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // 4. HANDLE PAYSTACK PAYMENT
+        function payWithPaystack(e) {
+            e.preventDefault(); // Stop form from refreshing
+
+            // Get form values
+            const email = document.getElementById("email-address").value;
+            const parentName = document.getElementById("parentName").value;
+            const phone = document.getElementById("phone").value;
+            const childInfo = document.getElementById("childInfo").value;
+
+            // Basic validation
+            if (!email || !parentName || !phone) {
+                alert("Please fill in all fields");
+                return;
+            }
+
+            let handler = PaystackPop.setup({
+                key: 'pk_test_52b8a2ebea6846935cefedccd4eb55ab1c839368', // YOUR KEY
+                email: email,
+                amount: 2000000, // 20,000 Naira (in kobo)
+                currency: "NGN",
+                ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+                metadata: {
+                    custom_fields: [
+                        { display_name: "Parent Name", variable_name: "parent_name", value: parentName },
+                        { display_name: "Phone", variable_name: "phone", value: phone },
+                        { display_name: "Child Info", variable_name: "child_info", value: childInfo },
+                        { display_name: "Course", variable_name: "course", value: "Summer Camp 2026 Waitlist" }
+                    ]
+                },
+                callback: function(response) {
+                    window.location.href = "success.html?ref=" + response.reference; 
+                },
+                onClose: function() {
+                    alert('Transaction was not completed, window closed.');
+                }
+            });
+
+            handler.openIframe();
+        }
+    </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<footer class="ilearn-footer">
+    <div class="footer-container">
+        
+        <div class="footer-col brand-col">
+            <img src="logo-footer.png" alt="iLearn Spaces" class="footer-logo footer-logo-img">
+            <p class="mission-text">
+                Bridging the digital divide in underserved communities. An offline-first, innovation-driven hub empowering Gwagwalada's youth.
+            </p>
+            <div class="social-icons">
+                <a href="https://web.facebook.com/ilearnliteracy" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com/ilearnspaces/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/ilearnspaces" target="_blank" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a> <a href="https://share.google/lrTZGXaXiNpsphgT1" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>Our Programs</h3>
+            <ul class="footer-links">
+                <li><a href="academy.html">Tech & Digital Academy</a></li>
+                <li><a href="kids-coding.html">Kids & Future Creators</a></li>
+                <li><a href="exam-prep.html">Exam Prep (JAMB/WAEC)</a></li>
+                <li><a href="youth-hub.html">The Youth Hub</a></li>
+                <li><a href="scholarships.html">Scholarship Application</a></li>
+                <li><a href="portal.html">Student Portal</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Partners & Services</h3>
+            <ul class="footer-links">
+                <li><a href="bizsuite.html">BizSuite (CAC Registration)</a></li>
+                <li><a href="consultancy.html">Business Consultancy</a></li>
+                <li><a href="hire.html">Hire a Graduate</a></li>
+                <li><a href="facilities.html">Rent a Training Hall</a></li>
+                <li><a href="partners.html">Corporate Partnerships</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col contact-col">
+            <h3>Contact & Policy</h3>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Plot 171 Shargale Plaza, Old Kutunku Road, Gwagwalada, Abuja.</p>
+                <p><i class="fas fa-phone"></i> 07033247060 | 08142450774</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:info@ilearnspaces.com">info@ilearnspaces.com</a></p>
+                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/2349158949925" target="_blank">WhatsApp Us (+234 915 894 9925)</a></p>
+            </div>
+
+            <div class="legal-links">
+                <a href="child-protection.html">Child Protection</a> | 
+                <a href="privacy.html">Privacy</a> | 
+                <a href="terms.html">Terms</a>
+            </div>
+
+            <form class="footer-newsletter" action="#" method="POST">
+                <p>Subscribe to iLearn Spaces Update</p>
+                <div class="input-group">
+                    <input type="text" name="name" placeholder="Your name" required>
+                    <input type="email" name="email" placeholder="Your email address" required>
+                    <input type="text" name="hp" class="hp-field" style="display:none" tabindex="-1" autocomplete="off">
+                    <input type="hidden" name="page" value="">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>Copyright &copy; 2026 iLearn Spaces. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

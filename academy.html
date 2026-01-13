@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academy - iLearn Spaces</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+  
+    <style>
+        /* --- 1. CORE VARIABLES --- */
+        :root {
+            --brand-blue: #0D47A1;
+            --brand-light-blue: #E3F2FD;
+            --brand-orange: #FF6F00;
+            --brand-white: #ffffff;
+            --brand-black: #111111;
+            --text-grey: #555555;
+            
+            --font-display: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+        }
+
+        /* --- 2. RESET & BASICS --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-body); color: var(--brand-black); background-color: #FAFAFA; overflow-x: hidden; }
+
+        /* --- 3. HEADER --- */
+        .site-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; background-color: var(--brand-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;
+        }
+        .brand-logo img { height: 50px; width: auto; display: block; }
+        
+        .main-nav ul { list-style: none; display: flex; gap: 25px; align-items: center; margin: 0; padding: 0; }
+        .main-nav a { text-decoration: none; color: var(--brand-blue); font-family: var(--font-body); font-weight: 700; transition: 0.3s; font-size: 1rem; }
+        .main-nav a:hover, .main-nav a.active { color: var(--brand-orange); }
+        
+        .btn-nav { background: var(--brand-blue); color: white !important; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-nav:hover { background-color: var(--brand-orange); }
+        
+        .menu-btn { display: none; font-size: 1.8rem; background: none; border: none; color: var(--brand-blue); cursor: pointer; }
+
+        /* --- 4. HERO SECTION --- */
+        .academy-hero {
+            background: linear-gradient(rgba(13, 71, 161, 0.9), rgba(13, 71, 161, 0.8)), url('assets/images/academy-bg.jpg');
+            background-size: cover; background-position: center; background-color: var(--brand-blue);
+            color: white; padding: 120px 20px; text-align: center;
+        }
+        .academy-hero h1 { font-family: var(--font-display); margin-bottom: 20px; font-size: 3.5rem; font-weight: 900; text-transform: uppercase; }
+        .academy-hero p { font-family: var(--font-body); max-width: 800px; margin: 0 auto; opacity: 0.95; line-height: 1.8; font-size: 1.2rem; }
+
+        /* --- 5. PAGE LAYOUT --- */
+        .academy-container {
+            max-width: 1200px; margin: 0 auto; padding: 60px 20px;
+            display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: start;
+        }
+
+        /* --- 6. SIDEBAR --- */
+        .filters-sidebar {
+            background: white; padding: 25px; border-radius: 10px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-top: 5px solid var(--brand-blue);
+        }
+        .filter-group { margin-bottom: 30px; }
+        .filter-title { 
+            font-family: var(--font-display); font-weight: 700; margin-bottom: 15px; 
+            display: block; color: var(--brand-blue); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;
+        }
+        .filter-label { display: flex; align-items: center; margin-bottom: 12px; cursor: pointer; font-size: 0.95rem; color: #444; font-weight: 600; }
+        .filter-label input { margin-right: 10px; accent-color: var(--brand-orange); transform: scale(1.2); }
+
+        /* --- 7. COURSE LIST --- */
+        .course-list { display: flex; flex-direction: column; gap: 25px; }
+        
+        .course-card {
+            display: flex; background: white; 
+            border-radius: 15px; overflow: hidden; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eee;
+        }
+        .course-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--brand-orange); }
+        
+        /* UPDATED IMAGE STYLING */
+        .card-image {
+            width: 250px; 
+            height: auto; /* Scales with content */
+            min-height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .card-content { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-content h3 { font-family: var(--font-display); margin-bottom: 10px; color: var(--brand-blue); font-size: 1.4rem; font-weight: 700; }
+        .card-desc { font-size: 1rem; color: #666; margin-bottom: 15px; line-height: 1.6; }
+        
+        .card-meta {
+            display: flex; gap: 20px; font-size: 0.9rem; font-weight: 700;
+            color: var(--brand-black); margin-bottom: 15px; text-transform: uppercase;
+        }
+        .card-meta span i { color: var(--brand-orange); margin-right: 5px; }
+
+        .card-tags { margin-bottom: 20px; }
+        .tag {
+            display: inline-block; background: #eee; color: #555;
+            padding: 5px 10px; border-radius: 20px; font-size: 0.75rem; 
+            margin-right: 5px; margin-bottom: 5px; font-weight: bold; text-transform: uppercase;
+        }
+        
+        .card-actions { display: flex; gap: 15px; margin-top: auto; }
+        .btn-outline {
+            border: 2px solid var(--brand-blue); color: var(--brand-blue); background: transparent;
+            padding: 10px 20px; border-radius: 5px; cursor: pointer; text-decoration: none;
+            font-weight: bold; font-family: var(--font-display); text-transform: uppercase; font-size: 0.85rem; transition: 0.3s;
+        }
+        .btn-outline:hover { background: var(--brand-blue); color: white; }
+        .btn-fill {
+            background: var(--brand-orange); color: white; border: none; padding: 10px 25px;
+            border-radius: 5px; cursor: pointer; text-decoration: none;
+            font-weight: bold; font-family: var(--font-display); text-transform: uppercase; font-size: 0.85rem;
+            transition: 0.3s; box-shadow: 0 4px 10px rgba(255, 111, 0, 0.3);
+        }
+        .btn-fill:hover { background: #E65100; transform: translateY(-2px); }
+
+        /* --- 8. MODAL POPUP --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 2000;
+        }
+        .modal-content {
+            background: white; padding: 40px; border-radius: 15px;
+            max-width: 500px; width: 90%; position: relative;
+            border-top: 10px solid var(--brand-blue); animation: slideUp 0.3s ease-out;
+        }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #999; }
+        #modalTitle { font-family: var(--font-display); color: var(--brand-blue); font-size: 1.8rem; margin-bottom: 10px; }
+        #modalDesc { color: #555; line-height: 1.6; font-size: 1rem; }
+
+        /* --- 9. MOBILE RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .menu-btn { display: block; }
+            .main-nav { display: none; } 
+            .academy-container { grid-template-columns: 1fr; }
+            .academy-hero h1 { font-size: 2.2rem; }
+            .course-card { flex-direction: column; }
+            .card-image { width: 100%; height: 180px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="brand-logo">
+            <img src="assets/images/logoblue.png" alt="iLearn Spaces">
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="academy.html" class="active">Academy</a></li>
+                <li><a href="kids-coding.html">Kids Coding</a></li>
+                <li><a href="bizsuite.html">BizSuite</a></li>
+                <li><a href="exam-prep.html">Exam Prep</a></li>
+                <li><a href="youth-hub.html">Youth Hub</a></li>
+                <li><a href="academy.html" class="btn-nav">FIND A COURSE</a></li>
+            </ul>
+        </nav>
+        <button class="menu-btn">☰</button>
+    </header>
+
+    <div class="academy-hero">
+        <div style="position: relative; z-index: 2;">
+            <h1>Innovation & Future Skills</h1>
+            <p>We believe breakthrough skills should be exclusive in quality, not in price. Experience rigorous, industry-standard innovation programs designed to launch your career without the barrier of excessive tuition.</p>
+        </div>
+    </div>
+
+    <div class="academy-container">
+        
+        <aside class="filters-sidebar">
+            <div class="filter-group">
+                <span class="filter-title">Program Type</span>
+                <label class="filter-label"><input type="checkbox" value="core" class="filter-input" checked> Core Tech & Digital</label>
+                <label class="filter-label"><input type="checkbox" value="kids" class="filter-input" checked> Kids & Youth</label>
+                <label class="filter-label"><input type="checkbox" value="professional" class="filter-input" checked> Professional</label>
+                <label class="filter-label"><input type="checkbox" value="educator" class="filter-input" checked> Educator & Community</label>
+            </div>
+            <div class="filter-group">
+                <span class="filter-title">Format</span>
+                <label class="filter-label"><input type="checkbox" value="Physical" class="filter-input format-check" checked> In-Person</label>
+                <label class="filter-label"><input type="checkbox" value="Virtual" class="filter-input format-check" checked> Online (Live)</label>
+                <label class="filter-label"><input type="checkbox" value="Hybrid" class="filter-input format-check" checked> Hybrid</label>
+            </div>
+            <div class="filter-group">
+                <span class="filter-title">Price Range</span>
+                <label class="filter-label"><input type="checkbox" value="low" class="filter-input price-check" checked> Under ₦50k</label>
+                <label class="filter-label"><input type="checkbox" value="mid" class="filter-input price-check" checked> ₦50k - ₦150k</label>
+                <label class="filter-label"><input type="checkbox" value="high" class="filter-input price-check" checked> Above ₦150k</label>
+            </div>
+        </aside>
+
+        <main class="course-list" id="courseListContainer">
+            </main>
+    </div>
+
+    <div class="modal-overlay" id="courseModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closePopup()">×</span>
+            <h2 id="modalTitle">Course Title</h2>
+            <p id="modalDesc">Description goes here.</p>
+            
+            <div class="card-meta" style="margin-top:20px; justify-content:center; color:var(--brand-blue);">
+                <span id="modalDuration"></span> | <span id="modalFee"></span>
+            </div>
+            <br>
+            <a href="enroll.html" class="btn-fill" style="width:100%; display:block; text-align:center;">Enroll Now</a>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA WITH ABSTRACT IMAGE URLs ---
+        const courses = [
+            // A. Core Tech & Digital Skills (Abstract: Neural Networks, Code, Binary, Circuits)
+            { id: 1, type: 'core', image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600', title: "AI Literacy & Responsible AI Use", desc: "Master the fundamentals of AI ethics.", details: "This essential course covers the core principles of artificial intelligence, taking you from basic definitions to ethical application. Suitable for beginners navigating the digital age.", duration: "4 Weeks", fee: "₦50,000", priceVal: 50000, tags: ["AI", "Ethics"] },
+            { id: 2, type: 'core', image: 'https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=600', title: "AI for Productivity & Automation", desc: "Boost workplace efficiency with AI tools.", details: "This practical course covers workplace efficiency tools, taking you from manual workflows to fully automated systems.", duration: "8 Weeks", fee: "₦180,000", priceVal: 180000, tags: ["Efficiency", "Business"] },
+            { id: 3, type: 'core', image: 'https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Applied AI for Education & Business", desc: "Practical AI for edu and business sectors.", details: "This sector-focused course covers AI implementation strategies, taking you from theory to practical deployment in schools and firms.", duration: "6 Weeks", fee: "₦170,000", priceVal: 170000, tags: ["Edu", "Biz"] },
+            { id: 4, type: 'core', image: 'https://images.pexels.com/photos/17483873/pexels-photo-17483873.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Machine Learning Foundations", desc: "Build ML models with low-code platforms.", details: "This accessible course covers machine learning concepts, taking you from data basics to model deployment without complex coding.", duration: "10 Weeks", fee: "₦200,000", priceVal: 200000, tags: ["ML", "No-Code"] },
+            { id: 5, type: 'core', image: 'https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Generative AI", desc: "Create stunning content using GenAI tools.", details: "This creative course covers the spectrum of generative tools, taking you from basic prompts to advanced multimedia creation.", duration: "6 Weeks", fee: "₦80,000", priceVal: 80000, tags: ["Creative", "Media"] },
+            { id: 6, type: 'core', image: 'https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Blockchain, Web3 & AI Integration", desc: "Decentralized web technologies and AI.", details: "This advanced course covers decentralized technologies, taking you from blockchain fundamentals to AI-integrated Web3 solutions.", duration: "12 Weeks", fee: "₦250,000", priceVal: 250000, tags: ["Blockchain", "Web3"] },
+            { id: 7, type: 'core', image: 'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Web Development (Full Stack)", desc: "Front-end and back-end coding.", details: "This intensive course covers front-end and back-end programming, taking you from syntax basics to full-stack deployment.", duration: "24 Weeks", fee: "₦350,000", priceVal: 350000, tags: ["Coding", "Full Stack"] },
+            { id: 8, type: 'core', image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Web Development (No-Code)", desc: "Launch prosites quickly using visual tools.", details: "This efficient course covers visual web building, taking you from design concepts to published professional sites.", duration: "12 Weeks", fee: "₦250,000", priceVal: 250000, tags: ["No-Code", "Web"] },
+            { id: 9, type: 'core', image: 'https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Mobile App Development (No-Code)", desc: "Design apps without writing code.", details: "This hands-on course covers mobile application creation, taking you from wireframing to app store deployment without coding.", duration: "12 Weeks", fee: "₦210,000", priceVal: 210000, tags: ["Mobile", "No-Code"] },
+            { id: 10, type: 'core', image: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=600', title: "API & Automation Basics", desc: "Connect apps and automate data with APIs.", details: "This technical course covers software connectivity, taking you from understanding APIs to building automated data pipelines.", duration: "10 Weeks", fee: "₦280,000", priceVal: 280000, tags: ["API", "Backend"] },
+            { id: 11, type: 'core', image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=600', title: "UI/UX Design", desc: "Design user-centric interfaces.", details: "This design-focused course covers user experience principles, taking you from research methods to high-fidelity interface prototyping.", duration: "8 Weeks", fee: "₦80,000", priceVal: 80000, tags: ["Design", "UX"] },
+            { id: 12, type: 'core', image: 'https://images.pexels.com/photos/1762851/pexels-photo-1762851.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Graphic Design", desc: "Visual communication and Adobe software.", details: "This visual course covers essential design theory, taking you from sketching ideas to mastering industry-standard software.", duration: "6 Weeks", fee: "₦50,000", priceVal: 50000, tags: ["Art", "Visual"] },
+            { id: 13, type: 'core', image: 'https://images.pexels.com/photos/2397652/pexels-photo-2397652.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Motion Graphics & Animation", desc: "Bring stories to life with motion graphics.", details: "This dynamic course covers the art of movement, taking you from keyframe basics to complex visual storytelling.", duration: "8 Weeks", fee: "₦70,000", priceVal: 70000, tags: ["Motion", "Animation"] },
+            { id: 14, type: 'core', image: 'https://images.pexels.com/photos/257904/pexels-photo-257904.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Video Editing & Content Creation", desc: "Produce professional-grade video content.", details: "This media course covers post-production techniques, taking you from raw footage to polished, professional video content.", duration: "8 Weeks", fee: "₦70,000", priceVal: 70000, tags: ["Video", "Content"] },
+            { id: 15, type: 'core', image: 'https://images.pexels.com/photos/102127/pexels-photo-102127.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Digital Illustration", desc: "Combine digital art skills with narrative techniques.", details: "This artistic course covers digital drawing techniques, taking you from concept art to finished narrative illustrations.", duration: "8 Weeks", fee: "₦70,000", priceVal: 70000, tags: ["Art", "Story"] },
+            { id: 16, type: 'core', image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Social Media Content Design", desc: "Streamline social media with design & auto.", details: "This strategic course covers digital brand presence, taking you from content design to automated scheduling workflows.", duration: "4 Weeks", fee: "₦50,000", priceVal: 50000, tags: ["Social", "Brand"] },
+            { id: 17, type: 'core', image: 'https://images.pexels.com/photos/186461/pexels-photo-186461.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Intermediate Data Analytics", desc: "Deepen your analytical skills.", details: "This analytical course covers complex data interpretation, taking you from raw numbers to actionable business insights.", duration: "10 Weeks", fee: "₦150,000", priceVal: 150000, tags: ["Data", "Analytics"] },
+            { id: 18, type: 'core', image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Beginner Data Literacy", desc: "Introductory course to understanding data.", details: "This foundational course covers the basics of data, taking you from spreadsheet fundamentals to simple trend analysis.", duration: "6 Weeks", fee: "₦60,000", priceVal: 60000, tags: ["Basics", "Stats"] },
+            { id: 19, type: 'core', image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Cybersecurity Fundamentals", desc: "Protect digital assets and understand threats.", details: "This security course covers digital defense strategies, taking you from threat identification to AI-enhanced protection.", duration: "6 Weeks", fee: "₦50,000", priceVal: 50000, tags: ["Security", "Cyber"] },
+            { id: 20, type: 'core', image: 'https://images.pexels.com/photos/6963098/pexels-photo-6963098.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Digital Safety & Ethics in AI", desc: "Navigate the ethical landscape of AI.", details: "This crucial course covers personal and organizational privacy, taking you from data protection laws to ethical AI frameworks.", duration: "4 Weeks", fee: "₦50,000", priceVal: 50000, tags: ["Privacy", "Safety"] },
+            { id: 21, type: 'core', image: 'https://images.pexels.com/photos/1181359/pexels-photo-1181359.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Cloud Computing Fundamentals", desc: "Understand internet infrastructure (AWS/Azure).", details: "This infrastructure course covers cloud services, taking you from server basics to scalable cloud architecture.", duration: "6 Weeks", fee: "₦50,000", priceVal: 50000, tags: ["Cloud", "AWS"] },
+            { id: 22, type: 'core', image: 'https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Tech Support & IT Fundamentals", desc: "Diagnosing and maintaining IT systems.", details: "This operational course covers hardware and software maintenance, taking you from troubleshooting to system optimization.", duration: "8 Weeks", fee: "₦70,000", priceVal: 70000, tags: ["Support", "IT"] },
+
+            // B. Kids & Youth (Abstract: Colorful Blocks, Bright Shapes, Fun Logic)
+            { id: 23, type: 'kids', image: 'https://images.pexels.com/photos/4004374/pexels-photo-4004374.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Kids Tech Bootcamp (Intro)", desc: "Fun, interactive intro to tech for kids.", details: "This interactive course covers a variety of tech topics, taking young learners from curiosity to basic digital competence.", duration: "2 Weeks", fee: "₦20,000", priceVal: 20000, tags: ["Kids", "Fun"] },
+            { id: 24, type: 'kids', image: 'https://images.pexels.com/photos/8386365/pexels-photo-8386365.jpeg?auto=compress&cs=tinysrgb&w=600', title: "AI for Kids", desc: "Demystifying AI for children.", details: "This engaging course covers artificial intelligence concepts, taking kids from 'magic' to understanding machine logic.", duration: "4 Weeks", fee: "₦40,000", priceVal: 40000, tags: ["AI", "Future"] },
+            { id: 25, type: 'kids', image: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Coding & Animation with AI", desc: "Code and animate with AI assistants.", details: "This modern course covers coding and animation, taking kids from block-based logic to AI-assisted creation.", duration: "6 Weeks", fee: "₦50,000", priceVal: 50000, tags: ["Code", "Kids"] },
+            { id: 26, type: 'kids', image: 'https://images.pexels.com/photos/1046332/pexels-photo-1046332.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Creative Computing & Digital Art", desc: "Merging creativity with computing.", details: "This expressive course covers the intersection of art and tech, taking kids from drawing to digital expression.", duration: "6 Weeks", fee: "₦60,000", priceVal: 60000, tags: ["Art", "Create"] },
+            { id: 27, type: 'kids', image: 'https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Game Design & Interactive Media", desc: "Learn logic behind building video games.", details: "This fun course covers video game creation, taking kids from playing to designing their own interactive levels.", duration: "10 Weeks", fee: "₦120,000", priceVal: 120000, tags: ["Games", "Design"] },
+            { id: 28, type: 'kids', image: 'https://images.pexels.com/photos/4709289/pexels-photo-4709289.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Basic Computing & Citizenship", desc: "Foundational computer skills.", details: "This foundational course covers essential computer skills, taking kids from typing to safe internet navigation.", duration: "8 Weeks", fee: "₦80,000", priceVal: 80000, tags: ["Basics", "Safety"] },
+            { id: 29, type: 'kids', image: 'https://images.pexels.com/photos/5905497/pexels-photo-5905497.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Youths Tech Bootcamp", desc: "Intensive intro to tech fields for teens.", details: "This comprehensive course covers key technology fields, taking teenagers from exploration to identifying career interests.", duration: "4 Weeks", fee: "₦40,000", priceVal: 40000, tags: ["Youth", "Skills"] },
+
+            // C. Professional (Abstract: Graphs, Sleek Devices, Office Abstracts)
+            { id: 30, type: 'professional', image: 'https://images.pexels.com/photos/3183186/pexels-photo-3183186.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Project Management with AI", desc: "Modernize PM skills using AI tools.", details: "This professional course covers modern project oversight, taking you from traditional planning to AI-enhanced tracking.", duration: "6 Weeks", fee: "₦60,000", priceVal: 60000, tags: ["PM", "Plan"] },
+            { id: 31, type: 'professional', image: 'https://images.pexels.com/photos/3182765/pexels-photo-3182765.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Agile & Scrum", desc: "Master agile methodologies.", details: "This methodology course covers agile development practices, taking you from theory to running efficient Scrum sprints.", duration: "6 Weeks", fee: "₦70,000", priceVal: 70000, tags: ["Agile", "Team"] },
+            { id: 32, type: 'professional', image: 'https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Product Management & UX", desc: "Manage products from conception to launch.", details: "This strategic course covers the product lifecycle, taking you from market research to user experience optimization.", duration: "10 Weeks", fee: "₦120,000", priceVal: 120000, tags: ["Product", "UX"] },
+            { id: 33, type: 'professional', image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Process Automation & No-Code", desc: "Optimize business operations.", details: "This operational course covers business workflow optimization, taking you from manual tasks to automated no-code systems.", duration: "10 Weeks", fee: "₦180,000", priceVal: 180000, tags: ["Auto", "Biz"] },
+            { id: 34, type: 'professional', image: 'https://images.pexels.com/photos/905164/pexels-photo-905164.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Digital Marketing with AI", desc: "Supercharge marketing with AI.", details: "This growth-focused course covers modern marketing strategies, taking you from campaign planning to AI-driven targeting.", duration: "6 Weeks", fee: "₦50,000", priceVal: 50000, tags: ["Marketing", "Growth"] },
+            { id: 35, type: 'professional', image: 'https://images.pexels.com/photos/2182979/pexels-photo-2182979.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Branding with AI", desc: "Build a powerful brand identity.", details: "This identity course covers brand building techniques, taking you from core values to visual identity using AI tools.", duration: "4 Weeks", fee: "₦50,000", priceVal: 50000, tags: ["Brand", "Identity"] },
+            { id: 36, type: 'professional', image: 'https://images.pexels.com/photos/8867482/pexels-photo-8867482.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Sales, CRM & Automation", desc: "Automate customer interactions.", details: "This commercial course covers customer relationship management, taking you from lead generation to automated support.", duration: "8 Weeks", fee: "₦150,000", priceVal: 150000, tags: ["Sales", "CRM"] },
+            { id: 37, type: 'professional', image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Entrepreneurship with AI", desc: "Build your startup faster with AI.", details: "This venture course covers the startup journey, taking you from ideation to pitching with the help of AI.", duration: "8 Weeks", fee: "₦75,000", priceVal: 75000, tags: ["Startup", "Biz"] },
+            { id: 38, type: 'professional', image: 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=600', title: "AI Office Productivity", desc: "Maximize output using AI.", details: "This efficiency course covers administrative speed, taking you from routine tasks to AI-accelerated output.", duration: "4 Weeks", fee: "₦40,000", priceVal: 40000, tags: ["Office", "Speed"] },
+            { id: 39, type: 'professional', image: 'https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Data-Driven Decisions", desc: "Make smarter business choices.", details: "This executive course covers strategic choices, taking you from intuition to evidence-based decision making with AI.", duration: "4 Weeks", fee: "₦40,000", priceVal: 40000, tags: ["Data", "Decisions"] },
+            { id: 40, type: 'professional', image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Remote Work & Collaboration", desc: "Best practices for working remotely.", details: "This collaborative course covers distributed work best practices, taking you from isolation to seamless digital teamwork.", duration: "4 Weeks", fee: "₦50,000", priceVal: 50000, tags: ["Remote", "Team"] },
+            { id: 41, type: 'professional', image: 'https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Career Readiness & CVs", desc: "Prepare for the job market with AI.", details: "This preparatory course covers job market skills, taking you from CV writing to acing interviews with AI practice.", duration: "4 Weeks", fee: "₦40,000", priceVal: 40000, tags: ["Career", "CV"] },
+
+            // D. Educator (Abstract: Books, Lightbulbs, Networks)
+            { id: 42, type: 'educator', image: 'https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg?auto=compress&cs=tinysrgb&w=600', title: "AI for Teachers", desc: "Empowering educators with AI tools.", details: "This pedagogical course covers EdTech integration, taking you from traditional teaching to AI-enhanced instruction.", duration: "1 Week", fee: "₦30,000", priceVal: 30000, tags: ["Teach", "Class"] },
+            { id: 43, type: 'educator', image: 'https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Offline & Low-Bandwidth EdTech", desc: "EdTech for resource-constrained areas.", details: "This specialized course covers education in limited settings, taking you from constraints to effective offline tech solutions.", duration: "8 Weeks", fee: "₦180,000", priceVal: 180000, tags: ["Global", "Offline"] },
+            { id: 44, type: 'educator', image: 'https://images.pexels.com/photos/5428830/pexels-photo-5428830.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Curriculum Design with AI", desc: "Create robust curriculums with AI.", details: "This academic course covers structural learning design, taking you from learning objectives to AI-generated assessments.", duration: "6 Weeks", fee: "₦70,000", priceVal: 70000, tags: ["Plan", "Assess"] },
+            { id: 45, type: 'educator', image: 'https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Plug-and-Play Device Training", desc: "Usage of educational hardware.", details: "This hardware course covers educational device usage, taking you from unboxing to effective classroom deployment.", duration: "4 Weeks", fee: "₦50,000", priceVal: 50000, tags: ["Hardware", "Edu"] },
+            { id: 46, type: 'educator', image: 'https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=600', title: "Monitoring & Evaluation (MEL)", desc: "Tracking impact using AI frameworks.", details: "This impact-focused course covers program evaluation, taking you from data collection to AI-driven impact analysis.", duration: "8 Weeks", fee: "₦120,000", priceVal: 120000, tags: ["MEL", "Data"] }
+        ];
+
+        const courseList = document.getElementById('courseListContainer');
+        const inputs = document.querySelectorAll('.filter-input');
+
+        function renderCourses() {
+            const checkedTypes = Array.from(document.querySelectorAll('.filter-input:checked'))
+                                      .filter(i => !i.classList.contains('price-check') && !i.classList.contains('format-check'))
+                                      .map(i => i.value);
+            const checkedPrices = Array.from(document.querySelectorAll('.price-check:checked')).map(i => i.value);
+            const checkedFormats = Array.from(document.querySelectorAll('.format-check:checked')).map(i => i.value);
+
+            const filtered = courses.filter(course => {
+                const typeMatch = checkedTypes.includes(course.type);
+                
+                let priceMatch = false;
+                if (checkedPrices.length === 0) priceMatch = true;
+                else {
+                    if (checkedPrices.includes('low') && course.priceVal <= 50000) priceMatch = true;
+                    if (checkedPrices.includes('mid') && course.priceVal > 50000 && course.priceVal <= 150000) priceMatch = true;
+                    if (checkedPrices.includes('high') && course.priceVal > 150000) priceMatch = true;
+                }
+
+                return typeMatch && priceMatch;
+            });
+
+            if(filtered.length === 0) {
+                courseList.innerHTML = '<p>No courses match your filters.</p>';
+                return;
+            }
+
+            courseList.innerHTML = filtered.map(course => `
+                <div class="course-card">
+                    <img src="${course.image}" class="card-image" alt="${course.title}">
+                    <div class="card-content">
+                        <h3>${course.title}</h3>
+                        <p class="card-desc">${course.desc}</p>
+                        <div class="card-meta">
+                            <span><i class="far fa-calendar-alt"></i> ${course.duration}</span>
+                            <span><i class="fas fa-money-bill-wave"></i> ${course.fee}</span>
+                        </div>
+                        <div class="card-tags">
+                            ${course.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-outline" onclick="openPopup(${course.id})">See More</button>
+                            <a href="enroll.html" class="btn-fill">Enroll Now ></a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        inputs.forEach(input => input.addEventListener('change', renderCourses));
+        
+        function openPopup(id) {
+            const course = courses.find(c => c.id === id);
+            if(course) {
+                document.getElementById('modalTitle').innerText = course.title;
+                document.getElementById('modalDesc').innerHTML = course.details; 
+                document.getElementById('modalDuration').innerText = "Duration: " + course.duration;
+                document.getElementById('modalFee').innerText = "Fee: " + course.fee;
+                
+                const popupBtn = document.querySelector('#courseModal .btn-fill');
+                if(popupBtn) popupBtn.href = "enroll.html";
+                
+                document.getElementById('courseModal').style.display = 'flex';
+            }
+        }
+
+        function closePopup() {
+            document.getElementById('courseModal').style.display = 'none';
+        }
+
+        renderCourses();
+    </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<footer class="ilearn-footer">
+    <div class="footer-container">
+        
+        <div class="footer-col brand-col">
+            <img src="logo-footer.png" alt="iLearn Spaces" class="footer-logo footer-logo-img">
+            <p class="mission-text">
+                Bridging the digital divide in underserved communities. An offline-first, innovation-driven hub empowering Gwagwalada's youth.
+            </p>
+            <div class="social-icons">
+                <a href="https://web.facebook.com/ilearnliteracy" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com/ilearnspaces/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/ilearnspaces" target="_blank" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a> <a href="https://share.google/lrTZGXaXiNpsphgT1" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>Our Programs</h3>
+            <ul class="footer-links">
+                <li><a href="academy.html">Tech & Digital Academy</a></li>
+                <li><a href="kids-coding.html">Kids & Future Creators</a></li>
+                <li><a href="exam-prep.html">Exam Prep (JAMB/WAEC)</a></li>
+                <li><a href="youth-hub.html">The Youth Hub</a></li>
+                <li><a href="scholarships.html">Scholarship Application</a></li>
+                <li><a href="portal.html">Student Portal</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Partners & Services</h3>
+            <ul class="footer-links">
+                <li><a href="bizsuite.html">BizSuite (CAC Registration)</a></li>
+                <li><a href="consultancy.html">Business Consultancy</a></li>
+                <li><a href="hire.html">Hire a Graduate</a></li>
+                <li><a href="facilities.html">Rent a Training Hall</a></li>
+                <li><a href="partners.html">Corporate Partnerships</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col contact-col">
+            <h3>Contact & Policy</h3>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Plot 171 Shargale Plaza, Old Kutunku Road, Gwagwalada, Abuja.</p>
+                <p><i class="fas fa-phone"></i> 07033247060 | 08142450774</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:info@ilearnspaces.com">info@ilearnspaces.com</a></p>
+                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/2349158949925" target="_blank">WhatsApp Us (+234 915 894 9925)</a></p>
+            </div>
+
+            <div class="legal-links">
+                <a href="child-protection.html">Child Protection</a> | 
+                <a href="privacy.html">Privacy</a> | 
+                <a href="terms.html">Terms</a>
+            </div>
+
+            <form class="footer-newsletter" action="#" method="POST">
+                <p>Subscribe to iLearn Spaces Update</p>
+                <div class="input-group">
+                    <input type="text" name="name" placeholder="Your name" required>
+                    <input type="email" name="email" placeholder="Your email address" required>
+                    <input type="text" name="hp" class="hp-field" style="display:none" tabindex="-1" autocomplete="off">
+                    <input type="hidden" name="page" value="">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>Copyright &copy; 2026 iLearn Spaces. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

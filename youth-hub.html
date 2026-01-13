@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Youth Hub @ iLearn Spaces</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <style>
+        /* --- 1. CORE VARIABLES --- */
+        :root {
+            --brand-blue: #0D47A1;
+            --brand-orange: #FF6F00;
+            --brand-white: #ffffff;
+            --brand-black: #111111;
+            
+            --font-display: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-body); color: var(--brand-black); background-color: var(--brand-white); overflow-x: hidden; }
+
+        /* --- 2. HEADER --- */
+        .site-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; background-color: var(--brand-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;
+        }
+        .brand-logo img { height: 50px; width: auto; }
+        .main-nav ul { list-style: none; display: flex; gap: 25px; align-items: center; }
+        .main-nav a { text-decoration: none; color: var(--brand-blue); font-family: var(--font-body); font-weight: 700; transition: 0.3s; }
+        .main-nav a:hover, .main-nav a.active { color: var(--brand-orange); }
+        .btn-nav { background: var(--brand-blue); color: white !important; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        .menu-btn { display: none; font-size: 1.8rem; background: none; border: none; color: var(--brand-blue); cursor: pointer; }
+
+        /* --- 3. BOLD HERO --- */
+        .hub-hero {
+            position: relative; height: 90vh; min-height: 600px;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; color: white; overflow: hidden;
+            background-color: var(--brand-black);
+        }
+        
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            /* African Youth Image */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), 
+                        url('hero-youth-hub.png') no-repeat;
+            background-size: cover; background-position: center;
+            z-index: 0;
+        }
+
+        .hero-content { position: relative; z-index: 2; max-width: 900px; padding: 20px; }
+        
+        .hero-title {
+            font-family: var(--font-display); font-weight: 900; font-size: 4rem; 
+            line-height: 1.1; text-transform: uppercase; margin-bottom: 20px;
+            text-shadow: 2px 2px 0px var(--brand-blue);
+        }
+        
+        .hero-sub { font-size: 1.3rem; margin-bottom: 40px; font-weight: 600; color: #eee; }
+
+        .btn-bold {
+            display: inline-block; padding: 18px 40px; 
+            background-color: var(--brand-orange); color: white; 
+            font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            text-decoration: none; border: none; cursor: pointer; 
+            transition: 0.2s;
+        }
+        .btn-bold:hover { background-color: white; color: var(--brand-orange); }
+
+        .btn-outline {
+            display: inline-block; padding: 16px 38px; margin-left: 15px;
+            border: 2px solid white; color: white; background: transparent;
+            font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+            text-decoration: none; cursor: pointer; transition: 0.2s;
+        }
+        .btn-outline:hover { background: white; color: var(--brand-black); }
+
+        /* --- 4. ABOUT --- */
+        .hub-about { display: grid; grid-template-columns: 1fr 1fr; }
+        .about-img { 
+            /* African Youth Portrait */
+            background: url('about-hub.png') center/cover no-repeat;
+            min-height: 500px; 
+        }
+        .about-text { padding: 80px 50px; display: flex; flex-direction: column; justify-content: center; background: white; }
+        .section-tag { color: var(--brand-orange); font-weight: 900; letter-spacing: 1px; margin-bottom: 10px; display: block; font-family: var(--font-display); text-transform: uppercase; }
+        .about-text h2 { font-family: var(--font-display); font-size: 3rem; text-transform: uppercase; line-height: 1; margin-bottom: 30px; color: var(--brand-blue); }
+        .about-text p { font-size: 1.1rem; line-height: 1.7; color: #444; margin-bottom: 30px; }
+
+        /* --- 5. OFFERINGS --- */
+        .offer-section { padding: 80px 5%; background: #F4F4F4; }
+        .offer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        
+        .hub-card { 
+            background: white; border-bottom: 5px solid var(--brand-blue); 
+            transition: 0.3s; position: relative; overflow: hidden;
+        }
+        .hub-card:hover { transform: translateY(-10px); border-bottom-color: var(--brand-orange); }
+        
+        .card-img { height: 250px; width: 100%; object-fit: cover; }
+        .card-body { padding: 30px; }
+        .card-title { font-family: var(--font-display); font-weight: 900; font-size: 1.5rem; text-transform: uppercase; margin-bottom: 15px; color: var(--brand-black); }
+        .card-desc { font-size: 0.95rem; color: #555; margin-bottom: 20px; line-height: 1.6; }
+        .card-btn { background: var(--brand-black); color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; display: inline-block; font-size: 0.9rem; text-transform: uppercase; cursor: pointer;}
+        .card-btn:hover { background: var(--brand-orange); }
+
+        /* --- 6. MEMBERSHIP STRIP --- */
+        .membership-strip {
+            background-color: var(--brand-orange); color: white; padding: 80px 20px; text-align: center;
+        }
+        .mem-title { font-family: var(--font-display); font-weight: 900; font-size: 3.5rem; text-transform: uppercase; margin-bottom: 10px; }
+        .mem-sub { font-size: 1.2rem; font-weight: 600; margin-bottom: 30px; }
+        .mem-info { background: rgba(0,0,0,0.2); display: inline-block; padding: 10px 20px; font-weight: bold; margin-bottom: 30px; }
+        
+        .inline-form { display: flex; justify-content: center; gap: 10px; max-width: 600px; margin: 0 auto; flex-wrap: wrap; }
+        .input-bold { padding: 15px; border: none; flex: 1; min-width: 250px; font-family: var(--font-body); font-size: 1rem; }
+        .btn-black { background: var(--brand-black); color: white; padding: 15px 30px; border: none; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.2s; }
+        .btn-black:hover { background: white; color: black; }
+
+        /* --- 7. EVENTS SLIDER --- */
+        .events-section { padding: 80px 0; background: white; }
+        .events-header { padding: 0 5%; display: flex; justify-content: space-between; align-items: end; margin-bottom: 40px; }
+        .events-header h2 { font-family: var(--font-display); font-size: 2.5rem; text-transform: uppercase; color: var(--brand-blue); }
+        
+        .events-scroller {
+            display: flex; overflow-x: auto; gap: 20px; padding: 0 5% 40px; 
+            scrollbar-width: thin; scrollbar-color: var(--brand-orange) #eee;
+        }
+        .event-card { min-width: 300px; position: relative; }
+        .event-img { width: 100%; height: 400px; object-fit: cover; filter: brightness(0.7); transition: 0.3s; }
+        .event-card:hover .event-img { filter: brightness(1); }
+        .event-overlay { position: absolute; bottom: 20px; left: 20px; color: white; pointer-events: none; }
+        .event-tag { background: var(--brand-orange); padding: 5px 10px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
+        .event-title { font-family: var(--font-display); font-size: 1.5rem; margin-top: 10px; line-height: 1.2; }
+
+        /* --- 8. FOOTER --- */
+        /* Footer styling removed (moved to global stylesheet) */
+        .btn-donate { background: var(--brand-orange); color: white; padding: 10px 20px; text-decoration: none; display: inline-block; font-weight: bold; margin-top: 10px; }
+
+        /* --- 9. MODALS --- */
+        .modal-overlay { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); align-items: center; justify-content: center; }
+        
+        /* Default Modal Size */
+        .modal-box { background-color: white; padding: 40px; width: 90%; max-width: 500px; position: relative; border-top: 10px solid var(--brand-orange); animation: slideUp 0.3s ease-out; }
+        
+        /* Smaller Modal for Accelerator Notice */
+        .modal-box-small { background-color: white; padding: 30px; width: 90%; max-width: 400px; position: relative; border-top: 10px solid var(--brand-blue); animation: slideUp 0.3s ease-out; text-align: center; }
+
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #999; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+        .form-control { width: 100%; padding: 15px; border: 2px solid #ddd; font-size: 1rem; font-family: var(--font-body); }
+        .form-control:focus { border-color: var(--brand-blue); outline: none; }
+        
+        select.form-control { appearance: none; background: white; cursor: pointer; }
+        
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .menu-btn { display: block; }
+            .main-nav { display: none; }
+            .hero-title { font-size: 2.5rem; }
+            .hub-about { grid-template-columns: 1fr; }
+            .about-img { min-height: 300px; }
+            .about-text h2 { font-size: 2.2rem; }
+            .inline-form { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="brand-logo">
+            <img src="assets/images/logoblue.png" alt="iLearn Spaces">
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="academy.html">Academy</a></li>
+                <li><a href="kids-coding.html">Kids Coding</a></li>
+                <li><a href="bizsuite.html">BizSuite</a></li>
+                <li><a href="exam-prep.html">Exam Prep</a></li>
+                <li><a href="youth-hub.html" class="active">Youth Hub</a></li>
+                <li><a onclick="openHubModal('Join Membership')" class="btn-nav">JOIN THE HUB</a></li>
+            </ul>
+        </nav>
+        <button class="menu-btn">☰</button>
+    </header>
+
+    <section class="hub-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Together for the <br>Future of Gwagwalada</h1>
+            <p class="hero-sub">We are a community, a workspace, and a launchpad for the next generation of changemakers.</p>
+            <div>
+                <button onclick="openHubModal('Join The Hub')" class="btn-bold">JOIN THE HUB ></button>
+                <button onclick="openHubModal('Watch Story')" class="btn-outline">WATCH OUR STORY</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="hub-about">
+        <div class="about-img"></div>
+        <div class="about-text">
+            <span class="section-tag">About The Hub</span>
+            <h2>More Than Just <br>A Building.</h2>
+            <p>We are iLearn Spaces Youth Hub: a social innovation centre on a mission to champion and strengthen the potential of young people in Gwagwalada and the wider Abuja area. We do this by providing a world-class environment where young creatives, tech enthusiasts, and entrepreneurs can access the infrastructure, skills, and networks they need to succeed.
+
+We are more than just a building; we are a movement. Powered by RABNI Education Interventions, we work with our partners to bridge the gap between education and the global economy, ensuring that your location is never a barrier to your opportunity.</p>
+            </div>
+    </section>
+
+    <section class="offer-section">
+        <div class="offer-grid">
+            
+            <div class="hub-card">
+                <img src="accelerator.png" class="card-img" alt="African Startup">
+                <div class="card-body">
+                    <h3 class="card-title">Startup Accelerator</h3>
+                    <p class="card-desc">Turn your idea into a business. Our incubator provides mentorship, seed funding access, and strategic guidance for young founders.</p>
+                    <a onclick="openAcceleratorModal()" class="card-btn">Apply Now</a>
+                </div>
+            </div>
+
+            <div class="hub-card">
+                <img src="co-working.png" class="card-img" alt="Co-Working">
+                <div class="card-body">
+                    <h3 class="card-title">Co-Working Space</h3>
+                    <p class="card-desc">A professional environment with 24/7 power and internet. Access is a benefit for registered members.</p>
+                    <a onclick="openHubModal('Coworking Membership')" class="card-btn">BECOME A MEMBER</a>
+                </div>
+            </div>
+
+            <div class="hub-card">
+                <img src="masterclasses.png" class="card-img" alt="Masterclass">
+                <div class="card-body">
+                    <h3 class="card-title">Masterclasses</h3>
+                    <p class="card-desc">From coding to digital marketing, access expert-led masterclasses. These are exclusive member-only privileges.</p>
+                    <a onclick="openHubModal('Masterclass Membership')" class="card-btn">BECOME A MEMBER</a>
+                </div>
+            </div>
+
+            <div class="hub-card">
+                <img src="networking.png" class="card-img" alt="Events">
+                <div class="card-body">
+                    <h3 class="card-title">Community Events</h3>
+                    <p class="card-desc">Connect with peers, mentors, and industry leaders at our weekly mixers and pitch nights.</p>
+                    <a href="gallery.html" class="card-btn">VIEW GALLERY</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="membership-strip">
+        <h2 class="mem-title">Membership is 100% Free.</h2>
+        <p class="mem-sub">We believe access to opportunity should have no barrier.</p>
+        <div class="mem-info">NEXT INTAKE: JANUARY & JUNE 2026</div>
+        
+        <div class="inline-form">
+            <input type="email" placeholder="Enter your email address..." class="input-bold">
+            <button onclick="openHubModal('Waitlist')" class="btn-black">JOIN WAITLIST</button>
+        </div>
+    </section>
+
+    <section class="events-section">
+        <div class="events-header">
+            <h2>Latest From The Hub</h2>
+            <a href="gallery.html" class="link-arrow" style="cursor:pointer;">View Full Gallery ></a>
+        </div>
+        
+        <div class="events-scroller">
+            <div class="event-card">
+                <img src="latest1.png" class="event-img" alt="Event">
+                <div class="event-overlay">
+                    <span class="event-tag">Tech Highlight</span>
+                    <h3 class="event-title">Hackathon 2025</h3>
+                </div>
+            </div>
+            <div class="event-card">
+                <img src="networking.png" class="event-img" alt="Event">
+                <div class="event-overlay">
+                    <span class="event-tag">Talk</span>
+                    <h3 class="event-title">Career Talk</h3>
+                </div>
+            </div>
+            <div class="event-card">
+                <img src="partnerships.jpg" class="event-img" alt="Event">
+                <div class="event-overlay">
+                    <span class="event-tag">Social</span>
+                    <h3 class="event-title">Friday Mixer</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <p>© 2026 RABNI Education Interventions.</p>
+                <p>Privacy Policy</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="hubModal" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeHubModal()">&times;</span>
+            
+            <div id="hubSuccessMessage" style="display:none; text-align:center; padding:20px;">
+                <i class="fas fa-check-circle" style="font-size:3rem; color:#4CAF50; margin-bottom:15px;"></i>
+                <h3 style="color:#333; margin-bottom:10px; font-family:var(--font-display);">Welcome to the Hub!</h3>
+                <p style="color:#666;">Your details have been registered. We will be in touch shortly.</p>
+                <button onclick="closeHubModal()" class="btn-black" style="margin-top:20px; width:100%;">Close</button>
+            </div>
+
+            <div id="hubFormContainer">
+                <div style="margin-bottom:20px; text-align:center;">
+                    <h3 style="font-family:var(--font-display); text-transform:uppercase; color:var(--brand-blue); margin-bottom:5px;">Join the Movement</h3>
+                    <p style="color:#666;">Fill the form to get started.</p>
+                </div>
+
+                <form id="hubForm" onsubmit="submitHubForm(event)">
+                    <input type="hidden" name="_subject" value="New Youth Hub Interest!">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" name="name" required class="form-control" placeholder="YOUR NAME">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" name="email" required class="form-control" placeholder="YOUR EMAIL">
+                    </div>
+
+                    <div class="form-group">
+                        <label>I am interested in...</label>
+                        <select name="interest" id="hubSelect" class="form-control">
+                            <option value="General">General Membership</option>
+                            <option value="Coworking">Co-Working Membership</option>
+                            <option value="Masterclasses">Masterclasses / Skills</option>
+                            <option value="Sponsorship">Sponsorship / Partnership</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="btn-black" style="width:100%;">SUBMIT INTEREST</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="acceleratorModal" class="modal-overlay">
+        <div class="modal-box-small">
+            <span class="close-btn" onclick="closeAcceleratorModal()">&times;</span>
+            
+            <div id="accSuccessMsg" style="display:none;">
+                <i class="fas fa-check-circle" style="font-size:3rem; color:#4CAF50; margin-bottom:15px;"></i>
+                <h3 style="color:#333; margin-bottom:10px;">You are on the list!</h3>
+                <p style="color:#666;">We will email you when applications open.</p>
+                <button onclick="closeAcceleratorModal()" class="btn-black" style="margin-top:20px; width:100%;">Close</button>
+            </div>
+
+            <div id="accFormContainer">
+                <i class="fas fa-clock" style="font-size:3rem; color:var(--brand-orange); margin-bottom:15px;"></i>
+                <h3 style="font-family:var(--font-display); text-transform:uppercase; color:var(--brand-blue); margin-bottom:10px;">Applications Not Yet Open</h3>
+                <p style="color:#666; margin-bottom:20px;">The next cohort for the Startup Accelerator begins soon. Subscribe to be notified immediately.</p>
+                
+                <form onsubmit="submitAcceleratorForm(event)">
+                    <input type="hidden" name="_subject" value="New Accelerator Waitlist!">
+                    <input type="hidden" name="_captcha" value="false">
+                    
+                    <input type="email" name="email" required class="form-control" placeholder="Enter your email" style="margin-bottom:15px; text-align:center;">
+                    
+                    <button type="submit" id="accSubmitBtn" class="btn-black" style="width:100%;">NOTIFY ME</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- MAIN HUB MODAL LOGIC ---
+        const modal = document.getElementById('hubModal');
+        const select = document.getElementById('hubSelect');
+        const successMsg = document.getElementById('hubSuccessMessage');
+        const formContainer = document.getElementById('hubFormContainer');
+        const form = document.getElementById('hubForm');
+
+        function openHubModal(interest) {
+            formContainer.style.display = 'block';
+            successMsg.style.display = 'none';
+            form.reset();
+            modal.style.display = 'flex';
+            
+            if(interest) {
+                for (let i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value.includes(interest) || select.options[i].text.includes(interest)) {
+                        select.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+
+        function closeHubModal() { modal.style.display = 'none'; }
+
+        function submitHubForm(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerText;
+            btn.innerText = "SENDING...";
+            btn.disabled = true;
+
+            const formData = new FormData(e.target);
+            fetch("https://formsubmit.co/ajax/ilearnacademy171@gmail.com", {
+                method: "POST", body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                formContainer.style.display = 'none';
+                successMsg.style.display = 'block';
+            })
+            .catch(err => { alert("Connection error."); })
+            .finally(() => { btn.innerText = originalText; btn.disabled = false; });
+        }
+
+        // --- ACCELERATOR MODAL LOGIC ---
+        const accModal = document.getElementById('acceleratorModal');
+        const accSuccess = document.getElementById('accSuccessMsg');
+        const accContainer = document.getElementById('accFormContainer');
+
+        function openAcceleratorModal() {
+            accContainer.style.display = 'block';
+            accSuccess.style.display = 'none';
+            accModal.style.display = 'flex';
+        }
+
+        function closeAcceleratorModal() { accModal.style.display = 'none'; }
+
+        function submitAcceleratorForm(e) {
+            e.preventDefault();
+            const btn = document.getElementById('accSubmitBtn');
+            const originalText = btn.innerText;
+            btn.innerText = "ADDING...";
+            btn.disabled = true;
+
+            const formData = new FormData(e.target);
+            fetch("https://formsubmit.co/ajax/ilearnacademy171@gmail.com", {
+                method: "POST", body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                accContainer.style.display = 'none';
+                accSuccess.style.display = 'block';
+            })
+            .catch(err => { alert("Connection error."); })
+            .finally(() => { btn.innerText = originalText; btn.disabled = false; });
+        }
+
+        // Close when clicking outside
+        window.onclick = function(e) {
+            if (e.target == modal) closeHubModal();
+            if (e.target == accModal) closeAcceleratorModal();
+        }
+    </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<footer class="ilearn-footer">
+    <div class="footer-container">
+        
+        <div class="footer-col brand-col">
+            <img src="logo-footer.png" alt="iLearn Spaces" class="footer-logo footer-logo-img">
+            <p class="mission-text">
+                Bridging the digital divide in underserved communities. An offline-first, innovation-driven hub empowering Gwagwalada's youth.
+            </p>
+            <div class="social-icons">
+                <a href="https://web.facebook.com/ilearnliteracy" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com/ilearnspaces/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/ilearnspaces" target="_blank" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a> <a href="https://share.google/lrTZGXaXiNpsphgT1" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>Our Programs</h3>
+            <ul class="footer-links">
+                <li><a href="academy.html">Tech & Digital Academy</a></li>
+                <li><a href="kids-coding.html">Kids & Future Creators</a></li>
+                <li><a href="exam-prep.html">Exam Prep (JAMB/WAEC)</a></li>
+                <li><a href="youth-hub.html">The Youth Hub</a></li>
+                <li><a href="scholarships.html">Scholarship Application</a></li>
+                <li><a href="portal.html">Student Portal</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Partners & Services</h3>
+            <ul class="footer-links">
+                <li><a href="bizsuite.html">BizSuite (CAC Registration)</a></li>
+                <li><a href="consultancy.html">Business Consultancy</a></li>
+                <li><a href="hire.html">Hire a Graduate</a></li>
+                <li><a href="facilities.html">Rent a Training Hall</a></li>
+                <li><a href="partners.html">Corporate Partnerships</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col contact-col">
+            <h3>Contact & Policy</h3>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Plot 171 Shargale Plaza, Old Kutunku Road, Gwagwalada, Abuja.</p>
+                <p><i class="fas fa-phone"></i> 07033247060 | 08142450774</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:info@ilearnspaces.com">info@ilearnspaces.com</a></p>
+                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/2349158949925" target="_blank">WhatsApp Us (+234 915 894 9925)</a></p>
+            </div>
+
+            <div class="legal-links">
+                <a href="child-protection.html">Child Protection</a> | 
+                <a href="privacy.html">Privacy</a> | 
+                <a href="terms.html">Terms</a>
+            </div>
+
+            <form class="footer-newsletter" action="#" method="POST">
+                <p>Subscribe to iLearn Spaces Update</p>
+                <div class="input-group">
+                    <input type="text" name="name" placeholder="Your name" required>
+                    <input type="email" name="email" placeholder="Your email address" required>
+                    <input type="text" name="hp" class="hp-field" style="display:none" tabindex="-1" autocomplete="off">
+                    <input type="hidden" name="page" value="">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>Copyright &copy; 2026 iLearn Spaces. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

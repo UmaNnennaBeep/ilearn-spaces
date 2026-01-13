@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .checkout-card {
+            background: white; width: 100%; max-width: 400px; padding: 30px;
+            border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;
+        }
+        h2 { color: #0D47A1; font-family: 'Nunito', sans-serif; margin-top: 0; }
+        .course-summary { background: #E3F2FD; padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center; }
+        .course-name { font-weight: bold; font-size: 1.1rem; display: block; margin-bottom: 5px; color: #0D47A1; }
+        .course-price { color: #FF6F00; font-size: 1.5rem; font-weight: bold; }
+        
+        /* New Input Style for Email */
+        .email-input {
+            width: 100%; padding: 12px; margin-bottom: 15px; border: 2px solid #ddd;
+            border-radius: 5px; font-family: 'Open Sans', sans-serif; box-sizing: border-box;
+        }
+        
+        .paystack-btn {
+            background-color: #0ba4db; color: white; border: none; padding: 15px; width: 100%;
+            border-radius: 5px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.3s;
+        }
+        .paystack-btn:hover { background-color: #098dbd; }
+        .secure-badge { margin-top: 15px; font-size: 0.8rem; color: #666; display: flex; align-items: center; justify-content: center; gap: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="checkout-card">
+        <h2>Confirm Enrollment</h2>
+        
+        <div class="course-summary">
+            <span id="course-name" class="course-name">Loading Course...</span>
+            <span id="course-price" class="course-price">...</span>
+        </div>
+
+        <form id="paymentForm">
+            <div style="text-align: left; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem;">Parent's Email:</div>
+            <input type="email" id="email-address" class="email-input" placeholder="example@gmail.com" required />
+            
+            <button type="submit" class="paystack-btn" onclick="payWithPaystack(event)">Pay Now</button>
+        </form>
+        
+        <div class="secure-badge">
+            🔒 Secured by Paystack
+        </div>
+        <a href="kids-coding.html" style="display:block; margin-top:20px; color:#999; text-decoration:none; font-size:0.9rem;">Cancel</a>
+    </div>
+
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+
+    <script>
+        // 2. Get URL Parameters
+        const params = new URLSearchParams(window.location.search);
+        const course = params.get('course') || "General Course";
+        const price = params.get('price') || "0"; // Price in Naira
+
+        // Display Data
+        document.getElementById('course-name').innerText = course;
+        const formattedPrice = new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN' }).format(price);
+        document.getElementById('course-price').innerText = formattedPrice;
+
+        // 3. Paystack Function
+        function payWithPaystack(e) {
+            e.preventDefault();
+
+            const email = document.getElementById("email-address").value;
+            
+            if (email === "") {
+                alert("Please enter an email address");
+                return;
+            }
+
+            let handler = PaystackPop.setup({
+                // REPLACE THIS WITH YOUR OWN PUBLIC KEY!
+                key: 'pk_live_ba7ec169db91b9acf031c8799137908ab6ee0dbb', 
+                
+                email: email,
+                amount: price * 100, // Paystack calculates in Kobo, so we multiply Naira by 100
+                currency: 'NGN',
+                ref: ''+Math.floor((Math.random() * 1000000000) + 1), // Generate a random reference number
+                metadata: {
+                    custom_fields: [
+                        {
+                            display_name: "Course Name",
+                            variable_name: "course_name",
+                            value: course
+                        }
+                    ]
+                },
+                callback: function(response) {
+                    // This runs after payment is successful
+                    // Redirect to a thank you page with the reference ID
+                    window.location.href = "success.html?reference=" + response.reference;
+                },
+                onClose: function() {
+                    alert('Transaction canceled.');
+                }
+            });
+
+            handler.openIframe();
+        }
+    </script>
+
+</body>
+</html>

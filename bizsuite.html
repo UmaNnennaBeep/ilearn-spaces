@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizSuite - Business Registration Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <style>
+        /* --- 1. CORE VARIABLES (Same as other pages) --- */
+        :root {
+            --brand-blue: #0D47A1;
+            --brand-light-blue: #E3F2FD; /* Sky Blue Background */
+            --brand-orange: #FF6F00;
+            --brand-white: #ffffff;
+            --text-dark: #333333;
+            --text-grey: #555555;
+            
+            --font-heading: 'Fredoka', sans-serif;
+            --font-sub: 'Nunito', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-body); color: var(--text-dark); background-color: var(--brand-white); overflow-x: hidden; }
+
+        /* --- 2. HEADER (Consistent Navigation) --- */
+        .site-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; background-color: var(--brand-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;
+        }
+        .brand-logo img { height: 50px; width: auto; }
+        .main-nav ul { list-style: none; display: flex; gap: 25px; align-items: center; }
+        .main-nav a { text-decoration: none; color: var(--brand-blue); font-family: var(--font-sub); font-weight: 700; transition: 0.3s; }
+        .main-nav a:hover, .main-nav a.active { color: var(--brand-orange); }
+        .btn-nav { background: var(--brand-blue); color: white !important; padding: 10px 20px; border-radius: 5px; }
+        .menu-btn { display: none; font-size: 1.8rem; background: none; border: none; color: var(--brand-blue); cursor: pointer; }
+
+        /* --- 3. BIZSUITE HERO SECTION --- */
+        .biz-hero {
+            background-color: var(--brand-light-blue); /* Soft Sky Blue */
+            padding: 100px 20px 180px; /* Extra bottom padding for the skyline */
+            text-align: center;
+            position: relative;
+            overflow: hidden; /* Keeps the skyline contained */
+        }
+
+        /* Hero Content */
+        .biz-hero h1 {
+            font-family: var(--font-heading);
+            color: var(--brand-blue);
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .biz-hero h2 {
+            font-family: var(--font-sub);
+            color: #444; /* Bold Grey/Black */
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .hero-desc {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--text-grey);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Buttons & Trust */
+        .btn-pill {
+            display: inline-block; padding: 15px 40px; border-radius: 50px;
+            font-weight: bold; text-decoration: none; font-family: var(--font-sub);
+            transition: transform 0.2s; border: none; font-size: 1.1rem;
+            background-color: var(--brand-orange); color: white;
+            box-shadow: 0 5px 15px rgba(255, 111, 0, 0.3);
+        }
+        .btn-pill:hover { transform: translateY(-3px); background-color: #E65100; }
+
+        .trust-signal {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .stars { color: #4CAF50; letter-spacing: 2px; } /* Green Stars */
+
+        /* --- 4. DECORATIONS (Clouds, Birds, Skyline) --- */
+        
+        /* Floating Clouds (CSS Shapes) */
+        .cloud {
+            position: absolute; background: white; border-radius: 50px;
+            opacity: 0.6; z-index: 1; animation: floatCloud 20s infinite linear;
+        }
+        .cloud::after {
+            content: ''; position: absolute; background: white; width: 50%; height: 100%;
+            top: -50%; left: 25%; border-radius: 50%;
+        }
+        .c1 { width: 120px; height: 40px; top: 15%; left: -10%; animation-duration: 35s; }
+        .c2 { width: 80px; height: 30px; top: 25%; right: -5%; animation-duration: 45s; animation-direction: reverse; }
+        .c3 { width: 100px; height: 35px; top: 60%; left: 10%; animation-duration: 25s; opacity: 0.4; }
+
+        /* Birds (Icons) */
+        .bird { position: absolute; color: rgba(13, 71, 161, 0.1); font-size: 1.5rem; animation: float 6s ease-in-out infinite; }
+        .b1 { top: 20%; left: 15%; }
+        .b2 { top: 15%; right: 20%; animation-delay: 2s; }
+
+        @keyframes floatCloud { 0% { transform: translateX(-100px); } 100% { transform: translateX(100vw); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* THE CITY SKYLINE (CSS Drawing of Abuja/Zuma) */
+        .skyline-container {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 150px;
+            z-index: 0; pointer-events: none;
+            display: flex; align-items: flex-end; justify-content: center;
+        }
+        
+        /* Zuma Rock Shape */
+        .zuma-rock {
+            width: 200px; height: 120px;
+            background-color: rgba(255, 255, 255, 0.4); /* Faint White/Grey */
+            border-radius: 50% 50% 0 0 / 80% 80% 0 0; /* Creates the rock hump */
+            margin-right: -50px; /* Overlap with buildings */
+        }
+
+        /* Generic Buildings */
+        .building { background-color: rgba(255, 255, 255, 0.3); margin: 0 2px; }
+        .bld-1 { width: 40px; height: 60px; }
+        .bld-2 { width: 30px; height: 90px; }
+        .bld-3 { width: 60px; height: 50px; }
+        .bld-4 { width: 50px; height: 100px; border-radius: 10px 10px 0 0; }
+        .bld-5 { width: 80px; height: 40px; }
+
+        /* --- 5. CHAT WIDGET --- */
+        .chat-widget {
+            position: fixed; bottom: 30px; right: 30px; z-index: 2000;
+            display: flex; flex-direction: column; align-items: flex-end;
+        }
+
+        .chat-bubble {
+            background: white; padding: 15px 20px; border-radius: 20px 20px 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15); margin-bottom: 15px;
+            font-size: 0.9rem; color: #333; max-width: 250px;
+            border: 1px solid #eee;
+            animation: popIn 0.5s ease-out 1s backwards; /* Delays appearance by 1s */
+        }
+
+        .chat-avatar {
+            width: 60px; height: 60px; background-color: var(--brand-blue);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 2rem; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(13, 71, 161, 0.4);
+            transition: transform 0.2s;
+        }
+        .chat-avatar:hover { transform: scale(1.1); }
+        .chat-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+
+        @keyframes popIn { 0% { opacity: 0; transform: translateY(20px) scale(0.8); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .menu-btn { display: block; }
+            .main-nav { display: none; }
+            .biz-hero h1 { font-size: 2.2rem; }
+            .chat-bubble { display: none; } /* Hide bubble text on mobile to save space, keep icon */
+        }
+        /* --- SECTION 2: TRUST & LOGOS --- */
+    .trust-section { padding: 60px 20px; text-align: center; background: white; }
+    .trust-headline { font-size: 0.9rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 30px; }
+    
+    .logo-row {
+        display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; opacity: 0.6; margin-bottom: 50px;
+    }
+    /* Placeholder styles for logos since we don't have images yet */
+    .logo-placeholder { 
+        font-family: 'Fredoka', sans-serif; font-size: 1.2rem; color: #555; 
+        display: flex; align-items: center; gap: 10px; filter: grayscale(100%); transition: 0.3s;
+    }
+    .logo-placeholder:hover { filter: grayscale(0%); opacity: 1; color: var(--brand-blue); }
+
+    .main-value-headline {
+        max-width: 800px; margin: 0 auto;
+    }
+    .main-value-headline h2 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 10px; }
+    .main-value-headline span { color: var(--brand-orange); }
+
+    /* --- SECTIONS 3 & 4: COMPARISON TABLES --- */
+    .comparison-section { padding: 80px 20px; background-color: #fff; }
+    .table-container { 
+        overflow-x: auto; /* Allows horizontal scroll on mobile */
+        padding: 20px 0; /* Space for shadows */
+    }
+
+    .comp-table {
+        width: 100%; max-width: 1000px; margin: 0 auto; border-collapse: collapse; min-width: 600px; /* Forces scroll on small screens */
+    }
+
+    .comp-table th, .comp-table td {
+        padding: 15px 20px; text-align: center; border-bottom: 1px solid #eee; font-size: 1rem;
+    }
+
+    .comp-table th { padding-bottom: 20px; color: #555; vertical-align: bottom; }
+    
+    /* First Column (Labels) alignment */
+    .comp-table td:first-child { text-align: left; font-weight: 600; color: var(--text-dark); width: 30%; }
+    .comp-table th:first-child { text-align: left; }
+
+    /* THE BIZSUITE COLUMN (The "Winner" Column) */
+    .biz-col {
+        background-color: #fff;
+        border-left: 2px solid var(--brand-blue);
+        border-right: 2px solid var(--brand-blue);
+        color: var(--brand-blue);
+        font-weight: 700;
+        position: relative;
+    }
+
+    /* Top of the BizSuite Column */
+    th.biz-col {
+        border-top: 4px solid var(--brand-blue);
+        border-radius: 10px 10px 0 0;
+        background-color: var(--brand-light-blue);
+        font-size: 1.2rem;
+    }
+    
+    /* Bottom of the BizSuite Column */
+    tr:last-child td.biz-col {
+        border-bottom: 4px solid var(--brand-blue);
+        border-radius: 0 0 10px 10px;
+    }
+
+    /* The "BEST VALUE" Badge */
+    .badge-value {
+        position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+        background-color: var(--brand-orange); color: white;
+        padding: 5px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;
+        box-shadow: 0 4px 10px rgba(255, 111, 0, 0.4); text-transform: uppercase; white-space: nowrap;
+    }
+
+    /* Status Icons */
+    .fa-check-circle { color: #4CAF50; font-size: 1.2rem; }
+    .fa-times-circle { color: #F44336; font-size: 1.2rem; opacity: 0.5; }
+
+    /* --- SECTION 5: SERVICES GRID --- */
+    .services-section { padding: 80px 20px; background-color: #FAFAFA; }
+    .services-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px; max-width: 1200px; margin: 50px auto 0;
+    }
+
+    .service-card {
+        background: white; padding: 40px 30px; border-radius: 20px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: transform 0.3s;
+        border-top: 4px solid transparent;
+    }
+    
+    .service-card:hover { transform: translateY(-5px); border-top-color: var(--brand-orange); }
+
+    .service-icon {
+        width: 60px; height: 60px; background: var(--brand-light-blue); color: var(--brand-blue);
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        font-size: 1.5rem; margin-bottom: 20px;
+    }
+
+    .service-list { list-style: none; margin-top: 20px; }
+    .service-list li {
+        margin-bottom: 15px; font-size: 0.95rem; color: #555;
+        padding-left: 15px; border-left: 2px solid #eee;
+    }
+    .service-list strong { color: var(--brand-blue); display: block; margin-bottom: 3px; }
+
+    @media (max-width: 768px) {
+        .logo-row { gap: 20px; }
+        .comp-table th, .comp-table td { padding: 10px; font-size: 0.9rem; }
+    }
+    /* --- SECTION 6: FREE CONSULTATION CTA --- */
+    .cta-section {
+        background-color: var(--brand-blue); /* Deep Navy Blue */
+        color: white; /* Overrides default dark text */
+        padding: 80px 20px;
+        position: relative;
+        overflow: hidden; /* Prevents image overflowing on small screens */
+    }
+
+    .cta-split {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Split layout */
+        gap: 60px;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Left Column Content styling */
+    .cta-content h2 { color: white; font-size: 2.8rem; margin-bottom: 20px; line-height: 1.1; }
+    .cta-content p.sub-head { color: #E3F2FD; /* Light Grey/White color */ font-size: 1.1rem; margin-bottom: 25px; opacity: 0.9; line-height: 1.6; }
+    .promise-text { color: var(--brand-orange); font-weight: bold; margin-bottom: 25px; display: block; font-size: 1.1rem; }
+
+    /* Channel Icons row */
+    .channels-list {
+        display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 35px; font-size: 0.9rem; color: #E3F2FD; align-items: center;
+    }
+    .channel-item { display: flex; align-items: center; gap: 8px; }
+    .channel-divider { color: rgba(255,255,255,0.3); }
+
+    /* Trust Signal at bottom left */
+    .cta-trust { margin-top: 40px; font-style: italic; opacity: 0.9; font-size: 0.95rem; }
+    .cta-trust .stars { color: #FFD700; margin-right: 10px; letter-spacing: 1px; }
+
+    /* Right Column Image styling */
+    .cta-image-wrapper {
+        position: relative; height: 100%; min-height: 450px;
+        border-radius: 20px; overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.4); /* Deep shadow for depth */
+    }
+    .cta-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+
+    /* --- MODAL (POPUP) STYLES --- */
+    .modal-overlay {
+        display: none; /* Hidden by default */
+        position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.7); /* Dark background dimming */
+        backdrop-filter: blur(5px); /* Modern blur effect */
+        align-items: center; justify-content: center;
+    }
+    .modal-box {
+        background-color: white; padding: 35px; border-radius: 20px; width: 90%; max-width: 450px;
+        position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.3); color: var(--text-dark);
+        animation: slideUp 0.3s ease-out;
+    }
+    .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: #aaa; cursor: pointer; transition:0.2s; }
+    .close-btn:hover { color: var(--brand-orange); }
+    .modal-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+    .modal-header h3 { color: var(--brand-blue); font-size: 1.5rem; margin-bottom: 5px; }
+
+    /* Form Elements */
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #333; font-size: 0.9rem; }
+    .form-control {
+        width: 100%; padding: 12px 15px; border: 2px solid #eee; border-radius: 10px;
+        font-size: 1rem; font-family: inherit; transition: 0.3s;
+    }
+    .form-control:focus { border-color: var(--brand-blue); outline: none; }
+    /* Custom arrow for dropdown select */
+    select.form-control { appearance: none; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%23333" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>') no-repeat right 15px center
+    /* --- SECTION 2: TRUST & LOGOS --- */
+    .trust-section { padding: 60px 20px; text-align: center; background: white; }
+    .trust-headline { font-size: 0.9rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 30px; }
+    
+    .logo-row {
+        display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; opacity: 0.6; margin-bottom: 50px;
+    }
+    /* Placeholder styles for logos since we don't have images yet */
+    .logo-placeholder { 
+        font-family: 'Fredoka', sans-serif; font-size: 1.2rem; color: #555; 
+        display: flex; align-items: center; gap: 10px; filter: grayscale(100%); transition: 0.3s;
+    }
+    .logo-placeholder:hover { filter: grayscale(0%); opacity: 1; color: var(--brand-blue); }
+
+    .main-value-headline {
+        max-width: 800px; margin: 0 auto;
+    }
+    .main-value-headline h2 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 10px; }
+    .main-value-headline span { color: var(--brand-orange); }
+
+    /* --- SECTIONS 3 & 4: COMPARISON TABLES --- */
+    .comparison-section { padding: 80px 20px; background-color: #fff; }
+    .table-container { 
+        overflow-x: auto; /* Allows horizontal scroll on mobile */
+        padding: 20px 0; /* Space for shadows */
+    }
+
+    .comp-table {
+        width: 100%; max-width: 1000px; margin: 0 auto; border-collapse: collapse; min-width: 600px; /* Forces scroll on small screens */
+    }
+
+    .comp-table th, .comp-table td {
+        padding: 15px 20px; text-align: center; border-bottom: 1px solid #eee; font-size: 1rem;
+    }
+
+    .comp-table th { padding-bottom: 20px; color: #555; vertical-align: bottom; }
+    
+    /* First Column (Labels) alignment */
+    .comp-table td:first-child { text-align: left; font-weight: 600; color: var(--text-dark); width: 30%; }
+    .comp-table th:first-child { text-align: left; }
+
+    /* THE BIZSUITE COLUMN (The "Winner" Column) */
+    .biz-col {
+        background-color: #fff;
+        border-left: 2px solid var(--brand-blue);
+        border-right: 2px solid var(--brand-blue);
+        color: var(--brand-blue);
+        font-weight: 700;
+        position: relative;
+    }
+
+    /* Top of the BizSuite Column */
+    th.biz-col {
+        border-top: 4px solid var(--brand-blue);
+        border-radius: 10px 10px 0 0;
+        background-color: var(--brand-light-blue);
+        font-size: 1.2rem;
+    }
+    
+    /* Bottom of the BizSuite Column */
+    tr:last-child td.biz-col {
+        border-bottom: 4px solid var(--brand-blue);
+        border-radius: 0 0 10px 10px;
+    }
+
+    /* The "BEST VALUE" Badge */
+    .badge-value {
+        position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+        background-color: var(--brand-orange); color: white;
+        padding: 5px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;
+        box-shadow: 0 4px 10px rgba(255, 111, 0, 0.4); text-transform: uppercase; white-space: nowrap;
+    }
+
+    /* Status Icons */
+    .fa-check-circle { color: #4CAF50; font-size: 1.2rem; }
+    .fa-times-circle { color: #F44336; font-size: 1.2rem; opacity: 0.5; }
+
+    /* --- SECTION 5: SERVICES GRID --- */
+    .services-section { padding: 80px 20px; background-color: #FAFAFA; }
+    .services-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px; max-width: 1200px; margin: 50px auto 0;
+    }
+
+    .service-card {
+        background: white; padding: 40px 30px; border-radius: 20px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: transform 0.3s;
+        border-top: 4px solid transparent;
+    }
+    
+    .service-card:hover { transform: translateY(-5px); border-top-color: var(--brand-orange); }
+
+    .service-icon {
+        width: 60px; height: 60px; background: var(--brand-light-blue); color: var(--brand-blue);
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        font-size: 1.5rem; margin-bottom: 20px;
+    }
+
+    .service-list { list-style: none; margin-top: 20px; }
+    .service-list li {
+        margin-bottom: 15px; font-size: 0.95rem; color: #555;
+        padding-left: 15px; border-left: 2px solid #eee;
+    }
+    .service-list strong { color: var(--brand-blue); display: block; margin-bottom: 3px; }
+
+    @media (max-width: 768px) {
+        .logo-row { gap: 20px; }
+        .comp-table th, .comp-table td { padding: 10px; font-size: 0.9rem; }
+    }
+    /* --- SECTION 6: FREE CONSULTATION CTA --- */
+    .cta-section {
+        background-color: var(--brand-blue); /* Deep Navy Blue */
+        color: white; /* Overrides default dark text */
+        padding: 80px 20px;
+        position: relative;
+        overflow: hidden; /* Prevents image overflowing on small screens */
+    }
+
+    .cta-split {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Split layout */
+        gap: 60px;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Left Column Content styling */
+    .cta-content h2 { color: white; font-size: 2.8rem; margin-bottom: 20px; line-height: 1.1; }
+    .cta-content p.sub-head { color: #E3F2FD; /* Light Grey/White color */ font-size: 1.1rem; margin-bottom: 25px; opacity: 0.9; line-height: 1.6; }
+    .promise-text { color: var(--brand-orange); font-weight: bold; margin-bottom: 25px; display: block; font-size: 1.1rem; }
+
+    /* Channel Icons row */
+    .channels-list {
+        display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 35px; font-size: 0.9rem; color: #E3F2FD; align-items: center;
+    }
+    .channel-item { display: flex; align-items: center; gap: 8px; }
+    .channel-divider { color: rgba(255,255,255,0.3); }
+
+    /* Trust Signal at bottom left */
+    .cta-trust { margin-top: 40px; font-style: italic; opacity: 0.9; font-size: 0.95rem; }
+    .cta-trust .stars { color: #FFD700; margin-right: 10px; letter-spacing: 1px; }
+
+    /* Right Column Image styling */
+    .cta-image-wrapper {
+        position: relative; height: 100%; min-height: 450px;
+        border-radius: 20px; overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.4); /* Deep shadow for depth */
+    }
+    .cta-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+
+    /* --- MODAL (POPUP) STYLES --- */
+    .modal-overlay {
+        display: none; /* Hidden by default */
+        position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.7); /* Dark background dimming */
+        backdrop-filter: blur(5px); /* Modern blur effect */
+        align-items: center; justify-content: center;
+    }
+    .modal-box {
+        background-color: white; padding: 35px; border-radius: 20px; width: 90%; max-width: 450px;
+        position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.3); color: var(--text-dark);
+        animation: slideUp 0.3s ease-out;
+    }
+    .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: #aaa; cursor: pointer; transition:0.2s; }
+    .close-btn:hover { color: var(--brand-orange); }
+    .modal-header { text-align: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+    .modal-header h3 { color: var(--brand-blue); font-size: 1.5rem; margin-bottom: 5px; }
+
+    /* Form Elements */
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #333; font-size: 0.9rem; }
+    .form-control {
+        width: 100%; padding: 12px 15px; border: 2px solid #eee; border-radius: 10px;
+        font-size: 1rem; font-family: inherit; transition: 0.3s;
+    }
+    .form-control:focus { border-color: var(--brand-blue); outline: none; }
+    /* Custom arrow for dropdown select */
+    select.form-control { appearance: none; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%23333" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>') no-repeat right 15px center; background-color: white; cursor: pointer; }
+
+
+    /* Responsive Adjustments */
+    @media (max-width: 900px) {
+         /* Stack columns on tablets/mobile */
+        .cta-split { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+        .cta-content h2 { font-size: 2.2rem; }
+        .channels-list { justify-content: center; }
+        /* Make image shorter on mobile */
+        .cta-image-wrapper { min-height: 300px; max-height: 400px; }
+    }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="brand-logo">
+            <img src="assets/images/logoblue.png" alt="iLearn Spaces">
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="academy.html">Academy</a></li>
+                <li><a href="kids-coding.html">Kids Coding</a></li>
+                <li><a href="bizsuite.html" class="active">BizSuite</a></li> <li><a href="exam-prep.html">Exam Prep</a></li>
+                <li><a href="youth-hub.html">Youth Hub</a></li>
+               <li><a href="#" onclick="openConsultModal(); return false;" class="btn-nav">REGISTER NOW</a></li>
+            </ul>
+        </nav>
+        <button class="menu-btn">☰</button>
+    </header>
+
+    <section class="biz-hero">
+        
+        <div class="cloud c1"></div>
+        <div class="cloud c2"></div>
+        <div class="cloud c3"></div>
+        <i class="fas fa-dove bird b1"></i>
+        <i class="fas fa-crow bird b2"></i>
+
+        <div class="container" style="position:relative; z-index:2;">
+            <h1>Seamless Business Registration</h1>
+            <h2>Packages for Business Names (BN) & Limited Companies (LTD)</h2>
+            
+            <p class="hero-desc">
+                Join hundreds of Nigerian entrepreneurs who trust us. Fast, accredited, and affordable formation. 
+                We handle the heavy CAC paperwork so you can focus on building your empire.
+            </p>
+
+           <a href="#" onclick="openConsultModal(); return false;" class="btn-pill">REGISTER BUSINESS</a>
+            
+            <div class="trust-signal">
+                <span class="stars">★★★★★</span>
+                <span>Excellent 4.9 | Verified & Accredited Agents</span>
+            </div>
+        </div>
+
+        <div class="skyline-container">
+            <div class="building bld-2"></div>
+            <div class="building bld-1"></div>
+            <div class="building bld-3"></div>
+            
+            <div class="zuma-rock"></div>
+            
+            <div class="building bld-4"></div>
+            <div class="building bld-1"></div>
+            <div class="building bld-5"></div>
+            <div class="building bld-2"></div>
+        </div>
+
+    </section>
+
+   <div class="chat-widget">
+        <div class="chat-bubble">
+            👋 Hello!! Any questions? I'm here to help! 🚀
+        </div>
+        <a href="https://wa.me/2349158949925?text=Hello!%20I'm%20interested%20in%20Business%20Registration." target="_blank" class="chat-avatar" style="text-decoration: none;">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <div id="consultModal" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeConsultModal()">&times;</span>
+            
+            <div class="modal-header">
+                <h3>👋 Let's Get Started</h3>
+                <p>Fill the form below and we'll contact you shortly.</p>
+            </div>
+
+            <form id="consultForm">
+                
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" required class="form-control" placeholder="e.g. Ibrahim Musa">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone / WhatsApp Number</label>
+                    <input type="tel" name="phone" required class="form-control" placeholder="080...">
+                </div>
+
+                <div class="form-group">
+                    <label>Preferred Contact Method</label>
+                    <select name="method" class="form-control">
+                        <option value="Phone Call">Phone Call</option>
+                        <option value="WhatsApp Chat">WhatsApp Chat</option>
+                        <option value="Google Meet Video">Google Meet (Video)</option>
+                        <option value="In-Person at Hub">In-Person (Abuja Hub)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-pill" style="width:100%; border:none; cursor:pointer;">Request Call</button>
+                
+                <p style="text-align:center; font-size:0.8rem; color:#888; margin-top:15px;">
+                    <i class="fas fa-lock"></i> Your details are secure. No spam.
+                </p>
+            </form>
+        </div>
+    </div>
+
+
+<section class="trust-section">
+        <div class="container">
+            <h4 class="trust-headline">Trusted by Organizations Big & Small</h4>
+            
+            <div class="logo-row">
+                <div class="logo-placeholder"><i class="fas fa-rocket"></i> Innovative Startups</div>
+                <div class="logo-placeholder"><i class="fas fa-globe-africa"></i> Local NGOs</div>
+                <div class="logo-placeholder"><i class="fas fa-laptop-code"></i> Tech SMEs</div>
+                <div class="logo-placeholder"><i class="fas fa-tractor"></i> Agri-Businesses</div>
+            </div>
+
+            <div class="main-value-headline">
+                <h2>BizSuite – Your Smart Choice for <br><span>Lowest Fees</span> and Fastest Processing</h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison-section">
+        <div class="container">
+            <div class="section-header" style="text-align:center; margin-bottom:40px;">
+                <h2 style="font-size:2rem; margin-bottom:10px;">Compare BizSuite to the Alternatives</h2>
+                <p style="color:#666;">Don't get overcharged or under-served. See the difference.</p>
+            </div>
+
+            <div class="table-container">
+                <table class="comp-table">
+                    <thead>
+                        <tr>
+                            <th>Features</th>
+                            <th class="biz-col">
+                                <span class="badge-value">Best Value</span>
+                                BizSuite
+                            </th>
+                            <th>Expensive Law Firms</th>
+                            <th>Roadside Agents</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total First Year Cost</td>
+                            <td class="biz-col" style="color:var(--brand-orange);">₦ Affordable</td>
+                            <td>₦₦₦ Expensive</td>
+                            <td>₦₦ Risky</td>
+                        </tr>
+                        <tr>
+                            <td>CAC Registration Fee</td>
+                            <td class="biz-col"><i class="fas fa-check-circle"></i> Included</td>
+                            <td><i class="fas fa-check-circle"></i> Included</td>
+                            <td><i class="fas fa-times-circle"></i> Often Extra</td>
+                        </tr>
+                        <tr>
+                            <td>TIN (Tax ID) Generation</td>
+                            <td class="biz-col"><i class="fas fa-check-circle"></i> FREE</td>
+                            <td>₦15,000+</td>
+                            <td><i class="fas fa-times-circle"></i> DIY</td>
+                        </tr>
+                        <tr>
+                            <td>Status Report</td>
+                            <td class="biz-col"><i class="fas fa-check-circle"></i> FREE</td>
+                            <td>₦10,000</td>
+                            <td><i class="fas fa-times-circle"></i> Not Included</td>
+                        </tr>
+                        <tr>
+                            <td>Document Delivery</td>
+                            <td class="biz-col">Digital + Hardcopy</td>
+                            <td>Hardcopy Only</td>
+                            <td>Digital Only</td>
+                        </tr>
+                        <tr>
+                            <td>Correction of Errors</td>
+                            <td class="biz-col"><i class="fas fa-check-circle"></i> Guaranteed</td>
+                            <td>Billable Hour</td>
+                            <td><i class="fas fa-ghost"></i> Ghosted</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison-section" style="padding-top:0;">
+        <div class="container">
+            <div class="section-header" style="text-align:center; margin-bottom:40px;">
+                <h2 style="font-size:2rem; margin-bottom:10px;">Total Yearly Maintenance Cost</h2>
+                <p style="color:#666;">The real cost of business is staying compliant. We make it cheap.</p>
+            </div>
+
+            <div class="table-container">
+                <table class="comp-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th class="biz-col">BizSuite</th>
+                            <th>Law Firms</th>
+                            <th>Agents</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Compliance Monitoring</td>
+                            <td class="biz-col"><i class="fas fa-check-circle"></i> ₦0 (Free)</td>
+                            <td>₦50,000/yr</td>
+                            <td>₦0 (No Alerts)</td>
+                        </tr>
+                        <tr>
+                            <td>Annual Returns Filing</td>
+                            <td class="biz-col">Standard CAC Fee</td>
+                            <td>Fee + High Charge</td>
+                            <td>Fee + "Processing"</td>
+                        </tr>
+                        <tr>
+                            <td>Change of Directors</td>
+                            <td class="biz-col">Discounted</td>
+                            <td>Full Price</td>
+                            <td>Varies</td>
+                        </tr>
+                        <tr>
+                            <td>Post-Inc Support</td>
+                            <td class="biz-col">24/7 Chat</td>
+                            <td>Appointment Only</td>
+                            <td>Unreliable</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="container">
+            <div class="section-header" style="text-align:center;">
+                <h2>More Than Just Registration</h2>
+                <p>Everything you need to launch and protect your Nigerian business.</p>
+            </div>
+
+            <div class="services-grid">
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <h3>Tax & Compliance</h3>
+                    <ul class="service-list">
+                        <li><strong>TIN Validation</strong> Ensure your Tax ID is active immediately.</li>
+                        <li><strong>SCUML Certification</strong> Essential for NGOs and DNFBPs.</li>
+                        <li><strong>VAT Registration</strong> Get set up with the FIRS easily.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Brand Protection</h3>
+                    <ul class="service-list">
+                        <li><strong>Trademarking</strong> Protect your logo and brand name from copycats.</li>
+                        <li><strong>Copyright Filing</strong> Secure your creative works (software, books, media).</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-university"></i></div>
+                    <h3>Business Banking</h3>
+                    <ul class="service-list">
+                        <li><strong>Corporate Accounts</strong> We provide the documents banks require.</li>
+                        <li><strong>Status Reports</strong> Essential for opening accounts instantly.</li>
+                        <li><strong>Certified Copies</strong> Verification support included.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="cta-section" id="consult">
+        <div class="container">
+            <div class="cta-split">
+                
+                <div class="cta-content">
+                    <h2>Confused About Registration? Let’s Talk.</h2>
+                    <p class="sub-head">Not sure if you need a Business Name or a Limited Company? Book a FREE 15-minute diagnostic session. Our experts will analyze your business and recommend the perfect structure.</p>
+                    
+                    <span class="promise-text">⚡ We reach out within 24 Hours.</span>
+                    
+                    <div class="channels-list">
+                        <div class="channel-item"><i class="fas fa-phone-alt"></i> Phone Call</div>
+                        <span class="channel-divider">|</span>
+                        <div class="channel-item"><i class="fab fa-whatsapp"></i> WhatsApp</div>
+                        <span class="channel-divider">|</span>
+                        <div class="channel-item"><i class="fas fa-video"></i> Web Call</div>
+                        <span class="channel-divider">|</span>
+                        <div class="channel-item"><i class="fas fa-building"></i> In-Person at Hub</div>
+                    </div>
+
+                    <button onclick="openConsultModal()" class="btn-pill" style="border:none; cursor:pointer; font-size:1.1rem;">BOOK FREE CONSULTATION</button>
+                    
+                    <div class="cta-trust">
+                        <span class="stars">⭐⭐⭐⭐⭐</span> "Best decision I made for my business." – Chidinma, CEO Tekur Foods
+                    </div>
+                </div>
+
+                <div class="cta-image-wrapper">
+                    <img src="bizsuite.png" alt="Friendly consultant in modern office" class="cta-img">
+                </div>
+
+            </div>
+        </div>
+    </section>
+        <!-- Success Message Modal -->
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-box" style="text-align: center; max-width: 350px;">
+            <span class="close-btn" onclick="closeSuccessModal()">&times;</span>
+            
+            <div style="font-size: 3rem; margin-bottom: 20px;">✅</div>
+            <h3 style="color: var(--brand-blue); font-size: 1.5rem; margin-bottom: 10px;">Success!</h3>
+            <p style="color: #666; margin-bottom: 20px;">Thank you! We've received your request and will contact you within 24 hours.</p>
+            
+            <button onclick="closeSuccessModal()" class="btn-pill" style="border: none; cursor: pointer;">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal elements
+        const consultModal = document.getElementById('consultModal');
+        const successModal = document.getElementById('successModal');
+        const consultForm = document.getElementById('consultForm');
+
+        // Function to OPEN the consult modal
+        function openConsultModal() {
+            consultModal.style.display = 'flex';
+        }
+
+        // Function to CLOSE the consult modal
+        function closeConsultModal() {
+             consultModal.style.display = 'none';
+        }
+
+        // Function to CLOSE the success modal
+        function closeSuccessModal() {
+             successModal.style.display = 'none';
+             closeConsultModal(); // Also close the form modal
+        }
+
+        // Close modal if user clicks outside the white box
+        window.onclick = function(event) {
+            if (event.target == consultModal) {
+                closeConsultModal();
+            }
+            if (event.target == successModal) {
+                closeSuccessModal();
+            }
+        }
+
+        // Handle form submission
+        consultForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = new FormData(consultForm);
+            const data = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                method: formData.get('method'),
+                _subject: 'New BizSuite Request!',
+                _captcha: 'false'
+            };
+
+            try {
+                // Send data to FormSubmit.co silently
+                const response = await fetch('https://formsubmit.co/ajax/ilearnbizsuite@gmail.com', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    // Show success message
+                    successModal.style.display = 'flex';
+                    // Reset form
+                    consultForm.reset();
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error sending form. Please try again.');
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<footer class="ilearn-footer">
+    <div class="footer-container">
+        
+        <div class="footer-col brand-col">
+            <img src="logo-footer.png" alt="iLearn Spaces" class="footer-logo footer-logo-img">
+            <p class="mission-text">
+                Bridging the digital divide in underserved communities. An offline-first, innovation-driven hub empowering Gwagwalada's youth.
+            </p>
+            <div class="social-icons">
+                <a href="https://web.facebook.com/ilearnliteracy" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com/ilearnspaces/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/ilearnspaces" target="_blank" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a> <a href="https://share.google/lrTZGXaXiNpsphgT1" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>Our Programs</h3>
+            <ul class="footer-links">
+                <li><a href="academy.html">Tech & Digital Academy</a></li>
+                <li><a href="kids-coding.html">Kids & Future Creators</a></li>
+                <li><a href="exam-prep.html">Exam Prep (JAMB/WAEC)</a></li>
+                <li><a href="youth-hub.html">The Youth Hub</a></li>
+                <li><a href="scholarships.html">Scholarship Application</a></li>
+                <li><a href="portal.html">Student Portal</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Partners & Services</h3>
+            <ul class="footer-links">
+                <li><a href="bizsuite.html">BizSuite (CAC Registration)</a></li>
+                <li><a href="consultancy.html">Business Consultancy</a></li>
+                <li><a href="hire.html">Hire a Graduate</a></li>
+                <li><a href="facilities.html">Rent a Training Hall</a></li>
+                <li><a href="partners.html">Corporate Partnerships</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col contact-col">
+            <h3>Contact & Policy</h3>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Plot 171 Shargale Plaza, Old Kutunku Road, Gwagwalada, Abuja.</p>
+                <p><i class="fas fa-phone"></i> 07033247060 | 08142450774</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:info@ilearnspaces.com">info@ilearnspaces.com</a></p>
+                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/2349158949925" target="_blank">WhatsApp Us (+234 915 894 9925)</a></p>
+            </div>
+
+            <div class="legal-links">
+                <a href="child-protection.html">Child Protection</a> | 
+                <a href="privacy.html">Privacy</a> | 
+                <a href="terms.html">Terms</a>
+            </div>
+
+            <form class="footer-newsletter" action="#" method="POST">
+                <p>Subscribe to iLearn Spaces Update</p>
+                <div class="input-group">
+                    <input type="text" name="name" placeholder="Your name" required>
+                    <input type="email" name="email" placeholder="Your email address" required>
+                    <input type="text" name="hp" class="hp-field" style="display:none" tabindex="-1" autocomplete="off">
+                    <input type="hidden" name="page" value="">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>Copyright &copy; 2026 iLearn Spaces. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

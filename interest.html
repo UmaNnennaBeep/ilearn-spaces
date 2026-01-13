@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Free Session - Kids Club</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <style>
+        :root {
+            --brand-blue: #0D47A1;
+            --brand-orange: #FF6F00;
+            --brand-white: #ffffff;
+            --font-heading: 'Fredoka', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+        }
+        body { font-family: var(--font-body); background-color: #E3F2FD; margin: 0; padding: 40px 20px; }
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h2 { color: var(--brand-blue); font-family: var(--font-heading); margin-bottom: 10px; }
+        p { margin-bottom: 30px; color: #666; }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+        input:focus { border-color: var(--brand-blue); outline: none; }
+        .btn-submit {
+            background-color: var(--brand-orange);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 4px 0 #cc5800; }
+        .back-link { display: block; margin-top: 20px; color: var(--brand-blue); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Book Your Free Taster</h2>
+        <p>Fill in the details below and we'll contact you to schedule your child's first step into the future!</p>
+        
+        <form action="#" method="POST"> <input type="text" name="parent_name" placeholder="Parent's Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="tel" name="phone" placeholder="Phone Number" required>
+            <input type="text" name="child_name" placeholder="Child's Name" required>
+            
+            <select name="interest">
+                <option value="" disabled selected>Select Interest...</option>
+                <option value="coding">General Coding</option>
+                <option value="ai">AI & Robotics</option>
+                <option value="games">Game Design</option>
+                <option value="undecided">Not Sure Yet</option>
+            </select>
+
+            <button type="submit" class="btn-submit">Book Free Session</button>
+        </form>
+        
+        <a href="kids-coding.html" class="back-link">← Back to Courses</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enroll - iLearn Spaces</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    /* --- GLOBAL STYLES --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f8; color: #333; }
+
+    /* --- HEADER --- */
+    .site-header {
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      position: sticky; top: 0; z-index: 1000; padding: 10px 20px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .brand-logo img { height: 50px; width: auto; display: block; }
+    .main-nav ul { display: flex; list-style: none; gap: 20px; align-items: center; margin: 0; padding: 0; }
+    .main-nav a { text-decoration: none; color: #333; font-weight: 500; font-size: 16px; transition: color 0.2s; }
+    .main-nav a:hover { color: #003366; }
+    .btn-nav { background-color: #003366; color: white !important; padding: 10px 20px; border-radius: 5px; font-weight: bold; }
+    .menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; }
+
+    /* --- ENROLLMENT CONTAINER --- */
+    .enroll-container {
+      max-width: 900px; margin: 40px auto; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: 0 20px;
+    }
+
+    /* --- LEFT: PAYMENT DETAILS --- */
+    .payment-info { background: #003366; color: white; padding: 40px; border-radius: 10px; }
+    .payment-info h1 { margin-bottom: 20px; font-size: 2rem; }
+    .payment-info p { opacity: 0.9; line-height: 1.6; margin-bottom: 20px; }
+    
+    .bank-details {
+      background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin-top: 30px; border: 1px solid rgba(255,255,255,0.2);
+    }
+    .bank-details strong { display: block; font-size: 1.2rem; margin-bottom: 5px; color: #ffc107; }
+
+    /* --- RIGHT: FORM --- */
+    .enroll-form-box { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #003366; }
+    .form-group input, .form-group select {
+      width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;
+    }
+    .submit-btn {
+      width: 100%; background-color: #003366; color: white; padding: 15px; border: none;
+      border-radius: 5px; font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.3s;
+    }
+    .submit-btn:hover { background-color: #002244; }
+
+    @media (max-width: 768px) {
+      .enroll-container { grid-template-columns: 1fr; }
+      .menu-btn { display: block; } .main-nav { display: none; }
+    }
+  </style>
+  
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="brand-logo"><img src="assets/images/logoblue.png" alt="iLearn Spaces"></a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="academy.html">Academy</a></li>
+        <li><a href="kids-coding.html">Kids Coding</a></li>
+        <li><a href="bizsuite.html">BizSuite</a></li>
+        <li><a href="exam-prep.html">Exam Prep</a></li>
+        <li><a href="youth-hub.html">Youth Hub</a></li>
+        <li><a href="academy.html" class="btn-nav">FIND A COURSE</a></li>
+      </ul>
+    </nav>
+    <button class="menu-btn">☰</button>
+  </header>
+
+  <div class="enroll-container">
+    
+    <div class="payment-info">
+      <h1>Secure Your Spot</h1>
+      <p>Fill out the form to make a secure online payment via Paystack, or use the details below for a bank transfer.</p>
+      
+      <div class="bank-details">
+        <p style="margin-bottom:5px; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px;">Bank Transfer Details</p>
+        <strong>iLearn Learning Spaces Ltd</strong>
+        <span>3002337532</span><br>
+        <span>KUDA Bank</span>
+      </div>
+      <br>
+      <small>* If transferring, please send proof of payment to admin@ilearnspaces.com</small>
+    </div>
+
+    <div class="enroll-form-box">
+      <form id="paymentForm">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="full-name" placeholder="Enter your full name" required>
+        </div>
+        
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email-address" placeholder="example@gmail.com" required>
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="phone-number" placeholder="080..." required>
+        </div>
+
+        <div class="form-group">
+          <label>Select Course</label>
+          <select id="course-select" required>
+            <option value="" disabled selected>Select a program...</option>
+            <option value="50000">Al Literacy & Responsible Al Use (₦50,000)</option>
+<option value="180000">Al for Productivity & Automation (₦180,000)</option>
+<option value="170000">Applied Al for Education & Business (₦170,000)</option>
+<option value="200000">Machine Learning Foundations (Low-Code/No-Code) (₦200,000)</option>
+<option value="80000">Generative Al (Text, Image, Video & Audio) (₦80,000)</option>
+<option value="250000">Blockchain, Web3 & Al Integration (₦250,000)</option>
+<option value="350000">Web Development (With Coding - Full Stack) (₦350,000)</option>
+<option value="250000">Web Development (No-Code / Low-Code) (₦250,000)</option>
+<option value="210000">Mobile App Development (No-Code) (₦210,000)</option>
+<option value="280000">API & Automation Basics (₦280,000)</option>
+<option value="80000">UI/UX Design (₦80,000)</option>
+<option value="50000">Graphic Design (₦50,000)</option>
+<option value="70000">Motion Graphics & Animation (₦70,000)</option>
+<option value="70000">Video Editing & Content Creation (₦70,000)</option>
+<option value="70000">Digital Illustration & Creative Storytelling (₦70,000)</option>
+<option value="50000">Social Media Content Design & Automation (₦50,000)</option>
+<option value="150000">Intermediate Data Literacy & Data Analytics (₦150,000)</option>
+<option value="60000">Beginner Data Literacy & Data Analytics (₦60,000)</option>
+<option value="50000">Cybersecurity Fundamentals & Al-Driven Threat Awareness (₦50,000)</option>
+<option value="50000">Digital Safety, Privacy & Ethics in Al (₦50,000)</option>
+<option value="50000">Cloud Computing Fundamentals (₦50,000)</option>
+<option value="70000">Tech Support & IT Fundamentals (₦70,000)</option>
+<option value="20000">Kids Tech Bootcamp (General/Intro) (₦20,000)</option>
+<option value="40000">Al for Kids (₦40,000)</option>
+<option value="50000">Coding & Animation with Al Copilots (₦50,000)</option>
+<option value="60000">Creative Computing & Digital Art (₦60,000)</option>
+<option value="120000">Game Design & Interactive Media (₦120,000)</option>
+<option value="80000">Basic Computing & Digital Citizenship (₦80,000)</option>
+<option value="40000">Youths Tech Bootcamp (General/Intro) (₦40,000)</option>
+<option value="60000">Project Management with Al Tools (₦60,000)</option>
+<option value="70000">Agile & Scrum (₦70,000)</option>
+<option value="120000">Product Management & UX Research (₦120,000)</option>
+<option value="180000">Process Automation & No-Code Tools (₦180,000)</option>
+<option value="50000">Digital Marketing with Al (₦50,000)</option>
+<option value="50000">Branding & Personal Branding with Al (₦50,000)</option>
+<option value="150000">Sales, CRM & Customer Support Automation (₦150,000)</option>
+<option value="75000">Entrepreneurship & Startup Building with Al (₦75,000)</option>
+<option value="40000">Al-Powered Office Productivity (₦40,000)</option>
+<option value="40000">Data-Driven Decision Making with Al (₦40,000)</option>
+<option value="50000">Remote Work, Collaboration & Al Assistants (₦50,000)</option>
+<option value="40000">Career Readiness, CVs & Interview Prep using Al (₦40,000)</option>
+<option value="30000">Al for Teachers & Facilitators (₦30,000)</option>
+<option value="180000">Offline & Low-Bandwidth EdTech with Al (₦180,000)</option>
+<option value="70000">Curriculum Design & Assessment using Al (₦70,000)</option>
+<option value="50000">Plug-and-Play Device Training (₦50,000)</option>
+<option value="120000">Monitoring, Evaluation & Learning (MEL) with Al Tools (₦120,000)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Mode</label>
+          <select>
+            <option>Physical (Gwagwalada Hub)</option>
+            <option>Virtual (Online Live)</option>
+            <option>Hybrid</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-btn" onclick="payWithPaystack(event)">Pay Now</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const paymentForm = document.getElementById('paymentForm');
+
+    function payWithPaystack(e) {
+      e.preventDefault(); // Stop page from reloading
+
+      const email = document.getElementById("email-address").value;
+      const name = document.getElementById("full-name").value;
+      const phone = document.getElementById("phone-number").value;
+      const courseSelect = document.getElementById("course-select");
+      const amount = courseSelect.value; // Gets the value (e.g., 50000)
+
+      // Validation
+      if (!email || !amount || amount === "") {
+        alert("Please fill in all fields and select a course.");
+        return;
+      }
+
+      let handler = PaystackPop.setup({
+        key: 'pk_test_52b8a2ebea6846935cefedccd4eb55ab1c839368', // PASTE YOUR KEY HERE
+        email: email,
+        amount: amount * 100, // Paystack calculates in Kobo, so we multiply by 100
+        currency: 'NGN',
+        metadata: {
+          custom_fields: [
+            { display_name: "Full Name", variable_name: "full_name", value: name },
+            { display_name: "Phone Number", variable_name: "phone_number", value: phone },
+            { display_name: "Course", variable_name: "course", value: courseSelect.options[courseSelect.selectedIndex].text }
+          ]
+        },
+        ref: '' + Math.floor((Math.random() * 1000000000) + 1), // Generate a random reference number
+        
+        onClose: function() {
+          alert('Transaction was not completed, window closed.');
+        },
+        
+        callback: function(response) {
+          // This runs when payment is successful
+          alert('Payment complete! Reference: ' + response.reference);
+          // Optional: Redirect to a success page
+          // window.location.href = "success.html";
+        }
+      });
+
+      handler.openIframe();
+    }
+  </script>
+
+</body>
+</html>

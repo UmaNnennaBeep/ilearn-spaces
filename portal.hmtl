@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Login</title>
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root { --brand-blue: #0D47A1; --brand-orange: #FF6F00; --brand-white: #ffffff; --text-dark: #333; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--text-dark); background: #f0f2f5; }
+
+        /* Full Screen Login Layout */
+        .login-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(13, 71, 161, 0.8), rgba(13, 71, 161, 0.8)), url('https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') center/cover;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: white;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .portal-logo { height: 60px; margin-bottom: 20px; }
+        
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-control { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 5px; }
+        
+        .btn-login {
+            width: 100%; padding: 12px; background: var(--brand-blue); color: white;
+            border: none; border-radius: 5px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s;
+        }
+        .btn-login:hover { background: #0b3d8a; }
+
+        .helper-link { display: block; margin-top: 15px; color: #666; font-size: 0.9rem; text-decoration: none; }
+
+        /* Utility Links */
+        .utility-links {
+            display: flex; gap: 20px; margin-top: 30px;
+        }
+        .utility-btn {
+            background: rgba(255,255,255,0.2); backdrop-filter: blur(5px);
+            color: white; padding: 10px 20px; border-radius: 30px;
+            text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.4);
+            transition: 0.3s; display: flex; align-items: center; gap: 8px;
+        }
+        .utility-btn:hover { background: white; color: var(--brand-blue); }
+
+        /* Footer overrides for this specific page */
+        .ilearn-footer { margin-top: 0; width: 100%; }
+        
+        @media(max-width:600px) { .utility-links { flex-direction: column; width: 100%; text-align: center; } .utility-btn { justify-content: center; } }
+    </style>
+</head>
+<body>
+
+    <div class="login-wrapper">
+        <div class="login-card">
+            <img src="assets/images/logoblue.png" alt="iLearn Portal" class="portal-logo">
+            <h2 style="margin-bottom:10px; font-family:'Montserrat', sans-serif;">Welcome Back</h2>
+            <p style="color:#666; margin-bottom:25px;">Log in to access your LMS</p>
+            
+            <form action="student-dashboard.html"> <div class="form-group">
+                    <label style="font-weight:bold; font-size:0.9rem;">Email or Student ID</label>
+                    <input type="text" class="form-control" placeholder="e.g. STU/2026/001">
+                </div>
+                <div class="form-group">
+                    <label style="font-weight:bold; font-size:0.9rem;">Password</label>
+                    <input type="password" class="form-control" placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-login">LOGIN TO LMS</button>
+            </form>
+            <a href="#" class="helper-link">Forgot Password?</a>
+        </div>
+
+        <div class="utility-links">
+            <a href="#" class="utility-btn"><i class="fas fa-certificate"></i> Verify Certificate</a>
+            <a href="#" class="utility-btn"><i class="fas fa-calendar-alt"></i> Exam Timetable</a>
+            <a href="https://wa.me/2349158949925" class="utility-btn"><i class="fas fa-headset"></i> IT Support</a>
+        </div>
+    </div>
+
+    <footer class="ilearn-footer">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <img src="assets/images/logo.png" alt="iLearn Spaces" class="footer-logo footer-logo-img" style="filter: brightness(0) invert(1); height:40px;">
+                <p class="mission-text">Bridging the digital divide in underserved communities.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="academy.html">Academy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col contact-col">
+                <h3>Contact</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> info@ilearnspaces.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom" style="background:#000; text-align:center; padding:20px;"><p>Copyright &copy; 2026 iLearn Spaces.</p></div>
+    </footer>
+
+</body>
+</html>

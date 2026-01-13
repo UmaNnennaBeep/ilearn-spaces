@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iLearn Global Exam Prep - Success Guaranteed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <style>
+        /* --- 1. CORE VARIABLES --- */
+        :root {
+            --brand-blue: #0D47A1;
+            --brand-light-blue: #E3F2FD;
+            --brand-orange: #FF6F00;
+            --brand-purple: #6A1B9A; /* Added for the Feature Section */
+            --brand-white: #ffffff;
+            --text-dark: #333333;
+            --text-grey: #555555;
+            
+            --font-heading: 'Fredoka', sans-serif;
+            --font-sub: 'Nunito', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-body); color: var(--text-dark); background-color: var(--brand-white); overflow-x: hidden; }
+
+        /* --- 2. HEADER --- */
+        .site-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; background-color: var(--brand-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;
+        }
+        .brand-logo img { height: 50px; width: auto; }
+        .main-nav ul { list-style: none; display: flex; gap: 25px; align-items: center; }
+        .main-nav a { text-decoration: none; color: var(--brand-blue); font-family: var(--font-sub); font-weight: 700; transition: 0.3s; }
+        .main-nav a:hover, .main-nav a.active { color: var(--brand-orange); }
+        .btn-nav { background: var(--brand-blue); color: white !important; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        .menu-btn { display: none; font-size: 1.8rem; background: none; border: none; color: var(--brand-blue); cursor: pointer; }
+
+        /* --- 3. ANIMATIONS --- */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
+        @keyframes pulseOrange { 0% { box-shadow: 0 0 0 0 rgba(255, 111, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 111, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 111, 0, 0); } }
+        @keyframes popIn { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+        /* --- 4. HERO SECTION --- */
+        .exam-hero {
+            position: relative; height: 90vh; min-height: 600px;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; color: white; overflow: hidden;
+        }
+        /* Background Image Wrapper for Zoom Effect */
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(13, 71, 161, 0.8), rgba(13, 71, 161, 0.7)), 
+                        url('https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-size: cover; background-position: center;
+            z-index: 0;
+            animation: slowZoom 20s infinite alternate;
+        }
+        
+        .hero-content { position: relative; z-index: 2; max-width: 800px; padding: 20px; }
+        
+        .hero-title {
+            font-family: var(--font-heading); font-size: 3.5rem; margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+        .hero-sub {
+            font-family: var(--font-sub); font-size: 1.25rem; margin-bottom: 40px; color: #E3F2FD;
+            line-height: 1.6; opacity: 0; animation: fadeInUp 1s ease-out 0.3s forwards; /* 0.3s delay */
+        }
+        
+        .btn-pulse {
+            display: inline-block; padding: 18px 45px; border-radius: 50px;
+            background-color: var(--brand-orange); color: white; font-weight: bold;
+            text-decoration: none; font-size: 1.1rem; border: none; cursor: pointer;
+            animation: fadeInUp 1s ease-out 0.6s forwards, pulseOrange 2s infinite;
+            opacity: 0; /* Starts hidden */
+        }
+
+        .trust-signal {
+            margin-top: 50px; display: flex; justify-content: center; gap: 30px;
+            font-size: 0.95rem; font-weight: 600; color: #FFD54F;
+            opacity: 0; animation: fadeInUp 1s ease-out 0.9s forwards;
+        }
+        .trust-item { display: flex; align-items: center; gap: 10px; }
+
+        /* --- 5. EXAM CATEGORIES (GRID) --- */
+        .categories-section { padding: 80px 20px; background: #FAFAFA; text-align: center; }
+        .cat-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; max-width: 1200px; margin: 50px auto 0;
+        }
+        
+        .cat-card {
+            background: white; padding: 40px 30px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s;
+            opacity: 0; /* Hidden for JS trigger or simple animation delay */
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .cat-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        
+        /* Staggered Animation Delays */
+        .cat-card:nth-child(1) { animation-delay: 0.2s; }
+        .cat-card:nth-child(2) { animation-delay: 0.4s; }
+        .cat-card:nth-child(3) { animation-delay: 0.6s; }
+
+        .cat-icon { font-size: 3rem; color: var(--brand-blue); margin-bottom: 20px; }
+        .cat-title { font-size: 1.5rem; color: var(--text-dark); margin-bottom: 15px; font-family: var(--font-heading); }
+        .cat-desc { color: #666; margin-bottom: 25px; min-height: 50px; }
+        .cat-link { color: var(--brand-orange); font-weight: bold; text-decoration: none; font-size: 0.95rem; }
+
+        /* --- 6. COMPARISON TABLE --- */
+        .comparison-section { padding: 80px 20px; background: white; }
+        .table-container { overflow-x: auto; padding: 20px; margin-top: 40px; }
+        .comp-table { width: 100%; max-width: 1000px; margin: 0 auto; border-collapse: collapse; min-width: 600px; }
+        .comp-table th, .comp-table td { padding: 15px 20px; text-align: center; border-bottom: 1px solid #eee; }
+        .comp-table th { text-align: left; color: #888; padding-bottom: 20px; }
+        .comp-table td:first-child { text-align: left; font-weight: bold; color: var(--text-dark); width: 30%; }
+
+        /* iLearn Highlight Column */
+        .ilearn-col {
+            background: #F8F9FA; border: 2px solid var(--brand-blue); border-radius: 15px;
+            color: var(--brand-blue); font-weight: 700; position: relative;
+            transform: scale(1.05); box-shadow: 0 20px 50px rgba(13, 71, 161, 0.15);
+            z-index: 1;
+        }
+        .ilearn-header { background: var(--brand-blue); color: white !important; border-radius: 13px 13px 0 0; padding: 15px; text-align: center !important; }
+        .badge-best { 
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--brand-orange); color: white; padding: 5px 15px;
+            border-radius: 20px; font-size: 0.75rem; font-weight: bold; white-space: nowrap;
+        }
+        
+        /* --- 7. FEATURE HIGHLIGHT (AI) --- */
+        .ai-feature { padding: 80px 20px; background: #fff; overflow: hidden; }
+        .feature-split {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+            max-width: 1200px; margin: 0 auto; align-items: center;
+        }
+        .feature-img-wrap {
+            position: relative; animation: fadeInLeft 1s ease-out;
+        }
+        .feature-img { width: 100%; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        
+        .feature-text { animation: fadeInRight 1s ease-out; }
+        .feature-text h2 { font-size: 2.5rem; color: var(--brand-blue); margin-bottom: 20px; }
+        .feature-list { list-style: none; margin: 30px 0; }
+        .feature-list li { margin-bottom: 15px; display: flex; gap: 10px; color: #555; }
+        .feature-list i { color: var(--brand-purple); margin-top: 5px; }
+        
+        .btn-purple {
+            background-color: var(--brand-purple); color: white; padding: 15px 35px;
+            border-radius: 50px; text-decoration: none; font-weight: bold; border: none; cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-purple:hover { background-color: #4A148C; transform: translateY(-3px); }
+
+        /* --- 8. FINAL CTA --- */
+        .consult-cta {
+            background: linear-gradient(135deg, #0D47A1, #1565C0); color: white;
+            padding: 80px 20px; text-align: center;
+        }
+        .cta-box { max-width: 700px; margin: 0 auto; }
+        .cta-box h2 { color: white; font-size: 2.5rem; margin-bottom: 15px; }
+        .cta-sub { color: #BBDEFB; font-size: 1.1rem; margin-bottom: 30px; }
+        .promise-flash { color: var(--brand-orange); font-weight: bold; display: block; margin-bottom: 30px; font-size: 1.2rem; }
+        .contact-row { margin-top: 40px; color: #BBDEFB; font-size: 0.9rem; }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px);
+            align-items: center; justify-content: center;
+        }
+        .modal-box {
+            background-color: white; padding: 35px; border-radius: 20px; width: 90%; max-width: 450px;
+            position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.3); animation: popIn 0.3s ease-out;
+        }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: #aaa; cursor: pointer; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #333; }
+        .form-control { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px; font-size: 1rem; }
+        /* Custom Select */
+        select.form-control { 
+            appearance: none; 
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%23333" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>') no-repeat right 15px center; 
+            background-color: white; 
+            cursor: pointer; 
+        }
+        /* Mobile */
+        @media (max-width: 900px) {
+            .menu-btn { display: block; }
+            .main-nav { display: none; }
+            .hero-title { font-size: 2.5rem; }
+            .feature-split { grid-template-columns: 1fr; text-align: center; }
+            .feature-list li { justify-content: center; text-align: left; }
+            .ilearn-col { transform: scale(1); border: 1px solid var(--brand-blue); } /* Reset scale on mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="brand-logo">
+            <img src="assets/images/logoblue.png" alt="iLearn Spaces">
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="academy.html">Academy</a></li>
+                <li><a href="kids-coding.html">Kids Coding</a></li>
+                <li><a href="bizsuite.html">BizSuite</a></li>
+                <li><a href="exam-prep.html" class="active">Exam Prep</a></li>
+                <li><a href="youth-hub.html">Youth Hub</a></li>
+                <li><a href="#" onclick="openExamModal('General Inquiry'); return false;" class="btn-nav">FIND A CLASS</a></li>
+            </ul>
+        </nav>
+        <button class="menu-btn">☰</button>
+    </header>
+
+    <section class="exam-hero">
+        <div class="hero-bg"></div> <div class="hero-content">
+            <h1 class="hero-title">One Hub. Any Exam. <br>Guaranteed Success.</h1>
+            <p class="hero-sub">
+                National Boards. International Admissions. Professional Certifications.<br>
+                Our AI-driven approach identifies your gaps and ensures you pass in one sitting.
+            </p>
+            
+           <button onclick="openExamModal('Exam Class Inquiry')" class="btn-pulse">
+    FIND YOUR EXAM CLASS
+</button>
+            
+            <div class="trust-signal">
+                <div class="trust-item"><i class="fas fa-globe"></i> Cross-Board Excellence</div>
+                <div class="trust-item"><i class="fas fa-laptop-code"></i> Offline AI Testing</div>
+                <div class="trust-item"><i class="fas fa-check-circle"></i> 98% Pass Rate</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories-section">
+        <h2 style="font-size:2.5rem; color:var(--brand-blue); margin-bottom:10px;">Select Your Path to Success</h2>
+        <p style="color:#666;">Comprehensive preparation for every stage of your academic journey.</p>
+
+        <div class="cat-grid">
+            
+            <div class="cat-card">
+                <div class="cat-icon"><i class="fas fa-book-open"></i></div>
+                <h3 class="cat-title">National Exams</h3>
+                <p class="cat-desc">JAMB, WAEC, NECO, and NABTEB. Intensive theory mastery and CBT practice.</p>
+               <a onclick="openExamModal('WAEC/NECO')" class="cat-link">View Classes ></a>
+
+            <div class="cat-card">
+                <div class="cat-icon"><i class="fas fa-child"></i></div>
+                <h3 class="cat-title">Junior & Entrance</h3>
+                <p class="cat-desc">Common Entrance, BECE (JSS3), and Loyola/Jesuit Entrance prep.</p>
+                <a onclick="openExamModal('WAEC/NECO')" class="cat-link">View Classes ></a>
+
+            <div class="cat-card">
+                <div class="cat-icon"><i class="fas fa-plane-departure"></i></div>
+                <h3 class="cat-title">Global / Prof.</h3>
+                <p class="cat-desc">IELTS, SAT, GRE, GMAT. Learn the specific formats for international success.</p>
+                <a onclick="openExamModal('WAEC/NECO')" class="cat-link">View Classes ></a>
+
+        </div>
+    </section>
+
+    <section class="comparison-section">
+        <div style="text-align:center; margin-bottom:40px;">
+            <h2 style="font-size:2rem; color:var(--brand-blue);">Why iLearn Prep Beats Regular Tutorials</h2>
+        </div>
+
+        <div class="table-container">
+            <table class="comp-table">
+                <thead>
+                    <tr>
+                        <th>Features</th>
+                        <th class="ilearn-header">
+                            <span class="badge-best">Best Value</span>
+                            iLearn Prep Hub
+                        </th>
+                        <th>Crowded Centers</th>
+                        <th>Home Tutors</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Curriculum Coverage</td>
+                        <td class="ilearn-col">100% (All Syllabuses)</td>
+                        <td>Often Incomplete</td>
+                        <td>Varies by Tutor</td>
+                    </tr>
+                    <tr>
+                        <td>Practice Methodology</td>
+                        <td class="ilearn-col">AI-Simulated (CBT)</td>
+                        <td>Paper & Pen</td>
+                        <td>Textbook Only</td>
+                    </tr>
+                    <tr>
+                        <td>Performance Tracking</td>
+                        <td class="ilearn-col">✅ Data-Driven Analytics</td>
+                        <td>❌ None</td>
+                        <td>❌ Subjective</td>
+                    </tr>
+                    <tr>
+                        <td>Environment</td>
+                        <td class="ilearn-col">✅ Distraction-Free Hub</td>
+                        <td>❌ Noisy/Hot</td>
+                        <td>❌ Home Distractions</td>
+                    </tr>
+                    <tr>
+                        <td>Cost Efficiency</td>
+                        <td class="ilearn-col" style="color:var(--brand-orange);">✅ Affordable Flat Fee</td>
+                        <td>Cheap but Low Value</td>
+                        <td>₦₦₦ Expensive</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="ai-feature">
+        <div class="feature-split">
+            <div class="feature-img-wrap">
+                <img src="https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Student using AI Tablet" class="feature-img">
+            </div>
+
+            <div class="feature-text">
+                <h2>Smart Prep for Every Syllabus</h2>
+                <p style="line-height:1.6; color:#555; margin-bottom:20px;">
+                    Different exams require different strategies. Our AI Engine adapts to the specific exam you are taking, ensuring you aren't just studying—you are practicing to win.
+                </p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> <strong>WAEC/NECO:</strong> Theory mastery & answering techniques.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>JAMB/Entrance:</strong> Speed, accuracy, and CBT navigation.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>IELTS/SAT:</strong> International formats & "tricks".</li>
+                </ul>
+                
+                <button onclick="openExamModal('Request Diagnostic Test')" class="btn-purple">
+                    BOOK A DIAGNOSTIC TEST
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="consult-cta">
+        <div class="cta-box">
+            <h2>Not Sure Where to Start?</h2>
+            <p class="cta-sub">
+                From JSS1 Entrance to Post-Graduate Study Abroad, navigating exam requirements can be confusing. Let our academic counselors guide you.
+            </p>
+            <span class="promise-flash">⚡ Personalized Study Plan within 24 Hours.</span>
+            
+            <button onclick="openExamModal('Counselor Consultation')" class="btn-pill" style="border:none; cursor:pointer; font-size:1.1rem; padding:18px 45px; background:var(--brand-orange); color:white; border-radius:50px; font-weight:bold;">
+                SPEAK TO A COUNSELOR
+            </button>
+
+            <div class="contact-row">
+                📞 Phone &nbsp;|&nbsp; 💬 WhatsApp &nbsp;|&nbsp; 📍 Visit Hub
+            </div>
+        </div>
+    </section>
+
+
+
+    <div id="examModal" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeExamModal()">&times;</span>
+            
+            <div id="examSuccessMessage" style="display:none; text-align:center; padding:20px;">
+                <i class="fas fa-check-circle" style="font-size:3rem; color:#4CAF50; margin-bottom:15px;"></i>
+                <h3 style="color:#333; margin-bottom:10px;">✅ Registration Received!</h3>
+                <p style="color:#666;">We have received your details. Our academic counselor will contact you within 24 hours.</p>
+                <button onclick="closeExamModal()" class="btn-purple" style="margin-top:20px; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Close</button>
+            </div>
+
+            <div id="examFormContainer">
+                <div style="text-align:center; margin-bottom:20px; border-bottom:1px solid #eee; padding-bottom:10px;">
+                    <h3 style="color:var(--brand-blue); margin:0;">🚀 Exam Success Starts Here</h3>
+                    <p style="color:#666; font-size:0.9rem; margin-top:5px;">Tell us your goal, we'll map the path.</p>
+                </div>
+
+                <form id="examForm">
+                    <div class="form-group">
+                        <label>Student Name</label>
+                        <input type="text" name="student_name" required class="form-control" placeholder="e.g. David Okon">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" name="phone" required class="form-control" placeholder="080...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Which Exam?</label>
+                        <select name="exam_interest" id="examSelect" class="form-control">
+                            <option value="General Inquiry">Not Sure / Counseling</option>
+                            <option value="JAMB/UTME">JAMB / UTME</option>
+                            <option value="WAEC/NECO">WAEC / NECO / GCE</option>
+                            <option value="Common Entrance">Common Entrance (JSS1)</option>
+                            <option value="IELTS/TOEFL">IELTS / TOEFL</option>
+                            <option value="SAT/GRE">SAT / GRE / GMAT</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Specific Goals / Struggles</label>
+                        <input type="text" name="message" class="form-control" placeholder="e.g. Need help with Math...">
+                    </div>
+
+                    <button type="submit" id="submitBtn" style="width:100%; padding:15px; background:var(--brand-orange); color:white; border:none; border-radius:50px; font-weight:bold; cursor:pointer; font-size:1.1rem;">
+                        Enroll
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Define Elements
+        const modal = document.getElementById('examModal');
+        const examSelect = document.getElementById('examSelect');
+        const successMsg = document.getElementById('examSuccessMessage');
+        const formContainer = document.getElementById('examFormContainer');
+        const form = document.getElementById('examForm');
+
+        // 1. OPEN MODAL FUNCTION
+        function openExamModal(interest) {
+            formContainer.style.display = 'block';
+            successMsg.style.display = 'none';
+            form.reset();
+            modal.style.display = 'flex';
+            
+            if(interest) {
+                for (let i = 0; i < examSelect.options.length; i++) {
+                    if (examSelect.options[i].text.includes(interest) || examSelect.options[i].value.includes(interest)) {
+                        examSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // 2. CLOSE MODAL FUNCTION
+        function closeExamModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close if clicked outside
+        window.onclick = function(e) {
+            if (e.target == modal) closeExamModal();
+        }
+
+        // 3. SUBMIT FORM (AJAX - No Redirect)
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "Sending...";
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+            
+            fetch("https://formsubmit.co/ilearnacademy171@gmail.com", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => {
+                formContainer.style.display = 'none';
+                successMsg.style.display = 'block';
+                form.reset();
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                alert("Network error. Please try again.");
+                btn.innerText = "Enroll";
+                btn.disabled = false;
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<footer class="ilearn-footer">
+    <div class="footer-container">
+        
+        <div class="footer-col brand-col">
+            <img src="logo-footer.png" alt="iLearn Spaces" class="footer-logo footer-logo-img">
+            <p class="mission-text">
+                Bridging the digital divide in underserved communities. An offline-first, innovation-driven hub empowering Gwagwalada's youth.
+            </p>
+            <div class="social-icons">
+                <a href="https://web.facebook.com/ilearnliteracy" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com/ilearnspaces/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/ilearnspaces" target="_blank" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a> <a href="https://share.google/lrTZGXaXiNpsphgT1" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>Our Programs</h3>
+            <ul class="footer-links">
+                <li><a href="academy.html">Tech & Digital Academy</a></li>
+                <li><a href="kids-coding.html">Kids & Future Creators</a></li>
+                <li><a href="exam-prep.html">Exam Prep (JAMB/WAEC)</a></li>
+                <li><a href="youth-hub.html">The Youth Hub</a></li>
+                <li><a href="scholarships.html">Scholarship Application</a></li>
+                <li><a href="portal.html">Student Portal</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Partners & Services</h3>
+            <ul class="footer-links">
+                <li><a href="bizsuite.html">BizSuite (CAC Registration)</a></li>
+                <li><a href="consultancy.html">Business Consultancy</a></li>
+                <li><a href="hire.html">Hire a Graduate</a></li>
+                <li><a href="facilities.html">Rent a Training Hall</a></li>
+                <li><a href="partners.html">Corporate Partnerships</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col contact-col">
+            <h3>Contact & Policy</h3>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Plot 171 Shargale Plaza, Old Kutunku Road, Gwagwalada, Abuja.</p>
+                <p><i class="fas fa-phone"></i> 07033247060 | 08142450774</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:info@ilearnspaces.com">info@ilearnspaces.com</a></p>
+                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/2349158949925" target="_blank">WhatsApp Us (+234 915 894 9925)</a></p>
+            </div>
+
+            <div class="legal-links">
+                <a href="child-protection.html">Child Protection</a> | 
+                <a href="privacy.html">Privacy</a> | 
+                <a href="terms.html">Terms</a>
+            </div>
+
+            <form class="footer-newsletter" action="#" method="POST">
+                <p>Subscribe to iLearn Spaces Update</p>
+                <div class="input-group">
+                    <input type="text" name="name" placeholder="Your name" required>
+                    <input type="email" name="email" placeholder="Your email address" required>
+                    <input type="text" name="hp" class="hp-field" style="display:none" tabindex="-1" autocomplete="off">
+                    <input type="hidden" name="page" value="">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>Copyright &copy; 2026 iLearn Spaces. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

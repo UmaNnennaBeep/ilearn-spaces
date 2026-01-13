@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - iLearn Spaces</title>
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root { --brand-blue: #0D47A1; --brand-orange: #FF6F00; --bg-light: #f4f6f8; --text-dark: #333; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--text-dark); background: var(--bg-light); }
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
+
+        /* Dashboard Header */
+        .dash-header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .logo-area img { height: 40px; }
+        .user-area { display: flex; align-items: center; gap: 15px; }
+        .user-avatar { width: 40px; height: 40px; background: var(--brand-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .btn-logout { color: #666; text-decoration: none; font-size: 0.9rem; }
+
+        /* Layout */
+        .dash-container { max-width: 1200px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 3fr 1fr; gap: 30px; }
+
+        /* Welcome Banner */
+        .welcome-banner { background: var(--brand-blue); color: white; padding: 30px; border-radius: 10px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .streak-badge { background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; font-weight: bold; }
+
+        /* Cards */
+        .dash-card { background: white; border-radius: 10px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); margin-bottom: 20px; }
+        .section-title { font-size: 1.2rem; margin-bottom: 20px; color: var(--text-dark); display: flex; justify-content: space-between; }
+
+        /* Course Progress */
+        .course-item { border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px; }
+        .course-item:last-child { border: none; margin: 0; }
+        .progress-bar-bg { height: 8px; background: #eee; border-radius: 4px; margin: 10px 0; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--brand-orange); border-radius: 4px; }
+        .next-lesson { font-size: 0.85rem; color: #666; }
+
+        /* Sidebar Items */
+        .alert-item { padding: 10px; border-radius: 5px; margin-bottom: 10px; font-size: 0.9rem; }
+        .alert-urgent { background: #ffebee; color: #c62828; border-left: 4px solid #c62828; }
+        .alert-upcoming { background: #fff3e0; color: #ef6c00; border-left: 4px solid #ef6c00; }
+
+        /* Resources */
+        .resource-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .resource-btn { background: #f9f9f9; padding: 15px; border-radius: 8px; text-decoration: none; color: #333; display: flex; align-items: center; gap: 10px; border: 1px solid #eee; transition: 0.2s; }
+        .resource-btn:hover { border-color: var(--brand-blue); background: white; }
+        .res-icon { color: var(--brand-blue); font-size: 1.2rem; }
+
+        /* Footer (Same) */
+        .ilearn-footer { background-color: #111; color: #e0e0e0; padding-top: 60px; font-size: 0.9rem; margin-top: 50px; }
+        .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 40px; }
+        .footer-logo-img { height: 40px; margin-bottom: 15px; filter: brightness(0) invert(1); }
+        .footer-col h3 { color: #fff; margin-bottom: 20px; text-transform: uppercase; font-size: 1.1rem; }
+        .footer-links { list-style: none; } .footer-links a { color: #bbb; text-decoration: none; display: block; margin-bottom: 10px; }
+        .footer-bottom { background: #000; text-align: center; padding: 20px; margin-top: 50px; }
+
+        @media(max-width:900px) { .dash-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header class="dash-header">
+        <div class="logo-area">
+            <img src="assets/images/logoblue.png" alt="iLearn">
+        </div>
+        <div class="user-area">
+            <span style="font-weight:bold;">David Okon</span>
+            <div class="user-avatar">DO</div>
+            <a href="portal.html" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </header>
+
+    <div class="dash-container">
+        
+        <main>
+            <div class="welcome-banner">
+                <div>
+                    <h2>Good Morning, David.</h2>
+                    <p>Ready to continue learning?</p>
+                </div>
+                <div class="streak-badge">🔥 14 Day Streak</div>
+            </div>
+
+            <div class="dash-card">
+                <div class="section-title">
+                    <h3>My Courses</h3>
+                    <a href="#" style="font-size:0.9rem; color:var(--brand-blue);">View All</a>
+                </div>
+
+                <div class="course-item">
+                    <div style="display:flex; justify-content:space-between; font-weight:bold;">
+                        <span>Web Development (Full Stack)</span>
+                        <span>40%</span>
+                    </div>
+                    <div class="progress-bar-bg"><div class="progress-fill" style="width:40%;"></div></div>
+                    <div class="next-lesson"><i class="fas fa-play-circle"></i> Next: CSS Grid Layouts</div>
+                </div>
+
+                <div class="course-item">
+                    <div style="display:flex; justify-content:space-between; font-weight:bold;">
+                        <span>Data Analytics (Intro)</span>
+                        <span>20%</span>
+                    </div>
+                    <div class="progress-bar-bg"><div class="progress-fill" style="width:20%;"></div></div>
+                    <div class="next-lesson"><i class="fas fa-play-circle"></i> Next: Introduction to SQL</div>
+                </div>
+            </div>
+
+            <div class="dash-card">
+                <div class="section-title"><h3>Resource Library</h3></div>
+                <div class="resource-grid">
+                    <a href="#" class="resource-btn">
+                        <i class="fas fa-file-pdf res-icon"></i>
+                        <div>
+                            <strong>Lecture Slides</strong><br>
+                            <span style="font-size:0.8rem; color:#666;">PDF Download</span>
+                        </div>
+                    </a>
+                    <a href="#" class="resource-btn">
+                        <i class="fas fa-video res-icon"></i>
+                        <div>
+                            <strong>Live Recordings</strong><br>
+                            <span style="font-size:0.8rem; color:#666;">Watch Replays</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <aside>
+            <div class="dash-card">
+                <div class="section-title"><h3>Deadlines</h3></div>
+                
+                <div class="alert-item alert-urgent">
+                    <strong>🔴 Urgent</strong><br>
+                    Project 3 (E-Commerce) due Friday @ 11:59 PM.
+                </div>
+                
+                <div class="alert-item alert-upcoming">
+                    <strong>🟡 Upcoming</strong><br>
+                    End of Module Quiz - Tuesday.
+                </div>
+            </div>
+
+            <div class="dash-card">
+                <div class="section-title"><h3>Support</h3></div>
+                <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">Need help with a technical issue?</p>
+                <a href="#" style="display:block; text-align:center; background:#eee; padding:10px; border-radius:5px; text-decoration:none; color:#333; font-weight:bold;">Contact IT Support</a>
+            </div>
+        </aside>
+
+    </div>
+
+    <footer class="ilearn-footer">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <img src="assets/images/logo.png" alt="iLearn Spaces" class="footer-logo footer-logo-img" style="filter: brightness(0) invert(1); height:40px;">
+                <p class="mission-text">Bridging the digital divide in underserved communities.</p>
+                <div class="social-icons">
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Our Programs</h3>
+                <ul class="footer-links">
+                    <li><a href="academy.html">Academy</a></li>
+                    <li><a href="kids-coding.html">Kids Coding</a></li>
+                    <li><a href="youth-hub.html">The Youth Hub</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="bizsuite.html">BizSuite</a></li>
+                    <li><a href="hire.html">Hire Talent</a></li>
+                </ul>
+            </div>
+            <div class="footer-col contact-col">
+                <h3>Contact</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> Gwagwalada, Abuja.</p>
+                    <p><i class="fas fa-envelope"></i> info@ilearnspaces.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>Copyright &copy; 2026 iLearn Spaces.</p></div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; background-color: #E3F2FD; text-align: center; padding-top: 50px; }
+        .success-card { background: white; max-width: 500px; margin: 0 auto; padding: 40px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        h1 { font-family: 'Fredoka', sans-serif; color: #43A047; }
+        .ref-box { background: #eee; padding: 10px; font-family: monospace; border-radius: 5px; margin: 20px 0; }
+        .btn { background-color: #FF6F00; color: white; text-decoration: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; display: inline-block; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="success-card">
+        <h1 style="font-size: 3rem;">🎉</h1>
+        <h1>Payment Successful!</h1>
+        <p>Welcome to the club! We have received your enrollment.</p>
+        <p>Your Transaction Reference is:</p>
+        <div class="ref-box" id="ref-id">Loading...</div>
+        <p>Check your email for your receipt and class details.</p>
+        <a href="kids-coding.html" class="btn">Back to Home</a>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById('ref-id').innerText = params.get('reference') || "Unknown";
+    </script>
+</body>
+</html>

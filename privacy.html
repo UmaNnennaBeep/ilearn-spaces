@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - iLearn Spaces</title>
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* PASTE THE SAME CSS FROM CHILD-PROTECTION.HTML HERE */
+        /* Core Variables */
+        :root { --brand-blue: #0D47A1; --brand-orange: #FF6F00; --brand-white: #ffffff; --text-dark: #333333; --font-display: 'Montserrat', sans-serif; --font-body: 'Open Sans', sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-body); color: var(--text-dark); background-color: #f9f9f9; line-height: 1.6; }
+        /* Header */
+        .site-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .brand-logo img { height: 50px; width: auto; }
+        .main-nav ul { list-style: none; display: flex; gap: 25px; align-items: center; }
+        .main-nav a { text-decoration: none; color: var(--brand-blue); font-weight: 700; }
+        .btn-nav { background: var(--brand-blue); color: white !important; padding: 10px 20px; border-radius: 5px; }
+        .menu-btn { display: none; font-size: 1.8rem; border: none; background: none; color: var(--brand-blue); }
+        /* Hero */
+        .policy-hero { background-color: var(--brand-blue); color: white; padding: 80px 20px; text-align: center; }
+        .policy-hero h1 { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 10px; }
+        .policy-hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
+        /* Layout */
+        .policy-container { max-width: 1200px; margin: 0 auto; padding: 50px 20px; display: grid; grid-template-columns: 250px 1fr; gap: 50px; align-items: start; }
+        /* Sidebar */
+        .policy-sidebar { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 100px; }
+        .policy-sidebar h3 { font-family: var(--font-display); font-size: 1rem; margin-bottom: 15px; color: var(--brand-blue); }
+        .policy-sidebar ul { list-style: none; }
+        .policy-sidebar li { margin-bottom: 10px; }
+        .policy-sidebar a { text-decoration: none; color: #555; font-size: 0.95rem; display: block; padding: 8px 10px; border-radius: 5px; transition: 0.2s; }
+        .policy-sidebar a:hover { background-color: #E3F2FD; color: var(--brand-blue); }
+        /* Content */
+        .policy-content { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .policy-section { margin-bottom: 40px; scroll-margin-top: 120px; }
+        .policy-section h2 { font-family: var(--font-display); color: var(--brand-blue); margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #eee; }
+        .policy-section h3 { color: var(--brand-orange); margin-top: 20px; margin-bottom: 10px; font-size: 1.1rem; }
+        .policy-section p, .policy-section ul { margin-bottom: 15px; color: #444; }
+        .policy-section ul { padding-left: 20px; }
+        .policy-section li { margin-bottom: 8px; }
+        /* Footer */
+        .ilearn-footer { background-color: #111; color: #e0e0e0; padding-top: 60px; font-size: 0.95rem; }
+        .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 40px; }
+        .footer-col h3 { color: #fff; font-size: 1.2rem; margin-bottom: 20px; font-weight: 700; text-transform: uppercase; }
+        .footer-logo { color: var(--brand-orange) !important; font-size: 1.8rem !important; margin-bottom: 15px !important; }
+        .footer-links { list-style: none; }
+        .footer-links a { color: #bbb; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--brand-orange); padding-left: 5px; }
+        .footer-bottom { background-color: #0a0a0a; text-align: center; padding: 20px 0; margin-top: 60px; border-top: 1px solid #222; }
+        
+        @media (max-width: 900px) {
+            .policy-container { grid-template-columns: 1fr; }
+            .policy-sidebar { display: none; }
+            .footer-container { grid-template-columns: 1fr 1fr; }
+            .menu-btn { display: block; }
+            .main-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="brand-logo"><img src="assets/images/logoblue.png" alt="iLearn Spaces"></a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="academy.html">Academy</a></li>
+                <li><a href="kids-coding.html">Kids Coding</a></li>
+                <li><a href="bizsuite.html">BizSuite</a></li>
+            </ul>
+        </nav>
+        <button class="menu-btn">☰</button>
+    </header>
+
+    <div class="policy-hero">
+        <h1>Your Data, Protected</h1>
+        <p>Transparent data handling compliant with the Nigeria Data Protection Regulation (NDPR).</p>
+    </div>
+
+    <div class="policy-container">
+        
+        <aside class="policy-sidebar">
+            <h3>Jump To:</h3>
+            <ul>
+                <li><a href="#collect">Information We Collect</a></li>
+                <li><a href="#usage">How We Use Data</a></li>
+                <li><a href="#media">Media & Photography</a></li>
+                <li><a href="#security">Data Security</a></li>
+                <li><a href="#rights">Your Rights</a></li>
+            </ul>
+        </aside>
+
+        <div class="policy-content">
+            
+            <div id="collect" class="policy-section">
+                <h2>1. Information We Collect</h2>
+                <p>We collect information necessary to provide our educational and business services. This includes:</p>
+                <ul>
+                    <li><strong>Personal Data:</strong> Name, email address, phone number, and residential address (for registration).</li>
+                    <li><strong>Student Data:</strong> Date of birth, academic progress, and assessment scores.</li>
+                    <li><strong>Sensitive Data:</strong> Medical information (allergies) for children attending physical camps.</li>
+                </ul>
+            </div>
+
+            <div id="usage" class="policy-section">
+                <h2>2. How We Use Data</h2>
+                <p>We use your data solely for the following purposes:</p>
+                <ul>
+                    <li>To process course registrations and issue certificates.</li>
+                    <li>To communicate important updates regarding classes or hub closures.</li>
+                    <li>To improve our curriculum based on aggregated student performance.</li>
+                </ul>
+                <p><strong>We do not sell, trade, or rent your personal identification information to others.</strong></p>
+            </div>
+
+            <div id="media" class="policy-section">
+                <h2>3. Media & Photography Consent</h2>
+                <p>iLearn Spaces is a vibrant community hub. We frequently document sessions for marketing and impact reporting.</p>
+                <h3>Consent & Opt-Out</h3>
+                <p>By registering, you acknowledge that photos/videos may be taken. <strong>You have the right to opt-out.</strong> Please tick the "No Media" box during registration or notify the Hub Manager in writing. We respect your privacy and will ensure you are not featured in promotional materials if you opt-out.</p>
+            </div>
+
+            <div id="security" class="policy-section">
+                <h2>4. Data Security</h2>
+                <p>We implement appropriate technical and organizational measures to protect your data against unauthorized access, alteration, or destruction. Our digital databases are encrypted, and physical files are stored in locked cabinets accessible only by authorized administrators.</p>
+            </div>
+
+            <div id="rights" class="policy-section">
+                <h2>5. Your Rights (NDPR)</h2>
+                <p>Under the Nigeria Data Protection Regulation, you have the right to:</p>
+                <ul>
+                    <li>Request access to the data we hold about you.</li>
+                    <li>Request correction of inaccurate data.</li>
+                    <li>Request deletion of your data ("Right to be Forgotten") where applicable.</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+   <footer class="ilearn-footer">
+    <div class="footer-container">
+        
+        <div class="footer-col brand-col">
+            <img src="assets/images/logo.png" alt="iLearn Spaces" class="footer-logo footer-logo-img">
+            <p class="mission-text">
+                Bridging the digital divide in underserved communities. An offline-first, innovation-driven hub empowering Gwagwalada's youth.
+            </p>
+            <div class="social-icons">
+                <a href="https://web.facebook.com/ilearnliteracy" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com/ilearnspaces/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/ilearnspaces" target="_blank" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a> <a href="https://share.google/lrTZGXaXiNpsphgT1" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>Our Programs</h3>
+            <ul class="footer-links">
+                <li><a href="academy.html">Tech & Digital Academy</a></li>
+                <li><a href="kids-coding.html">Kids & Future Creators</a></li>
+                <li><a href="exam-prep.html">Exam Prep (JAMB/WAEC)</a></li>
+                <li><a href="youth-hub.html">The Youth Hub</a></li>
+                <li><a href="scholarships.html">Scholarship Application</a></li>
+                <li><a href="portal.html">Student Portal</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Partners & Services</h3>
+            <ul class="footer-links">
+                <li><a href="bizsuite.html">BizSuite (CAC Registration)</a></li>
+                <li><a href="consultancy.html">Business Consultancy</a></li>
+                <li><a href="hire.html">Hire a Graduate</a></li>
+                <li><a href="facilities.html">Rent a Training Hall</a></li>
+                <li><a href="partners.html">Corporate Partnerships</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col contact-col">
+            <h3>Contact & Policy</h3>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Plot 171 Shargale Plaza, Old Kutunku Road, Gwagwalada, Abuja.</p>
+                <p><i class="fas fa-phone"></i> 07033247060 | 08142450774</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:info@ilearnspaces.com">info@ilearnspaces.com</a></p>
+                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/2349158949925" target="_blank">WhatsApp Us (+234 915 894 9925)</a></p>
+            </div>
+
+            <div class="legal-links">
+                <a href="child-protection.html">Child Protection</a> | 
+                <a href="privacy.html">Privacy</a> | 
+                <a href="terms.html">Terms</a>
+            </div>
+
+            <form class="footer-newsletter" action="#" method="POST">
+                <p>Subscribe to iLearn Spaces Update</p>
+                <div class="input-group">
+                    <input type="text" name="name" placeholder="Your name" required>
+                    <input type="email" name="email" placeholder="Your email address" required>
+                    <input type="text" name="hp" class="hp-field" style="display:none" tabindex="-1" autocomplete="off">
+                    <input type="hidden" name="page" value="">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>Copyright &copy; 2026 iLearn Spaces. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

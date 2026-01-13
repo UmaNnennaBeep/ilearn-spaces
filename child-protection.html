@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Protection Policy - iLearn Spaces</title>
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root {
+            --brand-blue: #0D47A1;
+            --brand-orange: #FF6F00;
+            --brand-white: #ffffff;
+            --text-dark: #333333;
+            --font-display: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-body); color: var(--text-dark); background-color: #f9f9f9; line-height: 1.6; }
+
+        /* --- HEADER & NAV (Standard) --- */
+        .site-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .brand-logo img { height: 50px; width: auto; }
+        .main-nav ul { list-style: none; display: flex; gap: 25px; align-items: center; }
+        .main-nav a { text-decoration: none; color: var(--brand-blue); font-weight: 700; }
+        .btn-nav { background: var(--brand-blue); color: white !important; padding: 10px 20px; border-radius: 5px; }
+        .menu-btn { display: none; font-size: 1.8rem; border: none; background: none; color: var(--brand-blue); }
+
+        /* --- POLICY HERO --- */
+        .policy-hero {
+            background-color: var(--brand-blue); color: white;
+            padding: 80px 20px; text-align: center;
+        }
+        .policy-hero h1 { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 10px; }
+        .policy-hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
+
+        /* --- LAYOUT GRID --- */
+        .policy-container {
+            max-width: 1200px; margin: 0 auto; padding: 50px 20px;
+            display: grid; grid-template-columns: 250px 1fr; gap: 50px;
+            align-items: start;
+        }
+
+        /* --- SIDEBAR --- */
+        .policy-sidebar {
+            background: white; padding: 20px; border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 100px;
+        }
+        .policy-sidebar h3 { font-family: var(--font-display); font-size: 1rem; margin-bottom: 15px; color: var(--brand-blue); }
+        .policy-sidebar ul { list-style: none; }
+        .policy-sidebar li { margin-bottom: 10px; }
+        .policy-sidebar a {
+            text-decoration: none; color: #555; font-size: 0.95rem; display: block;
+            padding: 8px 10px; border-radius: 5px; transition: 0.2s;
+        }
+        .policy-sidebar a:hover { background-color: #E3F2FD; color: var(--brand-blue); }
+
+        /* --- CONTENT AREA --- */
+        .policy-content { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .policy-section { margin-bottom: 40px; scroll-margin-top: 120px; /* Offset for sticky header */ }
+        .policy-section h2 { font-family: var(--font-display); color: var(--brand-blue); margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #eee; }
+        .policy-section h3 { color: var(--brand-orange); margin-top: 20px; margin-bottom: 10px; font-size: 1.1rem; }
+        .policy-section p, .policy-section ul { margin-bottom: 15px; color: #444; }
+        .policy-section ul { padding-left: 20px; }
+        .policy-section li { margin-bottom: 8px; }
+
+        /* --- FOOTER STYLES (Copied from unified footer) --- */
+        .ilearn-footer { background-color: #111; color: #e0e0e0; padding-top: 60px; font-size: 0.95rem; }
+        .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 40px; }
+        .footer-col h3 { color: #fff; font-size: 1.2rem; margin-bottom: 20px; font-weight: 700; text-transform: uppercase; }
+        .footer-logo { color: var(--brand-orange) !important; font-size: 1.8rem !important; margin-bottom: 15px !important; }
+        .footer-links { list-style: none; }
+        .footer-links a { color: #bbb; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--brand-orange); padding-left: 5px; }
+        .footer-bottom { background-color: #0a0a0a; text-align: center; padding: 20px 0; margin-top: 60px; border-top: 1px solid #222; }
+        
+        @media (max-width: 900px) {
+            .policy-container { grid-template-columns: 1fr; }
+            .policy-sidebar { display: none; /* Hide sidebar on mobile for simplicity */ }
+            .footer-container { grid-template-columns: 1fr 1fr; }
+            .menu-btn { display: block; }
+            .main-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="brand-logo"><img src="assets/images/logoblue.png" alt="iLearn Spaces"></a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="academy.html">Academy</a></li>
+                <li><a href="kids-coding.html">Kids Coding</a></li>
+                <li><a href="bizsuite.html">BizSuite</a></li>
+            </ul>
+        </nav>
+        <button class="menu-btn">☰</button>
+    </header>
+
+    <div class="policy-hero">
+        <h1>Safeguarding Our Future</h1>
+        <p>How we protect the children and young people entrusted to our care.</p>
+    </div>
+
+    <div class="policy-container">
+        
+        <aside class="policy-sidebar">
+            <h3>Jump To:</h3>
+            <ul>
+                <li><a href="#commitment">Our Commitment</a></li>
+                <li><a href="#vetting">Staff Vetting</a></li>
+                <li><a href="#physical">Physical Safety</a></li>
+                <li><a href="#digital">Digital Safety</a></li>
+                <li><a href="#reporting">Reporting Concerns</a></li>
+            </ul>
+        </aside>
+
+        <div class="policy-content">
+            
+            <div id="commitment" class="policy-section">
+                <h2>1. Our Commitment</h2>
+                <p>At iLearn Spaces, the safety and well-being of every child are our non-negotiable priorities. We acknowledge our duty of care to safeguard and promote the welfare of children and are committed to ensuring our safeguarding practice reflects statutory responsibilities, government guidance, and the <strong>Child Rights Act of Nigeria (2003)</strong>.</p>
+            </div>
+
+            <div id="vetting" class="policy-section">
+                <h2>2. Staff Vetting & Training</h2>
+                <h3>Background Checks</h3>
+                <p>Every mentor, staff member, and volunteer at iLearn Spaces undergoes a rigorous background check and verification process before working with children.</p>
+                <h3>Training</h3>
+                <p>All staff receive mandatory Safeguarding Training upon hiring and attend refresher courses annually. They are trained to recognize signs of abuse and neglect and know exactly how to report concerns.</p>
+                <h3>No-Alone Policy</h3>
+                <p>A strict "Two-Adult Rule" is enforced. No staff member is permitted to be alone with a child in a closed, unobservable room.</p>
+            </div>
+
+            <div id="physical" class="policy-section">
+                <h2>3. Physical Safety & Pickup</h2>
+                <ul>
+                    <li><strong>Secure Premises:</strong> The Gwagwalada Hub is monitored 24/7. Access to the "Code Zone" (Kids’ Area) is restricted during session times.</li>
+                    <li><strong>Drop-off & Pickup:</strong> Children must be signed in and out by a designated parent or guardian. We will not release a child to an unrecognized adult without prior written consent.</li>
+                    <li><strong>Medical Emergencies:</strong> We maintain a fully stocked First Aid kit, and key staff are trained in pediatric First Aid.</li>
+                </ul>
+            </div>
+
+            <div id="digital" class="policy-section">
+                <h2>4. Digital Safety</h2>
+                <p><strong>Content Filtering:</strong> All devices on the iLearn Spaces network are protected by content filters that block inappropriate, adult, or violent material.</p>
+                <p><strong>Moderated Interactions:</strong> During online sessions or "Game Dev Club" chats, all interactions are monitored by moderators. Bullying, hate speech, or sharing of personal identifiable information is strictly prohibited.</p>
+            </div>
+
+            <div id="reporting" class="policy-section">
+                <h2>5. Reporting Concerns</h2>
+                <p>If you have a concern about a child’s safety or the behavior of a staff member, please contact our Designated Safeguarding Officer (DSO) immediately.</p>
+                <p><strong>Email:</strong> <a href="mailto:safeguarding@ilearnspaces.com">safeguarding@ilearnspaces.com</a></p>
+                <p><strong>Confidential Helpline:</strong> 07033247060</p>
+            </div>
+
+        </div>
+    </div>
+
+   <footer class="ilearn-footer">
+    <div class="footer-container">
+        
+        <div class="footer-col brand-col">
+            <img src="assets/images/logo.png" alt="iLearn Spaces" class="footer-logo footer-logo-img">
+            <p class="mission-text">
+                Bridging the digital divide in underserved communities. An offline-first, innovation-driven hub empowering Gwagwalada's youth.
+            </p>
+            <div class="social-icons">
+                <a href="https://web.facebook.com/ilearnliteracy" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com/ilearnspaces/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/ilearnspaces" target="_blank" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a> <a href="https://share.google/lrTZGXaXiNpsphgT1" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>Our Programs</h3>
+            <ul class="footer-links">
+                <li><a href="academy.html">Tech & Digital Academy</a></li>
+                <li><a href="kids-coding.html">Kids & Future Creators</a></li>
+                <li><a href="exam-prep.html">Exam Prep (JAMB/WAEC)</a></li>
+                <li><a href="youth-hub.html">The Youth Hub</a></li>
+                <li><a href="scholarships.html">Scholarship Application</a></li>
+                <li><a href="portal.html">Student Portal</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Partners & Services</h3>
+            <ul class="footer-links">
+                <li><a href="bizsuite.html">BizSuite (CAC Registration)</a></li>
+                <li><a href="consultancy.html">Business Consultancy</a></li>
+                <li><a href="hire.html">Hire a Graduate</a></li>
+                <li><a href="facilities.html">Rent a Training Hall</a></li>
+                <li><a href="partners.html">Corporate Partnerships</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col contact-col">
+            <h3>Contact & Policy</h3>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Plot 171 Shargale Plaza, Old Kutunku Road, Gwagwalada, Abuja.</p>
+                <p><i class="fas fa-phone"></i> 07033247060 | 08142450774</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:info@ilearnspaces.com">info@ilearnspaces.com</a></p>
+                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/2349158949925" target="_blank">WhatsApp Us (+234 915 894 9925)</a></p>
+            </div>
+
+            <div class="legal-links">
+                <a href="child-protection.html">Child Protection</a> | 
+                <a href="privacy.html">Privacy</a> | 
+                <a href="terms.html">Terms</a>
+            </div>
+
+            <form class="footer-newsletter" action="#" method="POST">
+                <p>Subscribe to iLearn Spaces Update</p>
+                <div class="input-group">
+                    <input type="text" name="name" placeholder="Your name" required>
+                    <input type="email" name="email" placeholder="Your email address" required>
+                    <input type="text" name="hp" class="hp-field" style="display:none" tabindex="-1" autocomplete="off">
+                    <input type="hidden" name="page" value="">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>Copyright &copy; 2026 iLearn Spaces. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

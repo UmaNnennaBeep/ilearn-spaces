@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Partnerships - iLearn Spaces</title>
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root { --brand-blue: #0D47A1; --brand-orange: #FF6F00; --brand-white: #ffffff; --text-dark: #333; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--text-dark); background: #fff; }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+
+        /* Header */
+        .site-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .brand-logo img { height: 50px; }
+        .main-nav ul { list-style: none; display: flex; gap: 20px; }
+        .main-nav a { text-decoration: none; color: var(--brand-blue); font-weight: 700; }
+        .btn-nav { background: var(--brand-blue); color: white !important; padding: 10px 20px; border-radius: 5px; }
+
+        /* Hero */
+        .partner-hero { padding: 100px 5%; text-align: center; background: #f4f8fb; }
+        .partner-hero h1 { font-size: 3rem; color: var(--brand-blue); margin-bottom: 20px; }
+        .partner-hero p { max-width: 800px; margin: 0 auto; font-size: 1.2rem; color: #555; }
+
+        /* Partners Logos */
+        .logo-strip { padding: 40px 0; border-bottom: 1px solid #eee; text-align: center; }
+        .logo-container { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; opacity: 0.6; filter: grayscale(100%); }
+        .partner-logo-ph { font-weight: bold; font-size: 1.5rem; color: #888; } /* Placeholder for logos */
+
+        /* Ways to Partner */
+        .ways-section { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
+        .ways-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .way-card { background: white; border: 1px solid #eee; padding: 30px; border-radius: 10px; transition: 0.3s; }
+        .way-card:hover { border-color: var(--brand-orange); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .way-icon { font-size: 2.5rem; color: var(--brand-blue); margin-bottom: 20px; }
+
+        /* Impact */
+        .impact-section { background: var(--brand-blue); color: white; padding: 80px 5%; text-align: center; }
+        .btn-deck { background: white; color: var(--brand-blue); padding: 15px 30px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 30px; border-radius: 5px; }
+
+        /* Footer CSS (Same) */
+        .ilearn-footer { background-color: #111; color: #e0e0e0; padding-top: 60px; font-size: 0.9rem; }
+        .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 40px; }
+        .footer-logo-img { height: 40px; margin-bottom: 15px; filter: brightness(0) invert(1); }
+        .footer-col h3 { color: #fff; margin-bottom: 20px; text-transform: uppercase; font-size: 1.1rem; }
+        .footer-links { list-style: none; } .footer-links a { color: #bbb; text-decoration: none; display: block; margin-bottom: 10px; }
+        .social-icons a { margin-right: 10px; color: white; font-size: 1.2rem; }
+        .contact-info p { margin-bottom: 10px; display: flex; gap: 10px; }
+        .footer-bottom { background: #000; text-align: center; padding: 20px; margin-top: 50px; }
+        @media(max-width:900px) { .footer-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" class="brand-logo"><img src="assets/images/logoblue.png" alt="iLearn"></a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="academy.html">Academy</a></li>
+                <li><a href="bizsuite.html">BizSuite</a></li>
+                <li><a href="partners.html" class="btn-nav">Partner With Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="partner-hero">
+        <h1>Power the Next Generation.</h1>
+        <p>Join leading organizations making a tangible social impact in Gwagwalada. Invest in talent, technology, and the future workforce.</p>
+    </section>
+
+    <div class="logo-strip">
+        <p style="margin-bottom: 20px; font-weight: bold; color: #888;">TRUSTED BY</p>
+        <div class="logo-container">
+            <span class="partner-logo-ph">RABNI</span>
+            <span class="partner-logo-ph">PHOS FOODS</span>
+            <span class="partner-logo-ph">LOCAL TECH</span>
+            <span class="partner-logo-ph">NGO PARTNERS</span>
+        </div>
+    </div>
+
+    <section class="ways-section">
+        <h2 style="text-align: center; color: var(--brand-blue);">Ways to Partner</h2>
+        <div class="ways-grid">
+            <div class="way-card">
+                <i class="fas fa-graduation-cap way-icon"></i>
+                <h3>Sponsor a Cohort (CSR)</h3>
+                <p>Make a direct impact. Pay the tuition for 10 underserved youths in our community. Get full branding rights for the cohort.</p>
+            </div>
+            <div class="way-card">
+                <i class="fas fa-chalkboard-teacher way-icon"></i>
+                <h3>Curriculum Partner</h3>
+                <p>Struggling to find staff with specific skills? Co-design a course with us. We train the talent to your exact industry standards.</p>
+            </div>
+            <div class="way-card">
+                <i class="fas fa-laptop way-icon"></i>
+                <h3>Device Donation</h3>
+                <p>Help us bridge the digital divide. Donate used or new laptops and tablets for our "Kids Coding" and "Rural Outreach" programs.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="impact-section">
+        <h2>Impact Reporting</h2>
+        <p style="max-width: 600px; margin: 20px auto; opacity: 0.9;">We believe in radical transparency. Receive quarterly detailed reports on student progress, attendance, and success stories. See exactly how your sponsorship is changing lives.</p>
+        <a href="#" class="btn-deck">Download Partnership Deck (PDF)</a>
+        <br><br>
+        <a href="mailto:partners@ilearnspaces.com" style="color: white; text-decoration: underline;">Contact Partnership Team</a>
+    </section>
+
+    <footer class="ilearn-footer">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <img src="assets/images/logo.png" alt="iLearn Spaces" class="footer-logo footer-logo-img">
+                <p class="mission-text">Bridging the digital divide in underserved communities. An offline-first, innovation-driven hub empowering Gwagwalada's youth.</p>
+                <div class="social-icons">
+                    <a href="https://web.facebook.com/ilearnliteracy" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/ilearnspaces/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/ilearnspaces" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://share.google/lrTZGXaXiNpsphgT1" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Our Programs</h3>
+                <ul class="footer-links">
+                    <li><a href="academy.html">Tech & Digital Academy</a></li>
+                    <li><a href="kids-coding.html">Kids & Future Creators</a></li>
+                    <li><a href="exam-prep.html">Exam Prep (JAMB/WAEC)</a></li>
+                    <li><a href="youth-hub.html">The Youth Hub</a></li>
+                    <li><a href="scholarships.html">Scholarship Application</a></li>
+                    <li><a href="portal.html">Student Portal</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Partners & Services</h3>
+                <ul class="footer-links">
+                    <li><a href="bizsuite.html">BizSuite (CAC Registration)</a></li>
+                    <li><a href="consultancy.html">Business Consultancy</a></li>
+                    <li><a href="hire.html">Hire a Graduate</a></li>
+                    <li><a href="facilities.html">Rent a Training Hall</a></li>
+                    <li><a href="partners.html">Corporate Partnerships</a></li>
+                </ul>
+            </div>
+            <div class="footer-col contact-col">
+                <h3>Contact & Policy</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> Plot 171 Shargale Plaza, Old Kutunku Road, Gwagwalada, Abuja.</p>
+                    <p><i class="fas fa-phone"></i> 07033247060 | 08142450774</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@ilearnspaces.com">info@ilearnspaces.com</a></p>
+                    <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/2349158949925" target="_blank">WhatsApp Us</a></p>
+                </div>
+                <div class="legal-links">
+                    <a href="child-protection.html">Child Protection</a> | <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>Copyright &copy; 2026 iLearn Spaces. All Rights Reserved.</p></div>
+    </footer>
+</body>
+</html>
