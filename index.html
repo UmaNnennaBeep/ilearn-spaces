@@ -223,16 +223,14 @@
                 <a href="terms.html">Terms</a>
             </div>
 
-            <form class="footer-newsletter" action="#" method="POST">
-                <p>Subscribe to iLearn Spaces Update</p>
-                <div class="input-group">
-                    <input type="text" name="name" placeholder="Your name" required>
-                    <input type="email" name="email" placeholder="Your email address" required>
-                    <input type="text" name="hp" class="hp-field" style="display:none" tabindex="-1" autocomplete="off">
-                    <input type="hidden" name="page" value="">
-                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                </div>
-            </form>
+           <form class="footer-newsletter" name="newsletter" method="POST" data-netlify="true">
+    <input type="hidden" name="form-name" value="newsletter">
+    <p>Subscribe to iLearn Spaces Update</p>
+    <div class="input-group">
+        <input type="email" name="email" placeholder="Your email address" required>
+        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+    </div>
+</form>
         </div>
 
     </div>
