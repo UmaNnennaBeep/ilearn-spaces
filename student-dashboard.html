@@ -191,6 +191,30 @@
         </div>
         <div class="footer-bottom"><p>Copyright &copy; 2026 iLearn Spaces.</p></div>
     </footer>
+<script>
+    // 1. Select the button and the menu list
+    const menuBtn = document.querySelector('.menu-btn');
+    const mainNav = document.querySelector('.main-nav');
 
+    // 2. Add click event
+    if(menuBtn && mainNav) {
+        menuBtn.addEventListener('click', () => {
+            // Toggle the 'active' class on the menu
+            if (mainNav.style.display === 'block') {
+                mainNav.style.display = 'none';
+            } else {
+                mainNav.style.display = 'block';
+                mainNav.style.position = 'absolute';
+                mainNav.style.top = '70px';
+                mainNav.style.left = '0';
+                mainNav.style.width = '100%';
+                mainNav.style.background = 'white';
+                mainNav.style.padding = '20px';
+                mainNav.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+                mainNav.style.zIndex = '9999';
+            }
+        });
+    }
+</script>
 </body>
 </html>
