@@ -1,3 +1,24 @@
+/* GLOBAL MOBILE FIXES */
+html, body {
+    overflow-x: hidden; /* Stops side-scrolling */
+    max-width: 100%;
+}
+
+img {
+    max-width: 100%; /* Forces giant images to shrink to screen size */
+    height: auto;
+}
+
+/* Fix for the Hero Sections on Mobile */
+@media (max-width: 768px) {
+    .hero-title, .academy-hero h1, .hire-hero h1 {
+        font-size: 2.5rem !important; /* Shrinks huge text */
+    }
+    .hero-sub, .academy-hero p {
+        font-size: 1rem !important;
+        padding: 0 10px;
+    }
+}
 /* --- 1. VARIABLES & RESET --- */
 :root {
   /* Brand Colors */
