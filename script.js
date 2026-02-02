@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.footer-newsletter').forEach(form => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const submitBtn = form.querySelector('button[type="submit"]');
+      const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
       const nameInput = form.querySelector('input[name="name"]');
       const emailInput = form.querySelector('input[name="email"]');
       const hp = form.querySelector('input[name="hp"]')?.value;
@@ -36,17 +36,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const pageInput = form.querySelector('input[name="page"]');
       if (pageInput) pageInput.value = window.location.pathname || window.location.href;
 
-      submitBtn.disabled = true;
-      const orig = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        var orig = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+      }
 
       try {
         const res = await fetch(WEB_APP_URL, { method: 'POST', body: new URLSearchParams(new FormData(form)) });
-        const json = await res.json();
-        if (json && json.status === 'ok') {
+        const text = await res.text();
+        let json = null;
+        try { json = text ? JSON.parse(text) : null; } catch (err) { json = null; }
+        if (res.ok && json && json.status === 'ok') {
           const msg = document.createElement('div'); msg.className = 'newsletter-success'; msg.textContent = 'Thanks — you\'re subscribed!'; form.appendChild(msg); form.reset(); setTimeout(()=>msg.remove(),4000);
         } else {
-          throw new Error(json && json.error ? json.error : 'Submission failed');
+          console.error('Newsletter submission failed', { status: res.status, text, json });
+          throw new Error((json && json.error) ? json.error : 'Submission failed');
         }
       } catch (err) {
         const errDiv = form.querySelector('.newsletter-error') || document.createElement('div');
@@ -55,8 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!form.contains(errDiv)) form.appendChild(errDiv);
         setTimeout(()=>{ if (form.contains(errDiv)) errDiv.remove(); }, 5000);
       } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = orig;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = orig;
+        }
       }
     });
   });
