@@ -43,15 +43,41 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const res = await fetch(WEB_APP_URL, { method: 'POST', body: new URLSearchParams(new FormData(form)) });
-        const text = await res.text();
-        let json = null;
-        try { json = text ? JSON.parse(text) : null; } catch (err) { json = null; }
-        if (res.ok && json && json.status === 'ok') {
-          const msg = document.createElement('div'); msg.className = 'newsletter-success'; msg.textContent = 'Thanks — you\'re subscribed!'; form.appendChild(msg); form.reset(); setTimeout(()=>msg.remove(),4000);
-        } else {
-          console.error('Newsletter submission failed', { status: res.status, text, json });
-          throw new Error((json && json.error) ? json.error : 'Submission failed');
+        // Primary attempt (standard CORS-aware fetch)
+        let sent = false;
+        try {
+          const res = await fetch(WEB_APP_URL, { method: 'POST', body: new URLSearchParams(new FormData(form)) });
+          const text = await res.text();
+          let json = null;
+          try { json = text ? JSON.parse(text) : null; } catch (err) { json = null; }
+          if (res.ok && json && json.status === 'ok') {
+            const msg = document.createElement('div'); msg.className = 'newsletter-success'; msg.textContent = 'Thanks — you\'re subscribed!'; form.appendChild(msg); form.reset(); setTimeout(()=>msg.remove(),4000);
+            sent = true;
+          } else {
+            console.warn('Primary newsletter submission failed', { status: res.status, text, json });
+          }
+        } catch (primaryErr) {
+          // network/CORS or other fetch error
+          console.warn('Primary newsletter fetch error', primaryErr);
+        }
+
+        // Fallback: some Google Apps Script endpoints block CORS responses — try a no-cors POST and assume success if it doesn't throw
+        if (!sent) {
+          try {
+            await fetch(WEB_APP_URL, { method: 'POST', body: new URLSearchParams(new FormData(form)), mode: 'no-cors' });
+            const msg = document.createElement('div'); msg.className = 'newsletter-success'; msg.textContent = 'Thanks — you\'re subscribed!'; form.appendChild(msg); form.reset(); setTimeout(()=>msg.remove(),4000);
+            sent = true;
+          } catch (fallbackErr) {
+            console.warn('Fallback (no-cors) newsletter fetch failed', fallbackErr);
+          }
+        }
+
+        if (!sent) {
+          const errDiv = form.querySelector('.newsletter-error') || document.createElement('div');
+          errDiv.className = 'newsletter-error';
+          errDiv.textContent = 'Could not submit — please try again later.';
+          if (!form.contains(errDiv)) form.appendChild(errDiv);
+          setTimeout(()=>{ if (form.contains(errDiv)) errDiv.remove(); }, 5000);
         }
       } catch (err) {
         const errDiv = form.querySelector('.newsletter-error') || document.createElement('div');

@@ -542,6 +542,14 @@
         /* Make image shorter on mobile */
         .cta-image-wrapper { min-height: 300px; max-height: 400px; }
     }
+    /* Ensure footer is responsive on small screens (overrides global where needed) */
+    @media (max-width: 768px) {
+        .footer-container { display: grid !important; grid-template-columns: 1fr !important; gap: 20px !important; padding: 0 20px !important; }
+        .ilearn-footer .footer-col { width: 100% !important; }
+        .footer-newsletter .input-group { display: flex; flex-direction: column; gap: 10px; }
+        .footer-newsletter .input-group input, .footer-newsletter .input-group button { width: 100%; }
+        .footer-bottom { text-align: center; }
+    }
     </style>
 </head>
 <body>
