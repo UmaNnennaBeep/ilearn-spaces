@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iLearn Literacy Project | Offline-First EdTech</title>
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root { 
+            --brand-blue: #0D47A1; 
+            --brand-orange: #FF6F00; 
+            --bg-light: #f9f9fc; 
+            --text-dark: #222; 
+            --text-muted: #555;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--text-dark); background: #ffffff; line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; line-height: 1.2; }
+        img { max-width: 100%; height: auto; }
+
+        /* Navigation Header */
+        .site-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .brand-logo img { height: 50px; }
+        .main-nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
+        .main-nav a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.95rem; transition: color 0.3s; }
+        .main-nav a:hover { color: var(--brand-orange); }
+        .btn-nav-pdf { background: var(--brand-blue); color: white !important; padding: 10px 20px; border-radius: 5px; box-shadow: 0 4px 10px rgba(13, 71, 161, 0.2); }
+        .btn-nav-pdf:hover { background: var(--brand-orange); }
+
+        /* Mobile Menu Fix */
+        .menu-btn { display: none; font-size: 1.5rem; cursor: pointer; color: var(--brand-blue); border: none; background: transparent; }
+        @media (max-width: 900px) {
+            .menu-btn { display: block; }
+            .main-nav { display: none; } /* Toggled via JS */
+        }
+
+        /* Hero Section */
+        .pitch-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.6)), url('https://images.pexels.com/photos/1739842/pexels-photo-1739842.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') center/cover no-repeat;
+            color: white; padding: 120px 5% 100px; text-align: center;
+        }
+        .pitch-hero h1 { font-size: 3.5rem; max-width: 900px; margin: 0 auto 20px; }
+        .pitch-hero p { font-size: 1.25rem; max-width: 750px; margin: 0 auto 40px; color: #eee; }
+        .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary, .btn-secondary { padding: 15px 30px; border-radius: 5px; font-weight: bold; text-decoration: none; transition: 0.3s; display: inline-block; }
+        .btn-primary { background: var(--brand-orange); color: white; }
+        .btn-primary:hover { background: #e66400; }
+        .btn-secondary { background: transparent; color: white; border: 2px solid white; }
+        .btn-secondary:hover { background: white; color: var(--brand-blue); }
+
+        /* General Section Layout */
+        .section-pad { padding: 80px 5%; }
+        .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 50px; color: var(--brand-blue); }
+
+        /* The Problem Grid */
+        .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1100px; margin: 0 auto; text-align: center; }
+        .prob-card { padding: 30px; background: var(--bg-light); border-radius: 10px; }
+        .prob-icon { font-size: 3rem; color: #d32f2f; margin-bottom: 20px; }
+        .prob-card h3 { margin-bottom: 15px; font-size: 1.3rem; }
+
+        /* The Ecosystem (Alternating Blocks) */
+        .ecosystem-container { max-width: 1100px; margin: 0 auto; }
+        .eco-block { display: flex; align-items: center; gap: 50px; margin-bottom: 60px; }
+        .eco-block:nth-child(even) { flex-direction: row-reverse; }
+        .eco-img-wrap { flex: 1; }
+        .eco-img-wrap img { border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; height: 300px; object-fit: cover; }
+        .eco-text { flex: 1; }
+        .eco-text h3 { font-size: 1.8rem; color: var(--brand-orange); margin-bottom: 15px; }
+        .eco-text p { font-size: 1.1rem; color: var(--text-muted); }
+
+        /* Demo Video Section */
+        .demo-section { background: var(--brand-blue); color: white; text-align: center; }
+        .demo-section .section-title { color: white; }
+        .video-wrapper { max-width: 800px; margin: 0 auto 20px; border-radius: 10px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .video-caption { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+
+        /* Playbook Preview */
+        .playbook-bg { background: var(--bg-light); }
+        .playbook-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; }
+        .playbook-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center; border-top: 4px solid var(--brand-blue); }
+        .playbook-card i { font-size: 2.5rem; color: var(--brand-blue); margin-bottom: 15px; }
+
+        /* Impact & Traction */
+        .stats-grid { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; margin-bottom: 50px; text-align: center; }
+        .stat-item h2 { font-size: 3.5rem; color: var(--brand-orange); margin-bottom: 5px; }
+        .stat-item p { font-weight: 600; font-size: 1.1rem; color: var(--text-dark); }
+        
+        .scale-box { background: #e3f2fd; border-left: 5px solid var(--brand-blue); padding: 30px; border-radius: 0 10px 10px 0; max-width: 800px; margin: 0 auto 50px; }
+        .scale-box h4 { font-size: 1.3rem; margin-bottom: 10px; color: var(--brand-blue); }
+        
+        .logos-farm { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; opacity: 0.7; filter: grayscale(100%); }
+        .logos-farm h3 { font-size: 1.5rem; width: 100%; text-align: center; margin-bottom: 20px; color: var(--text-muted); }
+        /* Placeholder styling for logos */
+        .logo-placeholder { font-weight: bold; font-size: 1.2rem; color: #666; display: flex; align-items: center; gap: 10px; }
+
+        /* Partner Form Section */
+        .partner-section { background: var(--brand-blue); color: white; }
+        .partner-section .section-title { color: white; }
+        .partner-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; max-width: 1100px; margin: 0 auto; }
+        .contact-info-pitch h3 { font-size: 2rem; margin-bottom: 20px; }
+        .contact-info-pitch p { margin-bottom: 15px; font-size: 1.1rem; }
+        .partner-form { background: white; padding: 40px; border-radius: 10px; color: var(--text-dark); }
+        .form-control { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit; }
+        .btn-submit { width: 100%; padding: 15px; background: var(--brand-orange); color: white; border: none; font-weight: bold; font-size: 1.1rem; cursor: pointer; border-radius: 5px; transition: 0.3s; }
+
+        /* Standard Footer */
+        .ilearn-footer { background-color: #111; color: #e0e0e0; padding-top: 60px; font-size: 0.9rem; }
+        .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 40px; }
+        .footer-logo-img { height: 40px; margin-bottom: 15px; filter: brightness(0) invert(1); }
+        .footer-col h3 { color: #fff; margin-bottom: 20px; text-transform: uppercase; font-size: 1.1rem; }
+        .footer-links { list-style: none; } .footer-links a { color: #bbb; text-decoration: none; display: block; margin-bottom: 10px; }
+        .footer-bottom { background: #000; text-align: center; padding: 20px; margin-top: 50px; }
+
+        /* Mobile Fixes */
+        @media (max-width: 768px) {
+            .pitch-hero h1 { font-size: 2.2rem; }
+            .eco-block, .eco-block:nth-child(even) { flex-direction: column; text-align: center; }
+            .partner-wrapper { grid-template-columns: 1fr; }
+            .footer-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="brand-logo"><img src="assets/images/logoblue.png" alt="iLearn Spaces"></a>
+        <button class="menu-btn"><i class="fas fa-bars"></i></button>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#problem">The Problem</a></li>
+                <li><a href="#ecosystem">The Ecosystem</a></li>
+                <li><a href="#demo">See It In Action</a></li>
+                <li><a href="#impact">Our Impact</a></li>
+                <li><a href="#partner">Partner With Us</a></li>
+                <li><a href="assets/documents/iLearn_PitchDeck.pdf" target="_blank" class="btn-nav-pdf"><i class="fas fa-download"></i> Pitch Deck</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="pitch-hero">
+        <h1>Resilient Educational Infrastructure for the "Offline Majority."</h1>
+        <p>An autonomous, offline-first learning ecosystem designed to bridge the foundational literacy gap in zero-infrastructure communities and IDP camps.</p>
+        <div class="hero-buttons">
+            <a href="#demo" class="btn-primary"><i class="fas fa-play-circle"></i> Watch the Demo</a>
+            <a href="#playbook" class="btn-secondary"><i class="fas fa-book-open"></i> View the Playbook</a>
+        </div>
+    </section>
+
+    <section id="problem" class="section-pad">
+        <h2 class="section-title">Traditional EdTech Fails the Marginalized.</h2>
+        <div class="problem-grid">
+            <div class="prob-card">
+                <i class="fas fa-plug prob-icon"></i>
+                <h3>Zero Grid Electricity</h3>
+                <p>Consistent power to charge high-end devices is virtually non-existent in target camp environments.</p>
+            </div>
+            <div class="prob-card">
+                <i class="fas fa-wifi prob-icon" style="color:#d32f2f;"></i>
+                <h3>Zero Broadband Connectivity</h3>
+                <p>Cloud-based learning platforms and video streaming are inaccessible without reliable internet infrastructure.</p>
+            </div>
+            <div class="prob-card">
+                <i class="fas fa-laptop-house prob-icon"></i>
+                <h3>Exclusionary Hardware Costs</h3>
+                <p>Standard laptops and personal tablets are prohibitively expensive for marginalized families.</p>
+            </div>
+        </div>
+        <p style="text-align: center; max-width: 800px; margin: 40px auto 0; font-size: 1.1rem; color: var(--text-muted);">
+            "Across the FCT and rural Nigeria, thousands of displaced children are locked out of education. We don't rely on infrastructure that isn't there. <strong>We build for the reality of the camp.</strong>"
+        </p>
+    </section>
+
+    <section id="ecosystem" class="section-pad" style="background: #fff;">
+        <h2 class="section-title">The iLearn Literacy Toolkit</h2>
+        <div class="ecosystem-container">
+            
+            <div class="eco-block">
+                <div class="eco-img-wrap">
+                    <img src="https://images.pexels.com/photos/5905522/pexels-photo-5905522.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Tablet offline learning">
+                </div>
+                <div class="eco-text">
+                    <h3>1. "Offline-First" Pre-loaded Tablets</h3>
+                    <p>High-durability hardware preloaded with compressed, culturally resonant audio-visual Foundational Literacy and Numeracy (FLN) lessons. Requires zero data costs and zero internet connection to function.</p>
+                </div>
+            </div>
+
+            <div class="eco-block">
+                <div class="eco-img-wrap">
+                    <img src="https://images.pexels.com/photos/5905522/pexels-photo-5905522.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Teacher playbook manual">
+                </div>
+                <div class="eco-text">
+                    <h3>2. The "Zero-Teacher" Playbook</h3>
+                    <p>Decentralizing the classroom. We empower parents and camp officials to become "Micro-Educators" using structured routines, easy-to-follow diagrams, and localized micro-coaching prompts.</p>
+                </div>
+            </div>
+
+            <div class="eco-block">
+                <div class="eco-img-wrap">
+                    <img src="https://images.pexels.com/photos/8082062/pexels-photo-8082062.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Feature phone SMS">
+                </div>
+                <div class="eco-text">
+                    <h3>3. The SMS Nudge Engine</h3>
+                    <p>Asynchronous tracking and capacity building via basic USSD and SMS. This creates a continuous feedback loop and allows us to send teaching nudges to Micro-Educators without broadband.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="demo" class="section-pad demo-section">
+        <h2 class="section-title">See It In Action</h2>
+        <div class="video-wrapper">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="iLearn Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+        <p class="video-caption">Watch how our Micro-Educators facilitate a foundational literacy lesson using only an offline tablet and our guided playbook in the Durumi IDP pilot.</p>
+    </section>
+
+    <section id="playbook" class="section-pad playbook-bg">
+        <h2 class="section-title">Inside the Playbook</h2>
+        <p style="text-align: center; max-width: 800px; margin: -30px auto 40px; font-size: 1.1rem;">Explore the pedagogy. Our 150-page guide is designed for laypersons, ensuring learning never stops even when certified teachers are absent.</p>
+        
+        <div class="playbook-grid">
+            <div class="playbook-card">
+                <i class="fas fa-list-ol"></i>
+                <h3>Structured Journey</h3>
+                <p>Clear Table of Contents acting as a roadmap for absolute beginners to guide learners through phonics and reading.</p>
+            </div>
+            <div class="playbook-card">
+                <i class="fas fa-comments"></i>
+                <h3>Micro-Coaching</h3>
+                <p>Scripted prompts in local languages showing facilitators exactly what to ask and how to explain core concepts.</p>
+            </div>
+            <div class="playbook-card">
+                <i class="fas fa-check-square"></i>
+                <h3>Fidelity Checklists</h3>
+                <p>Built-in assessment trackers allowing parents to log learner progress before transmitting data via SMS.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="section-pad">
+        <h2 class="section-title">Built on Grassroots Data. Designed for Institutional Scale.</h2>
+        
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h2>4,000+</h2>
+                <p>Learners Reached</p>
+            </div>
+            <div class="stat-item">
+                <h2>~40%</h2>
+                <p>Improvement in Reading</p>
+            </div>
+            <div class="stat-item">
+                <h2>25%</h2>
+                <p>Increase in Formal Enrollment</p>
+            </div>
+        </div>
+
+        <div class="scale-box">
+            <h4><i class="fas fa-chart-line"></i> Unit Economics That Work</h4>
+            <p>By eliminating recurring cloud data costs and decentralizing the facilitation process, the iLearn Toolkit is one of the most financially scalable EdTech models currently operating in the Global South.</p>
+        </div>
+
+        <div class="logos-farm">
+            <h3>Trusted By / Aligned With</h3>
+            <div class="logo-placeholder"><i class="fas fa-landmark"></i> FCT-UBEB</div>
+            <div class="logo-placeholder"><i class="fas fa-globe-africa"></i> IRC</div>
+            <div class="logo-placeholder"><i class="fas fa-hands-helping"></i> Sanusi Foundation</div>
+            <div class="logo-placeholder"><i class="fas fa-flag-usa"></i> USAID</div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="#" class="btn-secondary" style="color:var(--brand-blue); border-color:var(--brand-blue);"><i class="fas fa-video"></i> Watch Founders Intro</a>
+        </div>
+    </section>
+
+    <section id="partner" class="section-pad partner-section">
+        <div class="partner-wrapper">
+            <div>
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Let's Bridge the Gap Together.</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9;">We are currently deploying our 2026 pilot for 5,000 learners across Nigeria. Partner with us to scale offline-first literacy to the communities that need it most.</p>
+                
+                <div class="contact-info-pitch">
+                    <p><i class="fas fa-envelope"></i> partners@ilearnspaces.com</p>
+                    <p><i class="fas fa-phone-alt"></i> +234 (0) 915 894 9925</p>
+                    <p><i class="fas fa-map-marker-alt"></i> iLearn Hub, Gwagwalada, Abuja, FCT.</p>
+                </div>
+            </div>
+
+            <div class="partner-form">
+                <h3 style="margin-bottom: 20px;">Request Partnership Details</h3>
+                <form name="pitch-deck-partners" method="POST" data-netlify="true">
+                    <input type="hidden" name="form-name" value="pitch-deck-partners">
+                    
+                    <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                    <input type="text" name="organization" class="form-control" placeholder="Organization / Foundation" required>
+                    <input type="email" name="email" class="form-control" placeholder="Work Email Address" required>
+                    <textarea name="message" class="form-control" rows="4" placeholder="How can we collaborate?" required></textarea>
+                    
+                    <button type="submit" class="btn-submit">Submit Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="ilearn-footer">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <img src="assets/images/logo.png" alt="iLearn Spaces" class="footer-logo footer-logo-img">
+                <p class="mission-text">Bridging the digital divide in underserved communities.</p>
+                <div style="margin-top: 15px;">
+                    <a href="#" style="color:white; margin-right:15px;"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" style="color:white; margin-right:15px;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color:white;"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Our Programs</h3>
+                <ul class="footer-links">
+                    <li><a href="academy.html">Academy</a></li>
+                    <li><a href="kids-coding.html">Kids Coding</a></li>
+                    <li><a href="youth-hub.html">The Youth Hub</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="bizsuite.html">BizSuite</a></li>
+                    <li><a href="hire.html">Hire Talent</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p style="margin-bottom:10px;"><i class="fas fa-map-marker-alt"></i> Gwagwalada, Abuja.</p>
+                <p><i class="fas fa-envelope"></i> info@ilearnspaces.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2026 iLearn Spaces.</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const mainNav = document.querySelector('.main-nav');
+
+        if(menuBtn && mainNav) {
+            menuBtn.addEventListener('click', () => {
+                if (mainNav.style.display === 'block') {
+                    mainNav.style.display = 'none';
+                } else {
+                    mainNav.style.display = 'block';
+                    mainNav.style.position = 'absolute';
+                    mainNav.style.top = '80px';
+                    mainNav.style.left = '0';
+                    mainNav.style.width = '100%';
+                    mainNav.style.background = 'white';
+                    mainNav.style.padding = '20px';
+                    mainNav.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+                    mainNav.style.zIndex = '9999';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
